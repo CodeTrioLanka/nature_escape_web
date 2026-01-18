@@ -31,7 +31,7 @@ const categoryData: Record<string, {
 }> = {
   beach: {
     title: "Beach Tours",
-    description: "Sri Lanka's coast dazzles with golden beaches, turquoise waters, vibrant coral reefs, and bustling fishing villages, offering relaxation, adventure, rich culture, and breathtaking sunsets along its endless tropical shoreline.",
+    description: "Sri Lanka’s coast dazzles with golden beaches, turquoise waters, vibrant coral reefs, and bustling fishing villages, offering relaxation, adventure, rich culture, and breathtaking sunsets along its endless tropical shoreline.",
     heroImage: beachSurfImg,
     tours: [
       { id: 1, slug: "unawatuna-beach-escape", title: "Eastern Blue Bliss", duration: "11 Nights & 12 Days", image: beachUnawatunaImg, recommended: ["Adventure", "Honeymoon"] },
@@ -41,62 +41,62 @@ const categoryData: Record<string, {
     features: [
       { name: "Negombo", values: [false, false, false] },
 
-  { name: "Tangalle", values: [false, true, true] },
-  { name: "Hummanaya Blow Hole", values: [false, true, true] },
-  { name: "Mulgirigala Temple", values: [false, true, true] },
-  { name: "Kalametiya Bird Sanctuary", values: [false, true, true] },
-  { name: "Scuba Diving", values: [false, true, true] },
+      { name: "Tangalle", values: [false, true, true] },
+      { name: "Hummanaya Blow Hole", values: [false, true, true] },
+      { name: "Mulgirigala Temple", values: [false, true, true] },
+      { name: "Kalametiya Bird Sanctuary", values: [false, true, true] },
+      { name: "Scuba Diving", values: [false, true, true] },
 
-  { name: "Habarana", values: [true, false, true] },
-  { name: "Sigiriya", values: [true, false, true] },
+      { name: "Habarana", values: [true, false, true] },
+      { name: "Sigiriya", values: [true, false, true] },
 
-  { name: "Trincomalee", values: [true, false, false] },
-  { name: "Pigeon Island", values: [true, false, false] },
-  { name: "Koneshwaram Temple", values: [true, false, true] },
+      { name: "Trincomalee", values: [true, false, false] },
+      { name: "Pigeon Island", values: [true, false, false] },
+      { name: "Koneshwaram Temple", values: [true, false, true] },
 
-  { name: "Pasikudah", values: [true, false, true] },
+      { name: "Pasikudah", values: [true, false, true] },
 
-  { name: "Arugambay", values: [true, false, true] },
-  { name: "Surfing", values: [true, false, true] },
+      { name: "Arugambay", values: [true, false, true] },
+      { name: "Surfing", values: [true, false, true] },
 
-  { name: "Yala", values: [true, false, true] },
-  { name: "Yala National Park Safari", values: [true, false, true] },
+      { name: "Yala", values: [true, false, true] },
+      { name: "Yala National Park Safari", values: [true, false, true] },
 
-  { name: "Mirissa", values: [false, true, true] },
-  { name: "Surfing (Mirissa)", values: [false, true, true] },
-  { name: "Whale and Dolphin Watching", values: [false, true, true] },
+      { name: "Mirissa", values: [false, true, true] },
+      { name: "Surfing (Mirissa)", values: [false, true, true] },
+      { name: "Whale and Dolphin Watching", values: [false, true, true] },
 
-  { name: "Unawatuna", values: [false, true, true] },
-  { name: "Jungle Beach", values: [false, true, true] },
+      { name: "Unawatuna", values: [false, true, true] },
+      { name: "Jungle Beach", values: [false, true, true] },
 
-  { name: "Galle", values: [false, false, true] },
-  { name: "Galle Fort Tour", values: [false, false, true] },
+      { name: "Galle", values: [false, false, true] },
+      { name: "Galle Fort Tour", values: [false, false, true] },
 
-  { name: "Hikkaduwa", values: [false, true, true] },
-  { name: "Snorkelling", values: [false, true, true] },
-  { name: "Kayaking", values: [false, true, true] },
+      { name: "Hikkaduwa", values: [false, true, true] },
+      { name: "Snorkelling", values: [false, true, true] },
+      { name: "Kayaking", values: [false, true, true] },
 
-  { name: "Bentota", values: [false, true, true] },
-  { name: "Kosgoda Sea Turtle Hatchery", values: [false, false, true] },
+      { name: "Bentota", values: [false, true, true] },
+      { name: "Kosgoda Sea Turtle Hatchery", values: [false, false, true] },
 
-  { name: "Kalpitiya", values: [true, true, false] },
-  { name: "Kite Surfing", values: [true, true, false] },
-  { name: "Dolphin Watching", values: [true, true, false] },
-  { name: "Fishing", values: [true, true, false] },
-  { name: "Cookery Demonstration", values: [true, true, false] },
-  { name: "Wilpattu National Park Safari", values: [true, true, false] },
+      { name: "Kalpitiya", values: [true, true, false] },
+      { name: "Kite Surfing", values: [true, true, false] },
+      { name: "Dolphin Watching", values: [true, true, false] },
+      { name: "Fishing", values: [true, true, false] },
+      { name: "Cookery Demonstration", values: [true, true, false] },
+      { name: "Wilpattu National Park Safari", values: [true, true, false] },
 
-  { name: "Colombo", values: [true, false, false] },
-  { name: "Street Food Tour", values: [true, false, false] },
-  { name: "City Tour and Shopping", values: [true, false, false] },
+      { name: "Colombo", values: [true, false, false] },
+      { name: "Street Food Tour", values: [true, false, false] },
+      { name: "City Tour and Shopping", values: [true, false, false] },
 
-  { name: "Mannar", values: [true, true, false] },
-  { name: "Mannar Fort", values: [true, true, false] },
+      { name: "Mannar", values: [true, true, false] },
+      { name: "Mannar Fort", values: [true, true, false] },
 
-  { name: "Jaffna", values: [true, true, false] },
-  { name: "KKS Beach", values: [true, true, false] },
-  { name: "Casuarina Beach", values: [true, true, false] },
-  { name: "Keerimalai Hot Water Spring", values: [true, true, false] }
+      { name: "Jaffna", values: [true, true, false] },
+      { name: "KKS Beach", values: [true, true, false] },
+      { name: "Casuarina Beach", values: [true, true, false] },
+      { name: "Keerimalai Hot Water Spring", values: [true, true, false] }
     ],
     mapText: {
       heading: "Sun, Sand, and Sea",
@@ -263,9 +263,9 @@ const TourCategory = () => {
     <Layout>
       {/* Hero Section with Parallax */}
       <section className="relative h-[50vh] min-h-[350px] overflow-hidden">
-        <motion.div 
+        <motion.div
           className="absolute inset-0 bg-cover bg-center scale-110"
-          style={{ 
+          style={{
             backgroundImage: `url(${data.heroImage})`,
             y: heroY
           }}
@@ -285,7 +285,7 @@ const TourCategory = () => {
           >
             Sri Lanka
           </motion.span>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -293,7 +293,7 @@ const TourCategory = () => {
           >
             {data.title}
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -315,28 +315,28 @@ const TourCategory = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Link 
+                <Link
                   to={`/tour/${tour.slug}`}
                   className="group block"
                 >
                   <div className="relative overflow-hidden aspect-[4/5] rounded-lg shadow-lg">
                     {/* Background Image */}
-                    <img 
-                      src={tour.image} 
+                    <img
+                      src={tour.image}
                       alt={tour.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    
+
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent" />
-                    
+
                     {/* Recommended Tag - Top */}
                     <div className="absolute top-4 left-4 right-4">
                       <span className="inline-block px-3 py-1.5 bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-[10px] font-semibold tracking-wider uppercase rounded">
                         Recommended for {tour.recommended.join(", ")}
                       </span>
                     </div>
-                    
+
                     {/* Content - Bottom */}
                     <div className="absolute bottom-0 left-0 right-0 p-6">
                       {/* Category Label */}
@@ -346,12 +346,12 @@ const TourCategory = () => {
                         </span>
                         <span className="w-8 h-[1px] bg-primary-foreground/50" />
                       </div>
-                      
+
                       {/* Tour Title */}
                       <h3 className="text-xl font-display font-bold text-primary-foreground mb-2 group-hover:text-secondary transition-colors duration-300">
                         {tour.title.toUpperCase()}
                       </h3>
-                      
+
                       {/* Duration */}
                       <p className="text-sm text-primary-foreground/80">
                         {tour.duration}
@@ -389,8 +389,8 @@ const TourCategory = () => {
               </thead>
               <tbody>
                 {data.features.map((feature, idx) => (
-                  <tr 
-                    key={feature.name} 
+                  <tr
+                    key={feature.name}
                     className={idx % 2 === 0 ? "bg-card" : "bg-muted/30"}
                   >
                     <td className="p-4 text-sm text-foreground">
@@ -418,8 +418,8 @@ const TourCategory = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative order-2 lg:order-1">
-              <img 
-                src={mapImg} 
+              <img
+                src={mapImg}
                 alt="Map of Sri Lanka"
                 className="w-full max-w-sm mx-auto rounded-2xl shadow-xl"
               />
@@ -435,7 +435,7 @@ const TourCategory = () => {
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 {data.mapText.description}
               </p>
-              
+
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="bg-card p-4 rounded-lg">
                   <span className="text-2xl font-display font-bold text-primary">{data.tours.length}</span>
