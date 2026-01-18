@@ -6,8 +6,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 // Images
 import beachSurfImg from "@/assets/beach-surf.jpg";
-import beachParadiseImg from "@/assets/beach-paradise.jpg";
-import beachMirissaImg from "@/assets/beach-mirissa.jpg";
 import beachUnawatunaImg from "@/assets/beach-unawatuna.jpg";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
@@ -16,6 +14,9 @@ import wildlifeImg from "@/assets/wildlife.jpg";
 import adventureImg from "@/assets/adventure.jpg";
 import honeymoonImg from "@/assets/honeymoon.jpg";
 import mapImg from "@/assets/sri-lanka-map.jpg";
+import tile1 from "@/assets/honeymoon1.jpg";
+import tile3 from "@/assets/honeymoon2.jpg";
+import tile2 from "@/assets/honeymoon3.jpg";
 
 import familyImg from "@/assets/family-beach.jpg";
 import golfImg from "@/assets/golf.jpg";
@@ -35,8 +36,8 @@ const categoryData: Record<string, {
     heroImage: beachSurfImg,
     tours: [
       { id: 1, slug: "unawatuna-beach-escape", title: "Eastern Blue Bliss", duration: "11 Nights & 12 Days", image: beachUnawatunaImg, recommended: ["Adventure", "Honeymoon"] },
-      { id: 2, slug: "mirissa-surf-retreat", title: "Southern Sands Voyage", duration: "09 Nights & 10 Days", image: beachMirissaImg, recommended: ["Adventure", "Honeymoon"] },
-      { id: 3, slug: "bentota-paradise", title: "Sunrise Shores Tour", duration: "13 Nights & 14 Days", image: beachParadiseImg, recommended: ["Family"] },
+      { id: 2, slug: "mirissa-surf-retreat", title: "Southern Sands Voyage", duration: "09 Nights & 10 Days", image: tile2, recommended: ["Adventure", "Honeymoon"] },
+      { id: 3, slug: "bentota-paradise", title: "Sunrise Shores Tour", duration: "13 Nights & 14 Days", image: tile3, recommended: ["Family"] },
     ],
     features: [
       { name: "Negombo", values: [false, false, false] },
@@ -140,30 +141,48 @@ const categoryData: Record<string, {
   },
   honeymoon: {
     title: "Honeymoon Tours",
-    description: "Celebrate your love in paradise with romantic honeymoon packages. From mystical beaches and incredible sunsets to the misty highlands, experience unforgettable moments with your loved one.",
+    description: "Experience the best of both worlds with our exclusive honeymoon getaways. We pair the mystique of the ocean with the romance of the highlands to create a diverse, unforgettable travel experience for newlyweds.",
     heroImage: honeymoonImg,
     tours: [
-      { id: 1, slug: "romantic-honeymoon-escape", title: "Romantic Honeymoon Escape", duration: "10 Days / 9 Nights", image: honeymoonImg, recommended: ["Couples", "Romantic"] },
-      { id: 2, slug: "romantic-honeymoon-escape", title: "Romantic Serenity in the Mist", duration: "7 Nights / 8 Days", image: beachMirissaImg, recommended: ["Romantic", "Scenic"] },
-      { id: 3, slug: "romantic-honeymoon-escape", title: "Passion's Getaway", duration: "5 Nights / 6 Days", image: beachParadiseImg, recommended: ["Beach", "Romantic"] },
+      { id: 1, slug: "romantic-honeymoon-escape", title: "Romantic Honeymoon Escape", duration: "10 Days / 9 Nights", image: tile1, recommended: ["Couples", "Romantic"] },
+      { id: 2, slug: "romantic-honeymoon-escape", title: "Romantic Serenity in the Mist", duration: "7 Nights / 8 Days", image: tile2, recommended: ["Beach", "Romantic"] },
+      { id: 3, slug: "romantic-honeymoon-escape", title: "Passion's Getaway", duration: "5 Nights / 6 Days", image: tile3, recommended: ["Romantic", "Scenic"] },
     ],
     features: [
-      { name: "Negombo", values: [true, true, true] },
-      { name: "Temple of the Tooth", values: [true, false, false] },
-      { name: "Pinnawala Elephant Orphanage", values: [true, true, false] },
-      { name: "Kandy", values: [true, true, false] },
-      { name: "Nuwara Eliya", values: [true, true, false] },
-      { name: "Tea Plantation", values: [true, true, false] },
-      { name: "Ella", values: [true, false, false] },
-      { name: "Nine Arch Bridge", values: [true, false, false] },
-      { name: "Yala Safari", values: [true, false, false] },
-      { name: "Mirissa", values: [true, true, false] },
-      { name: "Whale Watching", values: [true, true, false] },
-      { name: "Galle Fort", values: [true, true, true] },
-      { name: "Bentota", values: [true, true, true] },
-      { name: "Couples Spa", values: [true, true, true] },
-      { name: "Private Dinner", values: [true, true, true] },
-      { name: "Sunset Cruise", values: [true, true, false] },
+      // COLOMBO SECTION
+      { name: "Colombo", values: [true, true, true] },
+      { name: "City Tour and Shopping", values: [true, true, true] },
+      { name: "Street Food Experience", values: [true, false, true] },
+      { name: "Sunset Cruise", values: [true, false, false] },
+
+      // BENTOTA SECTION
+      { name: "Bentota", values: [true, false, false] },
+      { name: "Madu River Boat Ride", values: [true, false, false] },
+
+      // NEGOMBO SECTION
+      { name: "Negombo", values: [false, true, true] },
+
+      // HABARANA SECTION
+      { name: "Habarana", values: [false, true, true] },
+      { name: "Minneriya National Park", values: [false, true, true] },
+      { name: "Hiriwadunna Village", values: [false, true, true] },
+      { name: "Sigiriya", values: [false, true, true] },
+      { name: "Hot Air Balloon", values: [false, true, true] },
+      { name: "Dambulla Cave Temple", values: [false, true, true] },
+      { name: "Anuradhapura", values: [false, false, true] },
+
+      // KANDY SECTION
+      { name: "Kandy", values: [false, true, true] },
+      { name: "Temple of the Tooth", values: [false, true, true] },
+      { name: "Cultural Show", values: [false, true, true] },
+      { name: "Ambuluwawa Tower", values: [false, true, true] },
+      { name: "Royal Botanical Garden", values: [false, false, true] },
+
+      // NUWARA ELIYA SECTION
+      { name: "Nuwara Eliya", values: [false, true, true] },
+      { name: "Ramboda Falls", values: [false, false, true] },
+      { name: "Gregory Lake", values: [false, false, true] },
+      { name: "Strawberry Farm", values: [false, false, true] },
     ],
     mapText: {
       heading: "Love, Nature, and Sunset Cruises",
