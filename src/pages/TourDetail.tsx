@@ -55,22 +55,71 @@ interface TourData {
 
 const toursData: Record<string, TourData> = {
   "unawatuna-beach-escape": {
-    title: "Unawatuna Beach Escape",
-    subtitle: "Tropical Paradise Awaits",
-    duration: "7 Days / 6 Nights",
-    groupSize: "2-12 People",
+    title: "Eastern Blue Bliss",
+    subtitle: "Sri Lanka Beach Tours",
+    duration: "11 Nights & 12 Days",
+    groupSize: "Ayubowan! Welcome to Sri Lanka.",
     category: "beach",
-    categoryLabel: "Beach Tours",
+    categoryLabel: "Recommended for Adventure, Honeymoon",
     heroImage: beachUnawatunaImg,
-    description: "Experience the pristine beauty of Unawatuna, one of Sri Lanka's most stunning beach destinations. This exclusive escape combines relaxation with adventure, offering crystal-clear waters, golden sands, and vibrant marine life. From snorkeling expeditions to sunset cruises, every moment is designed to create unforgettable memories.",
+    description: "Tucked away from the usual tourist trails, the North Eastern coast of Sri Lanka is a hidden paradise waiting to be discovered. With golden beaches that stretch for miles, untouched coral reefs teeming with marine life, and a rich cultural tapestry woven from Tamil and colonial heritage, this region offers an experience that’s both serene and soul-stirring. Whether you’re chasing adventure, seeking spiritual depth, or simply craving a quiet stretch of sand to call your own, Sri Lanka’s North Eastern coast is a treasure trove of authentic, unspoiled beauty.",
     itinerary: [
-      { day: "Day 01", title: "Arrival in Colombo", description: "Welcome to Sri Lanka! Transfer to Unawatuna, check into your beachfront resort, and enjoy a welcome dinner by the sea." },
-      { day: "Day 02", title: "Unawatuna Beach Day", description: "Spend the day relaxing on the pristine beach, try water sports, or explore the nearby Jungle Beach." },
-      { day: "Day 03", title: "Galle Fort Exploration", description: "Visit the UNESCO World Heritage Galle Fort, explore its colonial architecture, boutique shops, and cafes." },
-      { day: "Day 04", title: "Whale Watching", description: "Early morning whale watching excursion from Mirissa, spot blue whales and dolphins in their natural habitat." },
-      { day: "Day 05", title: "Snorkeling Adventure", description: "Discover the vibrant underwater world with a guided snorkeling tour at the coral reefs." },
-      { day: "Day 06", title: "Spa & Relaxation", description: "Indulge in traditional Ayurvedic spa treatments, enjoy a sunset cruise along the coast." },
-      { day: "Day 07", title: "Departure", description: "Farewell breakfast and transfer to Colombo airport for your departure." },
+
+      {
+        day: "Day 01",
+        title: "Arrival",
+        description: "Arrive in Sri Lanka and head to Negombo, just minutes from the airport. Relax after your flight, explore the lively fish market or take a peaceful boat ride through the mangroves, and enjoy a refreshing dip or evening walk along Negombo Beach."
+      },
+
+      {
+        day: "Day 02",
+        title: "Habarana",
+        description: "Make a stop for the day at the cultural triangle of the country,Visit the Sigiriya Rock this evening for a spectacular sunset and the Sigiriya Rock is a UNESCO World Heritage site, whose ancient architectural tactics are bound to marvel you."
+      },
+
+
+      {
+        day: "Day 03 & 04",
+        title: "Trincomalee",
+        description: "Spend the day exploring Trincomalee, a coastal gem in Sri Lanka’s North Eastern province, renowned for one of the world’s finest natural harbors. Enjoy crystal-clear waters, golden beaches, and rich cultural heritage as you visit the sacred Koneswaram Temple, take in panoramic views from Swami Rock, or dive into the vibrant marine life at Pigeon Island for an unforgettable seaside experience."
+      },
+
+      {
+        day: "Day 05 & 06",
+        title: "Pasikudah",
+        description: "After breakfast, travel to Pasikudah on Sri Lanka’s east coast. This quiet coastal paradise is famous for its shallow, calm waters and long stretches of soft golden sand. The bay is ideal for safe swimming, as the sea remains waist-deep far from the shore, making it perfect for all ages."
+      },
+
+      {
+        day: "Day 07 & 08",
+        title: "Arugambay",
+        description: "Bid farewell to Pasikudah and travel to Arugam Bay, a surfer’s paradise on Sri Lanka’s southeast coast. Known for its world-class waves, laid-back atmosphere, and palm-fringed beaches, Arugam Bay attracts surfers from around the world, especially from May to September when the swells are at their best."
+      },
+
+      {
+        day: "Day 09",
+        title: "Yala",
+        description: "Making your way to the South, make a stop at Yala today. Head out on an evening safari at Yala National Park. With the highest density of leopards in Sri Lanka, test your luck with an exciting drive in search of the spotted leopard and many other endemic species."
+      },
+
+      {
+        day: "Day 10",
+        title: "Galle",
+        description: "Today's stop is at the city of Galle, a perfect blend of colonial charm and seaside elegance. Explore the historic Galle Fort, a UNESCO World Heritage Site built by the Portuguese and later fortified by the Dutch. Wander through cobbled streets lined with cozy cafés, art galleries, boutique hotels, and admire old-world architecture embraced by the salty sea breeze."
+      },
+
+      {
+        day: "Day 11",
+        title: "Colombo",
+        description: "Make your way to Colombo, the commercial hub of the country, for a perfect end to your Sri Lankan adventure. En-route, stop by the Kosgoda Turtle Hatchery. Enjoy some last-minute shopping and a tour around the city before departure."
+      },
+
+      {
+        day: "Day 12",
+        title: "Departure",
+        description: "After a fun-filled and adventurous holiday in Sri Lanka, it's time to say goodbye! Today you will be transferred to the airport in time for your departure flight. Until next time, Ayubowan!"
+      },
+
     ],
     gallery: [beachParadiseImg, beachMirissaImg, wildlifeImg],
     inclusions: [
@@ -379,8 +428,8 @@ const toursData: Record<string, TourData> = {
 };
 
 // Destinations Carousel Component
-const DestinationsCarousel = ({ destinations, categoryLabel }: { 
-  destinations: { name: string; image: string }[]; 
+const DestinationsCarousel = ({ destinations, categoryLabel }: {
+  destinations: { name: string; image: string }[];
   categoryLabel: string;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -402,7 +451,7 @@ const DestinationsCarousel = ({ destinations, categoryLabel }: {
         <div className="text-center mb-12">
           <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Plan your Perfect</h2>
           <h3 className="text-3xl md:text-4xl font-serif">{categoryLabel.replace(' Tours', '')} Escape</h3>
-          
+
           <div className="flex justify-center gap-4 mt-6">
             <Button variant="outline" size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">All Destinations</Button>
             <Button variant="ghost" size="sm">Top Beaches</Button>
@@ -411,15 +460,15 @@ const DestinationsCarousel = ({ destinations, categoryLabel }: {
 
         <div className="relative max-w-6xl mx-auto">
           {/* Navigation Arrows */}
-          <button 
+          <button
             onClick={() => scroll('left')}
             disabled={currentIndex === 0}
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 z-10 w-10 h-10 rounded-full bg-background border border-border shadow-lg flex items-center justify-center hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          
-          <button 
+
+          <button
             onClick={() => scroll('right')}
             disabled={currentIndex >= maxIndex}
             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-10 w-10 h-10 rounded-full bg-background border border-border shadow-lg flex items-center justify-center hover:bg-muted transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
@@ -429,18 +478,18 @@ const DestinationsCarousel = ({ destinations, categoryLabel }: {
 
           {/* Carousel Container */}
           <div className="overflow-hidden" ref={containerRef}>
-            <div 
+            <div
               className="flex gap-4 transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView + 1.5)}%)` }}
             >
               {destinations.map((destination, index) => (
-                <Link 
+                <Link
                   key={index}
                   to={`/destination/${destination.name.toLowerCase().replace(/\s+/g, '-')}`}
                   className="group relative flex-shrink-0 w-[calc(25%-12px)] aspect-[3/4] overflow-hidden rounded-lg cursor-pointer"
                 >
-                  <img 
-                    src={destination.image} 
+                  <img
+                    src={destination.image}
                     alt={destination.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -451,7 +500,7 @@ const DestinationsCarousel = ({ destinations, categoryLabel }: {
                       <div className="h-px bg-primary w-8" />
                     </div>
                   </div>
-                  
+
                   {/* Hover Explore Button */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="bg-primary/80 rounded-full p-3 flex items-center gap-2">
@@ -470,7 +519,7 @@ const DestinationsCarousel = ({ destinations, categoryLabel }: {
 
 const TourDetail = () => {
   const { tourSlug } = useParams<{ tourSlug: string }>();
-  
+
   const tour = tourSlug ? toursData[tourSlug] : null;
 
   if (!tour) {
@@ -492,13 +541,13 @@ const TourDetail = () => {
     <Layout>
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px]">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${tour.heroImage})` }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
         </div>
-        
+
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
           <span className="inline-block bg-primary/90 text-primary-foreground px-4 py-1 rounded-full text-sm font-medium mb-4">
             {tour.categoryLabel}
@@ -509,7 +558,7 @@ const TourDetail = () => {
             <span>{tour.subtitle}</span>
             <span className="w-12 h-px bg-white/60"></span>
           </div>
-          
+
           <div className="flex flex-wrap justify-center gap-6 mt-4 text-sm">
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4" />
@@ -572,8 +621,8 @@ const TourDetail = () => {
           <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {tour.gallery.map((image, index) => (
               <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg">
-                <img 
-                  src={image} 
+                <img
+                  src={image}
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 />
@@ -660,14 +709,14 @@ const TourDetail = () => {
                 {tour.title} <span className="text-primary">Route</span>
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Travel with us through the most breathtaking landscapes of Sri Lanka. 
-                Our carefully curated route takes you through hidden gems and iconic destinations, 
+                Travel with us through the most breathtaking landscapes of Sri Lanka.
+                Our carefully curated route takes you through hidden gems and iconic destinations,
                 creating memories that will last a lifetime.
               </p>
             </div>
             <div className="flex justify-center">
-              <img 
-                src={sriLankaMapImg} 
+              <img
+                src={sriLankaMapImg}
                 alt="Tour Route Map"
                 className="max-w-[300px] rounded-lg shadow-2xl"
               />
@@ -682,8 +731,8 @@ const TourDetail = () => {
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto items-center">
               <div className="aspect-[4/3] overflow-hidden rounded-lg">
-                <img 
-                  src={tour.gallery[0]} 
+                <img
+                  src={tour.gallery[0]}
                   alt="Tour Experience"
                   className="w-full h-full object-cover"
                 />
@@ -691,7 +740,7 @@ const TourDetail = () => {
               <div>
                 <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-2">Everything</h2>
                 <h3 className="text-3xl md:text-4xl font-serif mb-8">You Need to Know</h3>
-                
+
                 <Accordion type="single" collapsible className="w-full">
                   {tour.faqs.map((faq, index) => (
                     <AccordionItem key={index} value={`faq-${index}`}>
@@ -721,13 +770,13 @@ const TourDetail = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {tour.relatedTours.map((related, index) => (
-                <Link 
+                <Link
                   key={index}
                   to={`/tour/${related.slug}`}
                   className="group relative aspect-[4/3] overflow-hidden rounded-lg"
                 >
-                  <img 
-                    src={related.image} 
+                  <img
+                    src={related.image}
                     alt={related.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -746,9 +795,9 @@ const TourDetail = () => {
 
       {/* Destinations Carousel Section */}
       {tour.destinations.length > 0 && (
-        <DestinationsCarousel 
-          destinations={tour.destinations} 
-          categoryLabel={tour.categoryLabel} 
+        <DestinationsCarousel
+          destinations={tour.destinations}
+          categoryLabel={tour.categoryLabel}
         />
       )}
 
