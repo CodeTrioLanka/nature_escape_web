@@ -39,20 +39,64 @@ const categoryData: Record<string, {
       { id: 3, slug: "bentota-paradise", title: "Sunrise Shores Tour", duration: "13 Nights & 14 Days", image: beachParadiseImg, recommended: ["Family"] },
     ],
     features: [
-      { name: "Negombo", values: [true, true, true] },
-      { name: "Colombo city tour", values: [true, false, true] },
-      { name: "Pinnawala Elephant Orphanage", values: [false, true, false] },
-      { name: "Kandy", values: [false, true, false] },
-      { name: "Temple of Tooth", values: [false, true, false] },
-      { name: "Mirissa", values: [true, true, false] },
-      { name: "Whale Watching", values: [true, true, false] },
-      { name: "Unawatuna", values: [true, false, false] },
-      { name: "Galle Fort", values: [true, true, true] },
-      { name: "Bentota", values: [false, false, true] },
-      { name: "Water Sports", values: [true, false, true] },
-      { name: "Beach Relaxation", values: [true, true, true] },
-      { name: "Snorkeling", values: [true, true, true] },
-      { name: "Turtle Hatchery", values: [true, true, true] },
+      { name: "Negombo", values: [false, false, false] },
+
+  { name: "Tangalle", values: [false, true, true] },
+  { name: "Hummanaya Blow Hole", values: [false, true, true] },
+  { name: "Mulgirigala Temple", values: [false, true, true] },
+  { name: "Kalametiya Bird Sanctuary", values: [false, true, true] },
+  { name: "Scuba Diving", values: [false, true, true] },
+
+  { name: "Habarana", values: [true, false, true] },
+  { name: "Sigiriya", values: [true, false, true] },
+
+  { name: "Trincomalee", values: [true, false, false] },
+  { name: "Pigeon Island", values: [true, false, false] },
+  { name: "Koneshwaram Temple", values: [true, false, true] },
+
+  { name: "Pasikudah", values: [true, false, true] },
+
+  { name: "Arugambay", values: [true, false, true] },
+  { name: "Surfing", values: [true, false, true] },
+
+  { name: "Yala", values: [true, false, true] },
+  { name: "Yala National Park Safari", values: [true, false, true] },
+
+  { name: "Mirissa", values: [false, true, true] },
+  { name: "Surfing (Mirissa)", values: [false, true, true] },
+  { name: "Whale and Dolphin Watching", values: [false, true, true] },
+
+  { name: "Unawatuna", values: [false, true, true] },
+  { name: "Jungle Beach", values: [false, true, true] },
+
+  { name: "Galle", values: [false, false, true] },
+  { name: "Galle Fort Tour", values: [false, false, true] },
+
+  { name: "Hikkaduwa", values: [false, true, true] },
+  { name: "Snorkelling", values: [false, true, true] },
+  { name: "Kayaking", values: [false, true, true] },
+
+  { name: "Bentota", values: [false, true, true] },
+  { name: "Kosgoda Sea Turtle Hatchery", values: [false, false, true] },
+
+  { name: "Kalpitiya", values: [true, true, false] },
+  { name: "Kite Surfing", values: [true, true, false] },
+  { name: "Dolphin Watching", values: [true, true, false] },
+  { name: "Fishing", values: [true, true, false] },
+  { name: "Cookery Demonstration", values: [true, true, false] },
+  { name: "Wilpattu National Park Safari", values: [true, true, false] },
+
+  { name: "Colombo", values: [true, false, false] },
+  { name: "Street Food Tour", values: [true, false, false] },
+  { name: "City Tour and Shopping", values: [true, false, false] },
+
+  { name: "Mannar", values: [true, true, false] },
+  { name: "Mannar Fort", values: [true, true, false] },
+
+  { name: "Jaffna", values: [true, true, false] },
+  { name: "KKS Beach", values: [true, true, false] },
+  { name: "Casuarina Beach", values: [true, true, false] },
+  { name: "Keerimalai Hot Water Spring", values: [true, true, false] }
     ],
     mapText: {
       heading: "Sun, Sand, and Sea",
