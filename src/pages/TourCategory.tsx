@@ -11,13 +11,18 @@ import beachUnawatunaImg from "@/assets/beach-unawatuna.jpg";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
 import templeImg from "@/assets/temple.jpg";
-import wildlifeImg from "@/assets/wildlife.jpg";
+
 import adventureImg from "@/assets/adventure.jpg";
 
+import wildlifeImg from "@/assets/wildlife.jpg";
+import wildlifeImgCard1 from "@/assets/wildlife1.jpg";
+import wildlifeImgCard2 from "@/assets/wildlife2.jpg";
+import wildlifeImgCard3 from "@/assets/wildlife3.jpg";
+
 import honeymoonImg from "@/assets/honeymoon.jpg";
-import tile1 from "@/assets/honeymoon1.jpg";
-import tile3 from "@/assets/honeymoon2.jpg";
-import tile2 from "@/assets/honeymoon3.jpg";
+import honeymoonImgCard1 from "@/assets/honeymoon1.jpg";
+import honeymoonImgCard2 from "@/assets/honeymoon2.jpg";
+import honeymoonImgCard3 from "@/assets/honeymoon3.jpg";
 
 import familyImg from "@/assets/family-beach.jpg";
 import golfImg from "@/assets/golf.jpg";
@@ -39,8 +44,8 @@ const categoryData: Record<string, {
     heroImage: beachSurfImg,
     tours: [
       { id: 1, slug: "unawatuna-beach-escape", title: "Eastern Blue Bliss", duration: "11 Nights & 12 Days", image: beachUnawatunaImg, recommended: ["Adventure", "Honeymoon"] },
-      { id: 2, slug: "mirissa-surf-retreat", title: "Southern Sands Voyage", duration: "09 Nights & 10 Days", image: tile2, recommended: ["Adventure", "Honeymoon"] },
-      { id: 3, slug: "bentota-paradise", title: "Sunrise Shores Tour", duration: "13 Nights & 14 Days", image: tile3, recommended: ["Family"] },
+      { id: 2, slug: "mirissa-surf-retreat", title: "Southern Sands Voyage", duration: "09 Nights & 10 Days", image: honeymoonImgCard2, recommended: ["Adventure", "Honeymoon"] },
+      { id: 3, slug: "bentota-paradise", title: "Sunrise Shores Tour", duration: "13 Nights & 14 Days", image: honeymoonImgCard3, recommended: ["Family"] },
     ],
     features: [
       { name: "Negombo", values: [false, false, false] },
@@ -147,12 +152,30 @@ const categoryData: Record<string, {
     description: "Experience the best of both worlds with our exclusive honeymoon getaways. We pair the mystique of the ocean with the romance of the highlands to create a diverse, unforgettable travel experience for newlyweds.",
     heroImage: honeymoonImg,
     tours: [
-      { id: 1, slug: "romantic-honeymoon-escape", title: "Romantic Honeymoon Escape", duration: "10 Days / 9 Nights", image: tile1, recommended: ["Couples", "Romantic"] },
-      { id: 2, slug: "romantic-honeymoon-escape", title: "Romantic Serenity in the Mist", duration: "7 Nights / 8 Days", image: tile2, recommended: ["Beach", "Romantic"] },
-      { id: 3, slug: "romantic-honeymoon-escape", title: "Passion's Getaway", duration: "5 Nights / 6 Days", image: tile3, recommended: ["Romantic", "Scenic"] },
+      { 
+        id: 1, 
+        slug: "romantic-honeymoon-escape", 
+        title: "Romantic Honeymoon Escape", 
+        duration: "10 Days / 9 Nights", 
+        image: honeymoonImgCard1, 
+        recommended: ["Couples", "Romantic"] 
+      },
+      { id: 2, 
+        slug: "romantic-honeymoon-escape", 
+        title: "Romantic Serenity in the Mist", 
+        duration: "7 Nights / 8 Days", 
+        image: honeymoonImgCard2, 
+        recommended: ["Beach", "Romantic"] 
+      },
+      { id: 3, 
+        slug: "romantic-honeymoon-escape", 
+        title: "Passion's Getaway", 
+        duration: "5 Nights / 6 Days", 
+        image: honeymoonImgCard3, 
+        recommended: ["Romantic", "Scenic"] 
+      },
     ],
     features: [
-      // COLOMBO SECTION
       {
         section: "Colombo",
         items: [
@@ -161,24 +184,17 @@ const categoryData: Record<string, {
           { name: "Sunset Cruise", values: [true, false, false] },
         ],
       },
-
-      // BENTOTA SECTION
       {
         section: "Bentota",
         items: [
           { name: "Madu River Boat Ride", values: [true, false, false] }
         ],
       },
-
-      // NEGOMBO SECTION
       {
         section: "Negombo",
         items: [
-
         ]
       },
-
-      // HABARANA SECTION
       {
         section: "Habarana",
         items: [
@@ -190,8 +206,6 @@ const categoryData: Record<string, {
           { name: "Anuradhapura", values: [false, false, true] },
         ]
       },
-
-      // KANDY SECTION
       {
         section: "Kandy",
         items: [
@@ -201,8 +215,6 @@ const categoryData: Record<string, {
           { name: "Royal Botanical Garden", values: [false, false, true] },
         ],
       },
-
-      // NUWARA ELIYA SECTION
       {
         section: "Nuwara Eliya",
         items: [
@@ -254,12 +266,31 @@ const categoryData: Record<string, {
   },
   wildlife: {
     title: "Wildlife Tours",
-    description: "Discover the wild side of Sri Lanka with thrilling safari adventures.",
+    description: "Uncover Sri Lanka’s wilderness with exhilarating safari experiences. Explore national parks teeming with elephants, leopards, and exotic birds in their natural habitats.",
     heroImage: wildlifeImg,
     tours: [
-      { id: 1, slug: "wildlife-safari-expedition", title: "Wildlife Safari Expedition", duration: "6 Days / 5 Nights", image: wildlifeImg, recommended: ["Adventure", "Family"] },
-      { id: 2, slug: "wildlife-safari-expedition", title: "Wildlife Parks Explored", duration: "6 Nights / 7 Days", image: wildlifeImg, recommended: ["Nature", "Photography"] },
-      { id: 3, slug: "wildlife-safari-expedition", title: "Wilpattu Wild Escape", duration: "4 Nights / 5 Days", image: wildlifeImg, recommended: ["Adventure"] },
+      {
+        id: 1,
+        slug: "wildlife-safari-expedition",
+        title: "Wildlife Safari Expedition",
+        duration: "6 Days / 5 Nights",
+        image: wildlifeImgCard1,
+        recommended: ["Adventure", "Family"]
+      },
+      { 
+        id: 2, 
+        slug: "wildlife-safari-expedition", 
+        title: "Wildlife Parks Explored", 
+        duration: "6 Nights / 7 Days", 
+        image: wildlifeImgCard2, 
+        recommended: ["Nature", "Photography"] 
+      },
+      { id: 3, 
+        slug: "wildlife-safari-expedition", 
+        title: "Wilpattu Wild Escape", 
+        duration: "4 Nights / 5 Days", 
+        image: wildlifeImgCard3, 
+        recommended: ["Adventure"] },
     ],
     features: [
       { name: "Negombo", values: [false, false, false] },
