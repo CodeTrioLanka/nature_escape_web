@@ -1,3 +1,4 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ArrowRight, Check, X } from "lucide-react";
@@ -12,8 +13,8 @@ import teaImg from "@/assets/tea-plantations.jpg";
 import templeImg from "@/assets/temple.jpg";
 import wildlifeImg from "@/assets/wildlife.jpg";
 import adventureImg from "@/assets/adventure.jpg";
+
 import honeymoonImg from "@/assets/honeymoon.jpg";
-import mapImg from "@/assets/sri-lanka-map.jpg";
 import tile1 from "@/assets/honeymoon1.jpg";
 import tile3 from "@/assets/honeymoon2.jpg";
 import tile2 from "@/assets/honeymoon3.jpg";
@@ -21,13 +22,15 @@ import tile2 from "@/assets/honeymoon3.jpg";
 import familyImg from "@/assets/family-beach.jpg";
 import golfImg from "@/assets/golf.jpg";
 
+import mapImg from "@/assets/sri-lanka-map.jpg";
+
 // Category data
 const categoryData: Record<string, {
   title: string;
   description: string;
   heroImage: string;
   tours: { id: number; slug: string; title: string; duration: string; image: string; recommended: string[] }[];
-  features: { name: string; values: boolean[] }[];
+  features: ({ name: string; values: boolean[] } | { section: string; items: { name: string; values: boolean[] }[] })[];
   mapText: { heading: string; subheading: string; description: string };
 }> = {
   beach: {
@@ -150,44 +153,70 @@ const categoryData: Record<string, {
     ],
     features: [
       // COLOMBO SECTION
-      { name: "Colombo", values: [true, true, true] },
-      { name: "City Tour and Shopping", values: [true, true, true] },
-      { name: "Street Food Experience", values: [true, false, true] },
-      { name: "Sunset Cruise", values: [true, false, false] },
+      {
+        section: "Colombo",
+        items: [
+          { name: "City Tour and Shopping", values: [true, true, true] },
+          { name: "Street Food Experience", values: [true, false, true] },
+          { name: "Sunset Cruise", values: [true, false, false] },
+        ],
+      },
 
       // BENTOTA SECTION
-      { name: "Bentota", values: [true, false, false] },
-      { name: "Madu River Boat Ride", values: [true, false, false] },
+      {
+        section: "Bentota",
+        items: [
+          { name: "Madu River Boat Ride", values: [true, false, false] }
+        ],
+      },
 
       // NEGOMBO SECTION
-      { name: "Negombo", values: [false, true, true] },
+      {
+        section: "Negombo",
+        items: [
+
+        ]
+      },
 
       // HABARANA SECTION
-      { name: "Habarana", values: [false, true, true] },
-      { name: "Minneriya National Park", values: [false, true, true] },
-      { name: "Hiriwadunna Village", values: [false, true, true] },
-      { name: "Sigiriya", values: [false, true, true] },
-      { name: "Hot Air Balloon", values: [false, true, true] },
-      { name: "Dambulla Cave Temple", values: [false, true, true] },
-      { name: "Anuradhapura", values: [false, false, true] },
+      {
+        section: "Habarana",
+        items: [
+          { name: "Minneriya National Park", values: [false, true, true] },
+          { name: "Hiriwadunna Village", values: [false, true, true] },
+          { name: "Sigiriya", values: [false, true, true] },
+          { name: "Hot Air Balloon", values: [false, true, true] },
+          { name: "Dambulla Cave Temple", values: [false, true, true] },
+          { name: "Anuradhapura", values: [false, false, true] },
+        ]
+      },
 
       // KANDY SECTION
-      { name: "Kandy", values: [false, true, true] },
-      { name: "Temple of the Tooth", values: [false, true, true] },
-      { name: "Cultural Show", values: [false, true, true] },
-      { name: "Ambuluwawa Tower", values: [false, true, true] },
-      { name: "Royal Botanical Garden", values: [false, false, true] },
+      {
+        section: "Kandy",
+        items: [
+          { name: "Temple of the Tooth", values: [false, true, true] },
+          { name: "Cultural Show", values: [false, true, true] },
+          { name: "Ambuluwawa Tower", values: [false, true, true] },
+          { name: "Royal Botanical Garden", values: [false, false, true] },
+        ],
+      },
 
       // NUWARA ELIYA SECTION
-      { name: "Nuwara Eliya", values: [false, true, true] },
-      { name: "Ramboda Falls", values: [false, false, true] },
-      { name: "Gregory Lake", values: [false, false, true] },
-      { name: "Strawberry Farm", values: [false, false, true] },
+      {
+        section: "Nuwara Eliya",
+        items: [
+          { name: "Ramboda Falls", values: [false, false, true] },
+          { name: "Gregory Lake", values: [false, false, true] },
+          { name: "Strawberry Farm", values: [false, false, true] },
+        ],
+      },
     ],
+
     mapText: {
       heading: "Love, Nature, and Sunset Cruises",
       subheading: "Perfect Sri Lanka Honeymoon Escapes",
-      description: "Experience romantic getaways combining luxury resorts, private beach dinners, scenic train rides, and unforgettable sunset moments."
+      description: "Escape to a world where golden beaches meet misty mountains. Our honeymoon packages offer the perfect blend of intimate private dinners, breathtaking highland views, and serene sunset cruises designed for two."
     }
   },
   "hill-country": {
@@ -407,26 +436,70 @@ const TourCategory = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.features.map((feature, idx) => (
-                  <tr
-                    key={feature.name}
-                    className={idx % 2 === 0 ? "bg-card" : "bg-muted/30"}
-                  >
-                    <td className="p-4 text-sm text-foreground">
-                      {feature.name}
-                    </td>
-                    {feature.values.map((value, i) => (
-                      <td key={i} className="p-4 text-center">
-                        {value ? (
-                          <Check className="w-5 h-5 text-forest mx-auto" />
-                        ) : (
-                          <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
-                        )}
+                {data.features.map((group, groupIndex) => {
+                  // Handle grouped sections
+                  if ('section' in group) {
+                    return (
+                      <React.Fragment key={group.section}>
+                        {/* SECTION HEADER ROW */}
+                        <tr className="bg-muted/60">
+                          <td
+                            colSpan={data.tours.length + 1}
+                            className="p-4 font-display font-semibold text-foreground uppercase tracking-wide"
+                          >
+                            {group.section}
+                          </td>
+                        </tr>
+
+                        {/* FEATURE ROWS */}
+                        {group.items.map((item, idx) => (
+                          <tr
+                            key={item.name}
+                            className={idx % 2 === 0 ? "bg-card" : "bg-muted/30"}
+                          >
+                            <td className="p-4 text-sm text-foreground pl-8">
+                              {item.name}
+                            </td>
+
+                            {item.values.map((value, i) => (
+                              <td key={i} className="p-4 text-center">
+                                {value ? (
+                                  <Check className="w-5 h-5 text-forest mx-auto" />
+                                ) : (
+                                  <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
+                                )}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </React.Fragment>
+                    );
+                  }
+
+                  // Handle flat features
+                  return (
+                    <tr
+                      key={group.name}
+                      className={groupIndex % 2 === 0 ? "bg-card" : "bg-muted/30"}
+                    >
+                      <td className="p-4 text-sm text-foreground">
+                        {group.name}
                       </td>
-                    ))}
-                  </tr>
-                ))}
+
+                      {group.values.map((value, i) => (
+                        <td key={i} className="p-4 text-center">
+                          {value ? (
+                            <Check className="w-5 h-5 text-forest mx-auto" />
+                          ) : (
+                            <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
               </tbody>
+
             </table>
           </div>
         </div>
@@ -482,7 +555,7 @@ const TourCategory = () => {
       <section className="py-16 bg-ocean-dark">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-display font-bold text-primary-foreground mb-4">
-            Ready to Book Your {data.title.replace(" Tours", "")} Adventure?
+            Ready to Book Your {data.title.replace(" Tours", "")} Adventure ?
           </h2>
           <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">
             Contact our travel experts for personalized recommendations and exclusive deals.
