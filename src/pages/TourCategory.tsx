@@ -10,7 +10,6 @@ import beachSurfImg from "@/assets/beach-surf.jpg";
 import beachUnawatunaImg from "@/assets/beach-unawatuna.jpg";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
-import templeImg from "@/assets/temple.jpg";
 
 import honeymoonImg from "@/assets/honeymoon.jpg";
 import honeymoonImgCard1 from "@/assets/honeymoon1.jpg";
@@ -26,6 +25,11 @@ import adventureImg from "@/assets/adventure.jpg";
 import adventureImgCard1 from "@/assets/adventure1.jpg";
 import adventureImgCard2 from "@/assets/adventure2.jpg";
 import adventureImgCard3 from "@/assets/adventure3.jpg";
+
+import templeImg from "@/assets/temple.jpg";
+import templeImgCard1 from "@/assets/temple1.jpg";
+import templeImgCard2 from "@/assets/temple2.jpg";
+import templeImgCard3 from "@/assets/temple3.jpg";
 
 import familyImg from "@/assets/family-beach.jpg";
 import golfImg from "@/assets/golf.jpg";
@@ -345,6 +349,7 @@ const categoryData: Record<string, {
     features: [{ name: "Ayurvedic Spa Resort", values: [true, true] }, { name: "Yoga Sessions", values: [true, true] }, { name: "Meditation", values: [true, true] }],
     mapText: { heading: "Rejuvenate Your Mind and Body", subheading: "With Sri Lanka's Ayurvedic Escapes", description: "Experience ancient healing traditions." }
   },
+
   family: {
     title: "Family Tours",
     description: "Create unforgettable memories with family-friendly adventures across Sri Lanka.",
@@ -356,18 +361,48 @@ const categoryData: Record<string, {
     features: [{ name: "Elephant Safari", values: [true, true] }, { name: "Scenic Train Ride", values: [true, true] }, { name: "Beach Activities", values: [true, true] }],
     mapText: { heading: "Unforgettable Family Adventures", subheading: "Sri Lanka's Best Family Destinations", description: "Create lasting memories with family-friendly tours." }
   },
+
   ramayana: {
     title: "Ramayana Tours",
-    description: "Walk in the footsteps of Hindu mythology on this spiritual journey.",
+    description: "Journey through the legends of Hindu mythology on a sacred path. Explore ancient temples, caves, and landscapes linked to the epic Ramayana.",
     heroImage: templeImg,
     tours: [
-      { id: 1, slug: "temple-trail-pilgrimage", title: "11 Days Ramayana Trail", duration: "10 Nights / 11 Days", image: templeImg, recommended: ["Spiritual", "Cultural"] },
-      { id: 2, slug: "temple-trail-pilgrimage", title: "Sri Lanka's Legends", duration: "8 Nights / 9 Days", image: sigiriyaImg, recommended: ["History", "Mythology"] },
-      { id: 3, slug: "temple-trail-pilgrimage", title: "Ramayana Mini Trail", duration: "5 Nights / 6 Days", image: templeImg, recommended: ["Short Trip"] },
+      { 
+        id: 1, 
+        slug: "temple-trail-pilgrimage", 
+        title: "11 Days Ramayana Trail", 
+        duration: "10 Nights / 11 Days", 
+        image: templeImgCard1, 
+        recommended: ["Spiritual", "Cultural"] 
+      },
+      { id: 2, 
+        slug: "temple-trail-pilgrimage", 
+        title: "Sri Lanka's Legends", 
+        duration: "8 Nights / 9 Days", 
+        image: templeImgCard2, 
+        recommended: ["History", "Mythology"] 
+      },
+      { 
+        id: 3, 
+        slug: "temple-trail-pilgrimage", 
+        title: "Ramayana Mini Trail", 
+        duration: "5 Nights / 6 Days", 
+        image: templeImgCard3, 
+        recommended: ["Short Trip"] },
     ],
-    features: [{ name: "Sita Amman Temple", values: [true, true, true] }, { name: "Ravana Cave", values: [true, true, true] }, { name: "Hakgala Gardens", values: [true, true, true] }],
-    mapText: { heading: "Ramayana Trail Map", subheading: "Discover Sri Lanka's Legendary Journey", description: "Follow the sacred path of the Ramayana epic." }
+
+    features: [
+      { name: "Sita Amman Temple", values: [true, true, true] }, 
+      { name: "Ravana Cave", values: [true, true, true] }, 
+      { name: "Hakgala Gardens", values: [true, true, true] }
+    ],
+
+    mapText: { 
+      heading: "Ramayana Trail Map", 
+      subheading: "Discover Sri Lanka's Legendary Journey", 
+      description: "Follow the sacred path of the Ramayana epic." }
   },
+
   golf: {
     title: "Golf Tours",
     description: "Sri Lanka is home to some of the oldest and finest golf courses in South Asia.",
