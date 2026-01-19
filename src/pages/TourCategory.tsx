@@ -227,7 +227,29 @@ const categoryData: Record<string, {
       { id: 1, slug: "cultural-triangle-explorer", title: "Hills and Waterfalls Tour", duration: "6 Nights / 7 Days", image: teaImg, recommended: ["Scenic", "Nature"] },
       { id: 2, slug: "cultural-triangle-explorer", title: "Sri Lanka Cloud Adventure", duration: "10 Nights / 11 Days", image: teaImg, recommended: ["Adventure", "Nature"] },
     ],
-    features: [{ name: "Negombo", values: [true, true] }, { name: "Temple of the Tooth", values: [true, true] }, { name: "Ella", values: [true, true] }, { name: "Nine Arch Bridge", values: [true, true] }, { name: "Scenic Train Ride", values: [true, true] }],
+    features: [{ name: "Negombo", values: [false, false] },
+
+    { name: "Kandy", values: [false, false] },
+    { name: "Temple of the Tooth", values: [false, false] },
+    { name: "Cultural Performance", values: [false, false] },
+    { name: "Royal Botanical Garden", values: [false, false] },
+
+    { name: "Nuwara Eliya", values: [false, false] },
+    { name: "Tea Plantation", values: [false, false] },
+    { name: "Gregory Lake", values: [false, false] },
+    { name: "Hakgala Garden", values: [false, false] },
+    { name: "Ambewela Farm", values: [false, false] },
+
+    { name: "Ella", values: [true, false] },
+    { name: "Ravana Falls", values: [true, false] },
+    { name: "Nine Arch Bridge", values: [true, false] },
+
+    { name: "Galle", values: [true, false] },
+    { name: "Galle Fort Tour", values: [true, false] },
+
+    { name: "Colombo", values: [false, true] },
+    { name: "Red Mosque", values: [false, true] },
+    { name: "City Tour and Shopping", values: [false, true] }],
     mapText: { heading: "Discover the Highlands", subheading: "Misty, Cool, and Hill Country Pleasures", description: "Experience the scenic beauty of Sri Lanka's hill country." }
   },
   wildlife: {
