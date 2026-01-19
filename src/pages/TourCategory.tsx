@@ -251,46 +251,29 @@ const categoryData: Record<string, {
       { id: 1, slug: "cultural-triangle-explorer", title: "Hills and Waterfalls Tour", duration: "6 Nights / 7 Days", image: teaImg, recommended: ["Scenic", "Nature"] },
       { id: 2, slug: "cultural-triangle-explorer", title: "Sri Lanka Cloud Adventure", duration: "10 Nights / 11 Days", image: teaImg, recommended: ["Adventure", "Nature"] },
     ],
-    features: [
-      {
-        section: "Negombo",
-        items: []
-      },
-      {
-        section: "Kandy",
-        items: [
-          { name: "Temple of the Tooth", values: [false, false] },
-          { name: "Cultural Performance", values: [false, false] },
-          { name: "Royal Botanical Garden", values: [false, false] },
-        ]
-      },
-      {
-        section: "Nuwara Eliya",
-        items: [
-          { name: "Tea Plantation", values: [false, false] },
-          { name: "Gregory Lake", values: [false, false] },
-          { name: "Hakgala Garden", values: [false, false] },
-          { name: "Ambewela Farm", values: [false, false] },
-          { name: "Ella", values: [true, false] },
-          { name: "Ravana Falls", values: [true, false] },
-          { name: "Nine Arch Bridge", values: [true, false] },
-        ],
-      },
-      {
-        section: "Galle", 
-        items: [
-          { name: "Galle Fort Tour", values: [true, false] },
-        ],
-      },
-      {
-        section: "Colombo",
-        items: [
-          { name: "Red Mosque", values: [false, true] },
-          { name: "City Tour and Shopping", values: [false, true] }
-        ],
-      },
-    ],
+    features: [{ name: "Negombo", values: [false, false] },
 
+    { name: "Kandy", values: [false, false] },
+    { name: "Temple of the Tooth", values: [false, false] },
+    { name: "Cultural Performance", values: [false, false] },
+    { name: "Royal Botanical Garden", values: [false, false] },
+
+    { name: "Nuwara Eliya", values: [false, false] },
+    { name: "Tea Plantation", values: [false, false] },
+    { name: "Gregory Lake", values: [false, false] },
+    { name: "Hakgala Garden", values: [false, false] },
+    { name: "Ambewela Farm", values: [false, false] },
+
+    { name: "Ella", values: [true, false] },
+    { name: "Ravana Falls", values: [true, false] },
+    { name: "Nine Arch Bridge", values: [true, false] },
+
+    { name: "Galle", values: [true, false] },
+    { name: "Galle Fort Tour", values: [true, false] },
+
+    { name: "Colombo", values: [false, true] },
+    { name: "Red Mosque", values: [false, true] },
+    { name: "City Tour and Shopping", values: [false, true] }],
     mapText: { heading: "Discover the Highlands", subheading: "Misty, Cool, and Hill Country Pleasures", description: "Experience the scenic beauty of Sri Lanka's hill country." }
   },
 
@@ -474,9 +457,41 @@ const categoryData: Record<string, {
     ],
 
     features: [
-      { name: "Sita Amman Temple", values: [true, true, true] },
-      { name: "Ravana Cave", values: [true, true, true] },
-      { name: "Hakgala Gardens", values: [true, true, true] }
+      { name: "Chilaw", values: [true, true, true] },
+      { name: "Munneshwaram Kovil", values: [true, true, true] },
+
+      { name: "Kandy", values: [true, true, true] },
+      { name: "Temple of the Tooth Relic", values: [false, false, true] },
+
+      { name: "Nuwara Eliya", values: [true, true, true] },
+      { name: "Sri Bhaktha Hanuman Temple", values: [true, true, true] },
+      { name: "Tea Plantation", values: [true, true, true] },
+      { name: "Divurumpola", values: [true, true, false] },
+      { name: "Seeta Amman Temple", values: [true, true, true] },
+      { name: "Ashoka Vatika", values: [true, false, true] },
+      { name: "Gayathri Peedam", values: [true, false, true] },
+
+      { name: "Colombo", values: [true, true, true] },
+      { name: "Panchamuga Anjaneyar Temple", values: [true, true, true] },
+      { name: "Kelaniya Rajamaha Temple", values: [true, true, true] },
+
+      { name: "Ella", values: [false, true, false] },
+
+      { name: "Kataragama", values: [false, true, false] },
+      { name: "Kataragama Temple", values: [false, true, false] },
+
+      { name: "Unawatuna", values: [false, true, true] },
+      { name: "Roomassala Temple", values: [false, true, true] },
+
+      { name: "Bentota", values: [false, true, true] },
+
+      { name: "Galle", values: [false, false, true] },
+      { name: "Dambulla", values: [false, false, true] },
+      { name: "Dambulla Cave Temple", values: [false, false, true] },
+      { name: "Sigiriya", values: [false, false, true] },
+
+      { name: "Trincomalee", values: [false, false, true] },
+      { name: "Koneshwaram Temple", values: [false, false, true] }
     ],
 
     mapText: {
