@@ -474,9 +474,41 @@ const categoryData: Record<string, {
     ],
 
     features: [
-      { name: "Sita Amman Temple", values: [true, true, true] },
-      { name: "Ravana Cave", values: [true, true, true] },
-      { name: "Hakgala Gardens", values: [true, true, true] }
+      { name: "Chilaw", values: [false, false, false] },
+      { name: "Munneshwaram Kovil", values: [false, false, false] },
+
+      { name: "Kandy", values: [false, false, false] },
+      { name: "Temple of the Tooth Relic", values: [true, true, false] },
+
+      { name: "Nuwara Eliya", values: [false, false, false] },
+      { name: "Sri Bhaktha Hanuman Temple", values: [false, false, false] },
+      { name: "Tea Plantation", values: [false, false, false] },
+      { name: "Divurumpola", values: [false, false, true] },
+      { name: "Seeta Amman Temple", values: [false, false, false] },
+      { name: "Ashoka Vatika", values: [false, true, false] },
+      { name: "Gayathri Peedam", values: [false, true, false] },
+
+      { name: "Colombo", values: [false, false, false] },
+      { name: "Panchamuga Anjaneyar Temple", values: [false, false, false] },
+      { name: "Kelaniya Rajamaha Temple", values: [false, false, false] },
+
+      { name: "Ella", values: [true, false, true] },
+
+      { name: "Kataragama", values: [true, false, true] },
+      { name: "Kataragama Temple", values: [true, false, true] },
+
+      { name: "Unawatuna", values: [true, false, false] },
+      { name: "Roomassala Temple", values: [true, false, false] },
+
+      { name: "Bentota", values: [true, false, false] },
+
+      { name: "Galle", values: [true, true, false] },
+      { name: "Dambulla", values: [true, true, false] },
+      { name: "Dambulla Cave Temple", values: [true, true, false] },
+      { name: "Sigiriya", values: [true, true, false] },
+
+      { name: "Trincomalee", values: [true, true, false] },
+      { name: "Koneshwaram Temple", values: [true, true, false] }
     ],
 
     mapText: {
