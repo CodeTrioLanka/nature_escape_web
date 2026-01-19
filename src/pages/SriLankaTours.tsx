@@ -6,7 +6,7 @@ import { useRef } from "react";
 import Layout from "@/components/layout/Layout";
 
 // Hero images
-import beachSurfImg from "@/assets/beach-surf.jpg";
+import beachSurfImg from "@/assets/ballon.jpg";
 import heroImage from "@/assets/hero-srilanka.jpg";
 
 // Category images
@@ -110,13 +110,12 @@ const SriLankaTours = () => {
               Across Sri Lanka
             </h2>
             <p className="text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Experience the beauty of Sri Lanka, a tropical paradise with ancient ruins, endless beaches, 
-              welcoming locals, abundant wildlife, rolling surf, famous tea, and delicious cuisine.
+             Sri Lanka tourism offers a unique mix of ancient history, tropical beaches, wildlife safaris, Ceylon tea, surfing locations, and local cuisine.
             </p>
           </motion.div>
 
           {/* Sample Tours Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {sampleTours.map((tour, index) => (
               <motion.div
                 key={tour.id}
@@ -145,7 +144,7 @@ const SriLankaTours = () => {
                 </Link>
               </motion.div>
             ))}
-          </div>
+          </div> */}
 
           <motion.div 
             className="text-center mb-20"
@@ -153,13 +152,13 @@ const SriLankaTours = () => {
             animate={toursInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Link 
+            {/* <Link 
               to="/sri-lanka-tours/sample"
               className="group inline-flex items-center gap-2 px-8 py-3 border-2 border-primary text-primary font-medium rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
               Sample Tours
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </Link> */}
           </motion.div>
 
           {/* Match Tours Section */}
@@ -172,7 +171,7 @@ const SriLankaTours = () => {
           >
             <p className="text-muted-foreground mb-2">Also Take A Look</p>
             <h3 className="text-2xl md:text-3xl font-display font-semibold">
-              <span className="text-secondary">Made</span> Tours<br />
+              <span className="">Made</span> Tours<br />
               <span className="text-muted-foreground text-lg font-normal">to Match your Travel Style</span>
             </h3>
           </motion.div>
@@ -248,9 +247,9 @@ const SriLankaTours = () => {
                 Discover Sri Lanka's Stunning Coastline
               </h2>
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                From the golden beaches of the south coast to the untouched shores of the east, 
-                Sri Lanka offers over 1,340 km of breathtaking coastline. Experience pristine beaches, 
-                world-class surfing, whale watching, and vibrant coastal towns.
+                Sri Lanka is home to over 1,340 km of beautiful coastline, stretching from the golden beaches of the south coast to the unspoiled shores of the east. 
+                
+                Enjoy pristine beaches, world-class surfing, whale watching experiences, and lively coastal towns across the island
               </p>
               
               <div className="grid grid-cols-2 gap-4 mb-10">

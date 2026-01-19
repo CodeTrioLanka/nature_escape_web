@@ -245,7 +245,29 @@ const categoryData: Record<string, {
       { id: 1, slug: "cultural-triangle-explorer", title: "Hills and Waterfalls Tour", duration: "6 Nights / 7 Days", image: teaImg, recommended: ["Scenic", "Nature"] },
       { id: 2, slug: "cultural-triangle-explorer", title: "Sri Lanka Cloud Adventure", duration: "10 Nights / 11 Days", image: teaImg, recommended: ["Adventure", "Nature"] },
     ],
-    features: [{ name: "Negombo", values: [true, true] }, { name: "Temple of the Tooth", values: [true, true] }, { name: "Ella", values: [true, true] }, { name: "Nine Arch Bridge", values: [true, true] }, { name: "Scenic Train Ride", values: [true, true] }],
+    features: [{ name: "Negombo", values: [false, false] },
+
+    { name: "Kandy", values: [false, false] },
+    { name: "Temple of the Tooth", values: [false, false] },
+    { name: "Cultural Performance", values: [false, false] },
+    { name: "Royal Botanical Garden", values: [false, false] },
+
+    { name: "Nuwara Eliya", values: [false, false] },
+    { name: "Tea Plantation", values: [false, false] },
+    { name: "Gregory Lake", values: [false, false] },
+    { name: "Hakgala Garden", values: [false, false] },
+    { name: "Ambewela Farm", values: [false, false] },
+
+    { name: "Ella", values: [true, false] },
+    { name: "Ravana Falls", values: [true, false] },
+    { name: "Nine Arch Bridge", values: [true, false] },
+
+    { name: "Galle", values: [true, false] },
+    { name: "Galle Fort Tour", values: [true, false] },
+
+    { name: "Colombo", values: [false, true] },
+    { name: "Red Mosque", values: [false, true] },
+    { name: "City Tour and Shopping", values: [false, true] }],
     mapText: { heading: "Discover the Highlands", subheading: "Misty, Cool, and Hill Country Pleasures", description: "Experience the scenic beauty of Sri Lanka's hill country." }
   },
 
@@ -277,18 +299,54 @@ const categoryData: Record<string, {
         image: wildlifeImgCard3, 
         recommended: ["Adventure"] },
     ],
-
     features: [
-      { name: "Yala National Park", values: [true, true, false] },
-      { name: "Minneriya Safari", values: [true, true, false] },
-      { name: "Wilpattu National Park", values: [false, false, true] }
-    ],
+      { name: "Negombo", values: [false, false, false] },
 
-    mapText: {
-      heading: "From Wild Parks to Peaks",
-      subheading: "Sri Lanka's Ultimate Adventure Trail",
-      description: "Experience world-class wildlife safaris."
-    }
+      { name: "Habarana", values: [false, false, false] },
+      { name: "Minneriya National Park", values: [false, false, false] },
+      { name: "Hiriwadunna Village", values: [false, true, true] },
+      { name: "Sigiriya", values: [false, false, true] },
+      { name: "Anuradhapura", values: [true, false, false] },
+      { name: "Dambulla", values: [true, false, true] },
+      { name: "Wasgamuwa National Park", values: [false, true, true] },
+
+      { name: "Nuwara Eliya", values: [false, false, false] },
+      { name: "Tea Factory", values: [false, false, false] },
+      { name: "Horton Plains", values: [false, false, false] },
+      { name: "Moon Plains", values: [true, false, false] },
+
+      { name: "Colombo", values: [false, true, true] },
+      { name: "City Tour & Shopping", values: [false, true, true] },
+
+      { name: "Wilpattu", values: [true, false, true] },
+      { name: "Wilpattu National Park", values: [true, false, true] },
+
+      { name: "Kandy", values: [true, false, true] },
+      { name: "Royal Botanical Garden", values: [true, false, true] },
+
+      { name: "Ella", values: [true, false, false] },
+      { name: "Nine Arch Bridge", values: [true, false, true] },
+      { name: "Mini Adam’s Peak", values: [true, false, true] },
+      { name: "Ravana Falls", values: [true, false, true] },
+
+      { name: "Arugambay", values: [true, false, false] },
+      { name: "Elephant Rock", values: [true, false, false] },
+      { name: "Kumana National Park", values: [true, true, false] },
+
+      { name: "Udawalawe", values: [true, false, false] },
+      { name: "Udawalawe National Park", values: [true, false, false] },
+      { name: "Udawalawe Transit Home", values: [true, false, false] },
+
+      { name: "Yala", values: [true, false, false] },
+      { name: "Yala National Park", values: [true, true, false] },
+
+      { name: "Sinharaja", values: [true, true, false] },
+      { name: "Sinharaja Rainforest", values: [true, true, false] },
+
+      { name: "Bentota", values: [true, true, false] },
+      { name: "Madu River Boat Safari", values: [true, true, false] }
+    ],
+    mapText: { heading: "From Wild Parks to Peaks", subheading: "Sri Lanka's Ultimate Adventure Trail", description: "Experience world-class wildlife safaris." }
   },
 
   adventure: {

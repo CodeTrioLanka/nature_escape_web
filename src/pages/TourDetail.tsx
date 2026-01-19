@@ -35,8 +35,8 @@ interface TourData {
   gallery: string[];
   inclusions: string[];
   exclusions: string[];
-  departureInfo: string[];
-  bookingInfo: string[];
+  paymentMethods: string[];
+  paymentpolicies: string[];
   faqs: {
     question: string;
     answer: string;
@@ -123,27 +123,19 @@ const toursData: Record<string, TourData> = {
     ],
     gallery: [beachParadiseImg, beachMirissaImg, wildlifeImg],
     inclusions: [
-      "Accommodation in 4-star beachfront resort",
-      "Daily breakfast and 3 dinners",
-      "Airport transfers and local transportation",
-      "Whale watching excursion",
-      "Snorkeling equipment and guide",
-      "Galle Fort guided tour",
-      "Ayurvedic spa treatment"
+      "Accommodation – Transportation in an air-conditioned vehicle with the services of a chauffeur guide -Entrance Tickets – Government Taxes",
     ],
     exclusions: [
-      "International flights",
-      "Travel insurance",
-      "Personal expenses",
-      "Alcoholic beverages",
-      "Optional activities not mentioned"
+      "Alcoholic Beverages",
+      "Extra meals/snacks and beverages ordered from the hotel or outside the hotel.",
+      "Early check ins and late check outs",
+      "Tips & Expenses of personal nature",
+      "Travel Insurance, Visa & Air Fare"
     ],
-    departureInfo: [
-      "Departures available every Saturday from November to April",
-      "Private tours can be arranged on any date",
-      "Minimum 2 participants required"
+    paymentMethods: [
+      "Please note we require 50% of the payment on confirmation and the balance 02 weeks prior to arrival. Or the full payment can be settled on confirmation.",
     ],
-    bookingInfo: [
+    paymentpolicies: [
       "50% deposit required at booking",
       "Full payment due 30 days before departure",
       "Free cancellation up to 14 days before departure"
@@ -191,8 +183,8 @@ const toursData: Record<string, TourData> = {
     gallery: [beachMirissaImg, beachParadiseImg, beachUnawatunaImg],
     inclusions: ["Surf equipment rental", "Professional surf instruction", "Beachfront accommodation", "Daily breakfast", "Whale watching tour"],
     exclusions: ["International flights", "Travel insurance", "Personal expenses"],
-    departureInfo: ["Year-round departures", "Best surfing conditions November to April"],
-    bookingInfo: ["30% deposit required", "Full payment 14 days before"],
+    paymentMethods: ["Year-round departures", "Best surfing conditions November to April"],
+    paymentpolicies: ["30% deposit required", "Full payment 14 days before"],
     faqs: [
       { question: "Do I need prior surfing experience?", answer: "No, we welcome all skill levels from complete beginners to advanced surfers." }
     ],
@@ -222,8 +214,8 @@ const toursData: Record<string, TourData> = {
     gallery: [beachParadiseImg, beachMirissaImg, beachUnawatunaImg],
     inclusions: ["Luxury resort accommodation", "All water sports activities", "River safari", "Daily breakfast and dinner"],
     exclusions: ["International flights", "Travel insurance", "Personal expenses"],
-    departureInfo: ["Daily departures available"],
-    bookingInfo: ["50% deposit required at booking"],
+    paymentMethods: ["Daily departures available"],
+    paymentpolicies: ["50% deposit required at booking"],
     faqs: [],
     relatedTours: [
       { slug: "unawatuna-beach-escape", title: "Unawatuna Beach Escape", image: beachUnawatunaImg, duration: "7 Days" }
@@ -254,8 +246,8 @@ const toursData: Record<string, TourData> = {
     gallery: [sigiriyaImg, templeImg, wildlifeImg],
     inclusions: ["All accommodation", "Daily breakfast and dinner", "Entrance fees", "Professional guide", "All transportation"],
     exclusions: ["International flights", "Travel insurance", "Personal expenses", "Optional activities"],
-    departureInfo: ["Weekly departures on Sundays", "Private tours available daily"],
-    bookingInfo: ["40% deposit required", "Balance due 21 days before departure"],
+    paymentMethods: ["Weekly departures on Sundays", "Private tours available daily"],
+    paymentpolicies: ["40% deposit required", "Balance due 21 days before departure"],
     faqs: [
       { question: "How strenuous is the Sigiriya climb?", answer: "The climb involves about 1,200 steps and takes 1-2 hours. Moderate fitness recommended." }
     ],
@@ -288,8 +280,8 @@ const toursData: Record<string, TourData> = {
     gallery: [templeImg, sigiriyaImg, teaPlantationsImg],
     inclusions: ["Temple entrance fees", "Expert Buddhist guide", "All transportation", "Accommodation", "Vegetarian meals"],
     exclusions: ["International flights", "Travel insurance", "Personal offerings"],
-    departureInfo: ["Departures aligned with Buddhist full moon days", "Private tours available"],
-    bookingInfo: ["30% deposit required"],
+    paymentMethods: ["Departures aligned with Buddhist full moon days", "Private tours available"],
+    paymentpolicies: ["30% deposit required"],
     faqs: [],
     relatedTours: [
       { slug: "cultural-triangle-explorer", title: "Cultural Triangle Explorer", image: sigiriyaImg, duration: "8 Days" }
@@ -318,8 +310,8 @@ const toursData: Record<string, TourData> = {
     gallery: [honeymoonImg, beachParadiseImg, teaPlantationsImg],
     inclusions: ["Luxury accommodations", "Private transfers", "Couples spa treatments", "Private dinners", "All activities"],
     exclusions: ["International flights", "Travel insurance", "Alcoholic beverages"],
-    departureInfo: ["Available year-round", "Custom dates for your special occasion"],
-    bookingInfo: ["50% deposit", "Complimentary room upgrade when available"],
+    paymentMethods: ["Available year-round", "Custom dates for your special occasion"],
+    paymentpolicies: ["50% deposit", "Complimentary room upgrade when available"],
     faqs: [
       { question: "Can you arrange special surprises?", answer: "Yes! We specialize in romantic surprises including private dinners, flower arrangements, and celebration cakes." }
     ],
@@ -351,8 +343,8 @@ const toursData: Record<string, TourData> = {
     gallery: [familyBeachImg, wildlifeImg, teaPlantationsImg],
     inclusions: ["Family rooms", "Child-friendly meals", "All activities", "Private vehicle", "Kids' activity packs"],
     exclusions: ["International flights", "Travel insurance", "Personal expenses"],
-    departureInfo: ["School holiday departures", "Private family tours any date"],
-    bookingInfo: ["Children under 5 stay free", "Special family pricing available"],
+    paymentMethods: ["School holiday departures", "Private family tours any date"],
+    paymentpolicies: ["Children under 5 stay free", "Special family pricing available"],
     faqs: [
       { question: "What ages is this tour suitable for?", answer: "This tour is designed for children ages 4 and up, with activities adaptable for all ages." }
     ],
@@ -382,8 +374,8 @@ const toursData: Record<string, TourData> = {
     gallery: [wildlifeImg, sigiriyaImg, beachParadiseImg],
     inclusions: ["Safari jeeps", "Park entrance fees", "Expert naturalist guides", "Luxury safari lodges", "All meals"],
     exclusions: ["International flights", "Travel insurance", "Camera fees"],
-    departureInfo: ["Best wildlife viewing February to October"],
-    bookingInfo: ["Early booking recommended for peak season"],
+    paymentMethods: ["Best wildlife viewing February to October"],
+    paymentpolicies: ["Early booking recommended for peak season"],
     faqs: [
       { question: "What are the chances of seeing a leopard?", answer: "Yala has excellent leopard sighting rates, with chances over 60% on a full day safari." }
     ],
@@ -414,8 +406,8 @@ const toursData: Record<string, TourData> = {
     gallery: [adventureImg, teaPlantationsImg, beachMirissaImg],
     inclusions: ["All adventure activities", "Safety equipment", "Expert guides", "Adventure lodges", "Meals"],
     exclusions: ["International flights", "Travel insurance (mandatory)", "Personal gear"],
-    departureInfo: ["Year-round departures", "Best conditions April to September"],
-    bookingInfo: ["Medical fitness declaration required", "Minimum age 16 years"],
+    paymentMethods: ["Year-round departures", "Best conditions April to September"],
+    paymentpolicies: ["Medical fitness declaration required", "Minimum age 16 years"],
     faqs: [
       { question: "Do I need experience?", answer: "No prior experience needed. All activities include safety briefings and expert instruction." }
     ],
@@ -669,10 +661,10 @@ const TourDetail = () => {
             {/* Departure Info */}
             <div>
               <h3 className="font-semibold text-lg mb-4 text-foreground border-b border-primary pb-2">
-                DEPARTURE INFO
+              PAYMENT METHODS
               </h3>
               <ul className="space-y-2">
-                {tour.departureInfo.map((item, index) => (
+                {tour.paymentMethods.map((item, index) => (
                   <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
                     <ChevronRight className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                     <span>{item}</span>
@@ -684,10 +676,10 @@ const TourDetail = () => {
             {/* Booking Info */}
             <div>
               <h3 className="font-semibold text-lg mb-4 text-foreground border-b border-primary pb-2">
-                BOOKING INFO
+                PAYMENT POLICIES
               </h3>
               <ul className="space-y-2">
-                {tour.bookingInfo.map((item, index) => (
+                {tour.paymentpolicies.map((item, index) => (
                   <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
                     <ChevronRight className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                     <span>{item}</span>

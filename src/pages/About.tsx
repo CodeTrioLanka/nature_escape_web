@@ -150,9 +150,7 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="mb-6"
             >
-              <span className="inline-block px-6 py-2 bg-forest/80 backdrop-blur-sm text-primary-foreground text-sm font-medium rounded-full">
-                ✨ Discover Our Story
-              </span>
+             
             </motion.div>
             
             <motion.h1 
@@ -190,7 +188,7 @@ const About = () => {
             </motion.p>
 
             {/* Scroll Indicator */}
-            <motion.div
+            {/* <motion.div
               className="absolute bottom-10 left-1/2 -translate-x-1/2"
               animate={{ y: [0, 15, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -202,7 +200,7 @@ const About = () => {
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
         </motion.div>
       </section>
