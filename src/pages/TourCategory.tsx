@@ -161,27 +161,29 @@ const categoryData: Record<string, {
     description: "Experience the best of both worlds with our exclusive honeymoon getaways. We pair the mystique of the ocean with the romance of the highlands to create a diverse, unforgettable travel experience for newlyweds.",
     heroImage: honeymoonImg,
     tours: [
-      { 
-        id: 1, 
-        slug: "romantic-honeymoon-escape", 
-        title: "Romantic Honeymoon Escape", 
-        duration: "10 Days / 9 Nights", 
-        image: honeymoonImgCard1, 
-        recommended: ["Couples", "Romantic"] 
+      {
+        id: 1,
+        slug: "romantic-honeymoon-escape",
+        title: "Romantic Honeymoon Escape",
+        duration: "10 Days / 9 Nights",
+        image: honeymoonImgCard1,
+        recommended: ["Couples", "Romantic"]
       },
-      { id: 2, 
-        slug: "romantic-honeymoon-escape", 
-        title: "Romantic Serenity in the Mist", 
-        duration: "7 Nights / 8 Days", 
-        image: honeymoonImgCard2, 
-        recommended: ["Beach", "Romantic"] 
+      {
+        id: 2,
+        slug: "romantic-honeymoon-escape",
+        title: "Romantic Serenity in the Mist",
+        duration: "7 Nights / 8 Days",
+        image: honeymoonImgCard2,
+        recommended: ["Beach", "Romantic"]
       },
-      { id: 3, 
-        slug: "romantic-honeymoon-escape", 
-        title: "Passion's Getaway", 
-        duration: "5 Nights / 6 Days", 
-        image: honeymoonImgCard3, 
-        recommended: ["Romantic", "Scenic"] 
+      {
+        id: 3,
+        slug: "romantic-honeymoon-escape",
+        title: "Passion's Getaway",
+        duration: "5 Nights / 6 Days",
+        image: honeymoonImgCard3,
+        recommended: ["Romantic", "Scenic"]
       },
     ],
     features: [
@@ -288,20 +290,22 @@ const categoryData: Record<string, {
         image: wildlifeImgCard1,
         recommended: ["Adventure", "Family"]
       },
-      { 
-        id: 2, 
-        slug: "wildlife-safari-expedition", 
-        title: "Wildlife Parks Explored", 
-        duration: "6 Nights / 7 Days", 
-        image: wildlifeImgCard2, 
-        recommended: ["Nature", "Photography"] 
+      {
+        id: 2,
+        slug: "wildlife-safari-expedition",
+        title: "Wildlife Parks Explored",
+        duration: "6 Nights / 7 Days",
+        image: wildlifeImgCard2,
+        recommended: ["Nature", "Photography"]
       },
-      { id: 3, 
-        slug: "wildlife-safari-expedition", 
-        title: "Wilpattu Wild Escape", 
-        duration: "4 Nights / 5 Days", 
-        image: wildlifeImgCard3, 
-        recommended: ["Adventure"] },
+      {
+        id: 3,
+        slug: "wildlife-safari-expedition",
+        title: "Wilpattu Wild Escape",
+        duration: "4 Nights / 5 Days",
+        image: wildlifeImgCard3,
+        recommended: ["Adventure"]
+      },
     ],
     features: [
       { name: "Negombo", values: [false, false, false] },
@@ -358,42 +362,43 @@ const categoryData: Record<string, {
     description: "Enjoy hiking, biking, kayaking, and a range of exciting outdoor adventures. Explore Sri Lanka's diverse landscapes from mountains to beaches.",
     heroImage: adventureImg,
     tours: [
-      { 
-        id: 1, 
-        slug: "adventure-adrenaline-rush", 
-        title: "Adventure Adrenaline Rush", 
-        duration: "7 Days / 6 Nights", 
-        image: adventureImgCard1, 
-        recommended: ["Thrill", "Active"] 
+      {
+        id: 1,
+        slug: "adventure-adrenaline-rush",
+        title: "Adventure Adrenaline Rush",
+        duration: "7 Days / 6 Nights",
+        image: adventureImgCard1,
+        recommended: ["Thrill", "Active"]
       },
-      { 
-        id: 2, 
-        slug: "adventure-adrenaline-rush", 
-        title: "Sri Lanka Wild Trekking", 
-        duration: "8 Nights / 9 Days", 
-        image: adventureImgCard2, 
-        recommended: ["Hiking", "Nature"] 
+      {
+        id: 2,
+        slug: "adventure-adrenaline-rush",
+        title: "Sri Lanka Wild Trekking",
+        duration: "8 Nights / 9 Days",
+        image: adventureImgCard2,
+        recommended: ["Hiking", "Nature"]
       },
-      { 
-        id: 3, 
-        slug: "adventure-adrenaline-rush", 
-        title: "Extreme Trek Sri Lanka", 
-        duration: "6 Nights / 7 Days", 
-        image: adventureImgCard3, 
-        recommended: ["Extreme", "Adventure"] 
+      {
+        id: 3,
+        slug: "adventure-adrenaline-rush",
+        title: "Extreme Trek Sri Lanka",
+        duration: "6 Nights / 7 Days",
+        image: adventureImgCard3,
+        recommended: ["Extreme", "Adventure"]
       },
     ],
 
     features: [
-      { name: "White Water Rafting", values: [true, true, true] }, 
-      { name: "Ella Hiking", values: [true, true, true] }, 
+      { name: "White Water Rafting", values: [true, true, true] },
+      { name: "Ella Hiking", values: [true, true, true] },
       { name: "Surfing", values: [true, false, true] }
     ],
 
-    mapText: { 
-      heading: "Adventure-Filled Sri Lanka", 
-      subheading: "From Highlands to Beaches and Beyond", 
-      description: "Push your limits with thrilling adventures." }
+    mapText: {
+      heading: "Adventure-Filled Sri Lanka",
+      subheading: "From Highlands to Beaches and Beyond",
+      description: "Push your limits with thrilling adventures."
+    }
   },
 
   ayurvedic: {
@@ -425,40 +430,75 @@ const categoryData: Record<string, {
     description: "Journey through the legends of Hindu mythology on a sacred path. Explore ancient temples, caves, and landscapes linked to the epic Ramayana.",
     heroImage: templeImg,
     tours: [
-      { 
-        id: 1, 
-        slug: "temple-trail-pilgrimage", 
-        title: "11 Days Ramayana Trail", 
-        duration: "10 Nights / 11 Days", 
-        image: templeImgCard1, 
-        recommended: ["Spiritual", "Cultural"] 
+      {
+        id: 1,
+        slug: "temple-trail-pilgrimage",
+        title: "11 Days Ramayana Trail",
+        duration: "10 Nights / 11 Days",
+        image: templeImgCard1,
+        recommended: ["Spiritual", "Cultural"]
       },
-      { id: 2, 
-        slug: "temple-trail-pilgrimage", 
-        title: "Sri Lanka's Legends", 
-        duration: "8 Nights / 9 Days", 
-        image: templeImgCard2, 
-        recommended: ["History", "Mythology"] 
+      {
+        id: 2,
+        slug: "temple-trail-pilgrimage",
+        title: "Sri Lanka's Legends",
+        duration: "8 Nights / 9 Days",
+        image: templeImgCard2,
+        recommended: ["History", "Mythology"]
       },
-      { 
-        id: 3, 
-        slug: "temple-trail-pilgrimage", 
-        title: "Ramayana Mini Trail", 
-        duration: "5 Nights / 6 Days", 
-        image: templeImgCard3, 
-        recommended: ["Short Trip"] },
+      {
+        id: 3,
+        slug: "temple-trail-pilgrimage",
+        title: "Ramayana Mini Trail",
+        duration: "5 Nights / 6 Days",
+        image: templeImgCard3,
+        recommended: ["Short Trip"]
+      },
     ],
 
     features: [
-      { name: "Sita Amman Temple", values: [true, true, true] }, 
-      { name: "Ravana Cave", values: [true, true, true] }, 
-      { name: "Hakgala Gardens", values: [true, true, true] }
+      { name: "Chilaw", values: [true, true, true] },
+      { name: "Munneshwaram Kovil", values: [true, true, true] },
+
+      { name: "Kandy", values: [true, true, true] },
+      { name: "Temple of the Tooth Relic", values: [false, false, true] },
+
+      { name: "Nuwara Eliya", values: [true, true, true] },
+      { name: "Sri Bhaktha Hanuman Temple", values: [true, true, true] },
+      { name: "Tea Plantation", values: [true, true, true] },
+      { name: "Divurumpola", values: [true, true, false] },
+      { name: "Seeta Amman Temple", values: [true, true, true] },
+      { name: "Ashoka Vatika", values: [true, false, true] },
+      { name: "Gayathri Peedam", values: [true, false, true] },
+
+      { name: "Colombo", values: [true, true, true] },
+      { name: "Panchamuga Anjaneyar Temple", values: [true, true, true] },
+      { name: "Kelaniya Rajamaha Temple", values: [true, true, true] },
+
+      { name: "Ella", values: [false, true, false] },
+
+      { name: "Kataragama", values: [false, true, false] },
+      { name: "Kataragama Temple", values: [false, true, false] },
+
+      { name: "Unawatuna", values: [false, true, true] },
+      { name: "Roomassala Temple", values: [false, true, true] },
+
+      { name: "Bentota", values: [false, true, true] },
+
+      { name: "Galle", values: [false, false, true] },
+      { name: "Dambulla", values: [false, false, true] },
+      { name: "Dambulla Cave Temple", values: [false, false, true] },
+      { name: "Sigiriya", values: [false, false, true] },
+
+      { name: "Trincomalee", values: [false, false, true] },
+      { name: "Koneshwaram Temple", values: [false, false, true] }
     ],
 
-    mapText: { 
-      heading: "Ramayana Trail Map", 
-      subheading: "Discover Sri Lanka's Legendary Journey", 
-      description: "Follow the sacred path of the Ramayana epic." }
+    mapText: {
+      heading: "Ramayana Trail Map",
+      subheading: "Discover Sri Lanka's Legendary Journey",
+      description: "Follow the sacred path of the Ramayana epic."
+    }
   },
 
   golf: {
