@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
-import beachUnawatuna from "@/assets/beach-unawatuna.jpg";
+import srilanka_beach from "@/assets/srilanka_beach.webp";
 import logo from "@/assets/nature-escape-logo.png";
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${beachUnawatuna})` }}
+        style={{ backgroundImage: `url(${srilanka_beach})` }}
       />
       <div className="absolute inset-0 bg-black/40" />
       <div className="relative z-10 container mx-auto px-4 py-16">

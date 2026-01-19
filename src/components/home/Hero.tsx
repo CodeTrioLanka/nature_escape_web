@@ -79,7 +79,7 @@ const Hero = () => {
         style={{ y: textY, opacity }}
       >
         <div className="max-w-3xl">
-          <motion.span 
+          {/* <motion.span 
             className="inline-block px-4 py-1.5 bg-forest/90 backdrop-blur-sm text-primary-foreground text-sm font-medium rounded-full mb-6"
             initial={{ opacity: 0, y: 20, x: -50 }}
             animate={{ opacity: 1, y: 0, x: 0 }}
@@ -87,7 +87,7 @@ const Hero = () => {
           >
             ✨ Discover Untouched Paradise
           </motion.span>
-          
+           */}
           <motion.h1 
             className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-primary-foreground leading-tight mb-6"
             initial={{ opacity: 0, y: 50 }}
