@@ -509,7 +509,23 @@ const categoryData: Record<string, {
       { id: 1, slug: "cultural-triangle-explorer", title: "18 Holes of Golfing", duration: "6 Nights / 7 Days", image: golfImg, recommended: ["Golf", "Luxury"] },
       { id: 2, slug: "cultural-triangle-explorer", title: "The Ultimate Golf Escape", duration: "10 Nights / 11 Days", image: golfImg, recommended: ["Golf", "Premium"] },
     ],
-    features: [{ name: "Royal Colombo Golf Club", values: [true, true] }, { name: "Victoria Golf Club", values: [true, true] }, { name: "Nuwara Eliya Golf Club", values: [true, true] }],
+    features: [{ name: "Colombo", values: [false, false] },
+    { name: "City Tour", values: [false, false] },
+    { name: "Royal Colombo Golf Club", values: [true, false] },
+
+    { name: "Kandy", values: [false, false] },
+    { name: "Temple of the Tooth", values: [false, false] },
+    { name: "Victoria Golf Club", values: [false, false] },
+    { name: "Royal Botanical Garden", values: [true, false] },
+
+    { name: "Negombo", values: [false, false] },
+
+    { name: "Nuwara Eliya", values: [true, false] },
+    { name: "Tea Factory", values: [true, false] },
+    { name: "Nuwara Eliya Golf Club", values: [true, false] },
+
+    { name: "Hambantota", values: [true, false] },
+    { name: "Shangri La Golf Course", values: [true, false] }],
     mapText: { heading: "Sri Lanka's Golf Paradise", subheading: "World-Class Courses in Tropical Settings", description: "Experience world-class golfing in stunning settings." }
   }
 };
