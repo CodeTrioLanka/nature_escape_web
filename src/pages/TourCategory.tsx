@@ -457,41 +457,41 @@ const categoryData: Record<string, {
     ],
 
     features: [
-      { name: "Chilaw", values: [true, true, true] },
-      { name: "Munneshwaram Kovil", values: [true, true, true] },
+      { name: "Chilaw", values: [false, false, false] },
+      { name: "Munneshwaram Kovil", values: [false, false, false] },
 
-      { name: "Kandy", values: [true, true, true] },
-      { name: "Temple of the Tooth Relic", values: [false, false, true] },
+      { name: "Kandy", values: [false, false, false] },
+      { name: "Temple of the Tooth Relic", values: [true, true, false] },
 
-      { name: "Nuwara Eliya", values: [true, true, true] },
-      { name: "Sri Bhaktha Hanuman Temple", values: [true, true, true] },
-      { name: "Tea Plantation", values: [true, true, true] },
-      { name: "Divurumpola", values: [true, true, false] },
-      { name: "Seeta Amman Temple", values: [true, true, true] },
-      { name: "Ashoka Vatika", values: [true, false, true] },
-      { name: "Gayathri Peedam", values: [true, false, true] },
+      { name: "Nuwara Eliya", values: [false, false, false] },
+      { name: "Sri Bhaktha Hanuman Temple", values: [false, false, false] },
+      { name: "Tea Plantation", values: [false, false, false] },
+      { name: "Divurumpola", values: [false, false, true] },
+      { name: "Seeta Amman Temple", values: [false, false, false] },
+      { name: "Ashoka Vatika", values: [false, true, false] },
+      { name: "Gayathri Peedam", values: [false, true, false] },
 
-      { name: "Colombo", values: [true, true, true] },
-      { name: "Panchamuga Anjaneyar Temple", values: [true, true, true] },
-      { name: "Kelaniya Rajamaha Temple", values: [true, true, true] },
+      { name: "Colombo", values: [false, false, false] },
+      { name: "Panchamuga Anjaneyar Temple", values: [false, false, false] },
+      { name: "Kelaniya Rajamaha Temple", values: [false, false, false] },
 
-      { name: "Ella", values: [false, true, false] },
+      { name: "Ella", values: [true, false, true] },
 
-      { name: "Kataragama", values: [false, true, false] },
-      { name: "Kataragama Temple", values: [false, true, false] },
+      { name: "Kataragama", values: [true, false, true] },
+      { name: "Kataragama Temple", values: [true, false, true] },
 
-      { name: "Unawatuna", values: [false, true, true] },
-      { name: "Roomassala Temple", values: [false, true, true] },
+      { name: "Unawatuna", values: [true, false, false] },
+      { name: "Roomassala Temple", values: [true, false, false] },
 
-      { name: "Bentota", values: [false, true, true] },
+      { name: "Bentota", values: [true, false, false] },
 
-      { name: "Galle", values: [false, false, true] },
-      { name: "Dambulla", values: [false, false, true] },
-      { name: "Dambulla Cave Temple", values: [false, false, true] },
-      { name: "Sigiriya", values: [false, false, true] },
+      { name: "Galle", values: [true, true, false] },
+      { name: "Dambulla", values: [true, true, false] },
+      { name: "Dambulla Cave Temple", values: [true, true, false] },
+      { name: "Sigiriya", values: [true, true, false] },
 
-      { name: "Trincomalee", values: [false, false, true] },
-      { name: "Koneshwaram Temple", values: [false, false, true] }
+      { name: "Trincomalee", values: [true, true, false] },
+      { name: "Koneshwaram Temple", values: [true, true, false] }
     ],
 
     mapText: {
