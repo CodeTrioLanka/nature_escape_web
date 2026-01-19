@@ -12,17 +12,20 @@ import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
 import templeImg from "@/assets/temple.jpg";
 
-import adventureImg from "@/assets/adventure.jpg";
+import honeymoonImg from "@/assets/honeymoon.jpg";
+import honeymoonImgCard1 from "@/assets/honeymoon1.jpg";
+import honeymoonImgCard2 from "@/assets/honeymoon2.jpg";
+import honeymoonImgCard3 from "@/assets/honeymoon3.jpg";
 
 import wildlifeImg from "@/assets/wildlife.jpg";
 import wildlifeImgCard1 from "@/assets/wildlife1.jpg";
 import wildlifeImgCard2 from "@/assets/wildlife2.jpg";
 import wildlifeImgCard3 from "@/assets/wildlife3.jpg";
 
-import honeymoonImg from "@/assets/honeymoon.jpg";
-import honeymoonImgCard1 from "@/assets/honeymoon1.jpg";
-import honeymoonImgCard2 from "@/assets/honeymoon2.jpg";
-import honeymoonImgCard3 from "@/assets/honeymoon3.jpg";
+import adventureImg from "@/assets/adventure.jpg";
+import adventureImgCard1 from "@/assets/adventure1.jpg";
+import adventureImgCard2 from "@/assets/adventure2.jpg";
+import adventureImgCard3 from "@/assets/adventure3.jpg";
 
 import familyImg from "@/assets/family-beach.jpg";
 import golfImg from "@/assets/golf.jpg";
@@ -113,6 +116,7 @@ const categoryData: Record<string, {
       description: "Discover over 1,340 km of stunning coastline with pristine beaches, world-class surf spots, and crystal-clear waters perfect for snorkeling and diving."
     }
   },
+
   cultural: {
     title: "Cultural Tours",
     description: "Journey through Sri Lanka's ancient heritage with UNESCO World Heritage sites, sacred temples, and historic kingdoms. Discover the Cultural Triangle featuring Sigiriya, Polonnaruwa, and Anuradhapura.",
@@ -147,6 +151,7 @@ const categoryData: Record<string, {
       description: "Explore ancient kingdoms, sacred temples, and UNESCO World Heritage sites across the Cultural Triangle of Sri Lanka."
     }
   },
+
   honeymoon: {
     title: "Honeymoon Tours",
     description: "Experience the best of both worlds with our exclusive honeymoon getaways. We pair the mystique of the ocean with the romance of the highlands to create a diverse, unforgettable travel experience for newlyweds.",
@@ -231,6 +236,7 @@ const categoryData: Record<string, {
       description: "Escape to a world where golden beaches meet misty mountains. Our honeymoon packages offer the perfect blend of intimate private dinners, breathtaking highland views, and serene sunset cruises designed for two."
     }
   },
+
   "hill-country": {
     title: "Hill Country Tours",
     description: "Explore the misty highlands of Sri Lanka with scenic tea plantations, cool climate, and breathtaking mountain views.",
@@ -242,6 +248,7 @@ const categoryData: Record<string, {
     features: [{ name: "Negombo", values: [true, true] }, { name: "Temple of the Tooth", values: [true, true] }, { name: "Ella", values: [true, true] }, { name: "Nine Arch Bridge", values: [true, true] }, { name: "Scenic Train Ride", values: [true, true] }],
     mapText: { heading: "Discover the Highlands", subheading: "Misty, Cool, and Hill Country Pleasures", description: "Experience the scenic beauty of Sri Lanka's hill country." }
   },
+
   wildlife: {
     title: "Wildlife Tours",
     description: "Uncover Sri Lanka’s wilderness with exhilarating safari experiences. Explore national parks teeming with elephants, leopards, and exotic birds in their natural habitats.",
@@ -283,18 +290,50 @@ const categoryData: Record<string, {
       description: "Experience world-class wildlife safaris."
     }
   },
+
   adventure: {
     title: "Adventure Tours",
-    description: "Experience hiking, biking, kayaking, and thrilling adventures.",
+    description: "Enjoy hiking, biking, kayaking, and a range of exciting outdoor adventures. Explore Sri Lanka's diverse landscapes from mountains to beaches.",
     heroImage: adventureImg,
     tours: [
-      { id: 1, slug: "adventure-adrenaline-rush", title: "Adventure Adrenaline Rush", duration: "7 Days / 6 Nights", image: adventureImg, recommended: ["Thrill", "Active"] },
-      { id: 2, slug: "adventure-adrenaline-rush", title: "Sri Lanka Wild Trekking", duration: "8 Nights / 9 Days", image: adventureImg, recommended: ["Hiking", "Nature"] },
-      { id: 3, slug: "adventure-adrenaline-rush", title: "Extreme Trek Sri Lanka", duration: "6 Nights / 7 Days", image: beachSurfImg, recommended: ["Extreme", "Adventure"] },
+      { 
+        id: 1, 
+        slug: "adventure-adrenaline-rush", 
+        title: "Adventure Adrenaline Rush", 
+        duration: "7 Days / 6 Nights", 
+        image: adventureImgCard1, 
+        recommended: ["Thrill", "Active"] 
+      },
+      { 
+        id: 2, 
+        slug: "adventure-adrenaline-rush", 
+        title: "Sri Lanka Wild Trekking", 
+        duration: "8 Nights / 9 Days", 
+        image: adventureImgCard2, 
+        recommended: ["Hiking", "Nature"] 
+      },
+      { 
+        id: 3, 
+        slug: "adventure-adrenaline-rush", 
+        title: "Extreme Trek Sri Lanka", 
+        duration: "6 Nights / 7 Days", 
+        image: adventureImgCard3, 
+        recommended: ["Extreme", "Adventure"] 
+      },
     ],
-    features: [{ name: "White Water Rafting", values: [true, true, true] }, { name: "Ella Hiking", values: [true, true, true] }, { name: "Surfing", values: [true, false, true] }],
-    mapText: { heading: "Adventure-Filled Sri Lanka", subheading: "From Highlands to Beaches and Beyond", description: "Push your limits with thrilling adventures." }
+
+    features: [
+      { name: "White Water Rafting", values: [true, true, true] }, 
+      { name: "Ella Hiking", values: [true, true, true] }, 
+      { name: "Surfing", values: [true, false, true] }
+    ],
+
+    mapText: { 
+      heading: "Adventure-Filled Sri Lanka", 
+      subheading: "From Highlands to Beaches and Beyond", 
+      description: "Push your limits with thrilling adventures." }
   },
+
   ayurvedic: {
     title: "Ayurvedic Tours",
     description: "Rejuvenate your mind and body with Sri Lanka's ancient healing traditions.",
