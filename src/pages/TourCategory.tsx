@@ -277,7 +277,7 @@ const categoryData: Record<string, {
         ],
       },
       {
-        section: "Galle", 
+        section: "Galle",
         items: [
           { name: "Galle Fort Tour", values: [true, false] },
         ],
@@ -291,7 +291,11 @@ const categoryData: Record<string, {
       },
     ],
 
-    mapText: { heading: "Discover the Highlands", subheading: "Misty, Cool, and Hill Country Pleasures", description: "Experience the scenic beauty of Sri Lanka's hill country." }
+    mapText: {
+      heading: "Discover the Highlands",
+      subheading: "Misty, Cool, and Hill Country Pleasures",
+      description: "Experience the scenic beauty of Sri Lanka's hill country."
+    }
   },
 
   wildlife: {
@@ -325,53 +329,97 @@ const categoryData: Record<string, {
       },
     ],
     features: [
-      { name: "Negombo", values: [false, false, false] },
+      {
+        section: "Negombo",
+        items: [
+          { name: "Negombo", values: [false, false, false] },
+        ]
+      },
+      {
+        section: "Habarana",
+        items: [
+          { name: "Minneriya National Park", values: [false, false, false] },
+          { name: "Hiriwadunna Village", values: [false, true, true] },
+          { name: "Sigiriya", values: [false, false, true] },
+          { name: "Anuradhapura", values: [true, false, false] },
+          { name: "Dambulla", values: [true, false, true] },
+          { name: "Wasgamuwa National Park", values: [false, true, true] },
 
-      { name: "Habarana", values: [false, false, false] },
-      { name: "Minneriya National Park", values: [false, false, false] },
-      { name: "Hiriwadunna Village", values: [false, true, true] },
-      { name: "Sigiriya", values: [false, false, true] },
-      { name: "Anuradhapura", values: [true, false, false] },
-      { name: "Dambulla", values: [true, false, true] },
-      { name: "Wasgamuwa National Park", values: [false, true, true] },
-
-      { name: "Nuwara Eliya", values: [false, false, false] },
-      { name: "Tea Factory", values: [false, false, false] },
-      { name: "Horton Plains", values: [false, false, false] },
-      { name: "Moon Plains", values: [true, false, false] },
-
-      { name: "Colombo", values: [false, true, true] },
-      { name: "City Tour & Shopping", values: [false, true, true] },
-
-      { name: "Wilpattu", values: [true, false, true] },
-      { name: "Wilpattu National Park", values: [true, false, true] },
-
-      { name: "Kandy", values: [true, false, true] },
-      { name: "Royal Botanical Garden", values: [true, false, true] },
-
-      { name: "Ella", values: [true, false, false] },
-      { name: "Nine Arch Bridge", values: [true, false, true] },
-      { name: "Mini Adam’s Peak", values: [true, false, true] },
-      { name: "Ravana Falls", values: [true, false, true] },
-
-      { name: "Arugambay", values: [true, false, false] },
-      { name: "Elephant Rock", values: [true, false, false] },
-      { name: "Kumana National Park", values: [true, true, false] },
-
-      { name: "Udawalawe", values: [true, false, false] },
-      { name: "Udawalawe National Park", values: [true, false, false] },
+        ]
+      },
+      {
+        section: "Nuwara Eliya",
+        items: [
+          { name: "Tea Factory", values: [false, false, false] },
+          { name: "Horton Plains", values: [false, false, false] },
+          { name: "Moon Plains", values: [true, false, false] },
+        ]
+      },
+      {
+        section: "Colombo",
+        items: [
+          { name: "City Tour & Shopping", values: [false, true, true] },
+        ]
+      },
+      {
+        section: "Wilpattu",
+        items: [
+          { name: "Wilpattu National Park", values: [true, false, true] },
+        ]
+      },
+      {
+        section: "Kandy",
+        items: [
+          { name: "Royal Botanical Garden", values: [true, false, true] },
+        ]
+      },
+      {
+        section: "Ella",
+        items: [
+          { name: "Nine Arch Bridge", values: [true, false, true] },
+          { name: "Mini Adam’s Peak", values: [true, false, true] },
+          { name: "Ravana Falls", values: [true, false, true] },
+        ]
+      },
+      {
+        section: "Arugambay",
+        items: [
+          { name: "Elephant Rock", values: [true, false, false] },
+          { name: "Kumana National Park", values: [true, true, false] },
+        ]
+      },
+      {
+        section: "Udawalawe",
+        items: [
+          { name: "Udawalawe National Park", values: [true, false, false] },
       { name: "Udawalawe Transit Home", values: [true, false, false] },
-
-      { name: "Yala", values: [true, false, false] },
-      { name: "Yala National Park", values: [true, true, false] },
-
-      { name: "Sinharaja", values: [true, true, false] },
-      { name: "Sinharaja Rainforest", values: [true, true, false] },
-
-      { name: "Bentota", values: [true, true, false] },
-      { name: "Madu River Boat Safari", values: [true, true, false] }
+        ]
+      },
+      {
+        section: "Yala",
+        items: [
+          { name: "Yala National Park", values: [true, true, false] },
+        ]
+      },
+      {
+        section: "Sinharaja",
+        items: [
+          { name: "Sinharaja Rainforest", values: [true, true, false] },
+        ]
+      },
+      {
+        section: "Bentota",
+        items: [
+          { name: "Madu River Boat Safari", values: [true, true, false] },
+        ]
+      },
     ],
-    mapText: { heading: "From Wild Parks to Peaks", subheading: "Sri Lanka's Ultimate Adventure Trail", description: "Experience world-class wildlife safaris." }
+    
+    mapText: {
+      heading: "From Wild Parks to Peaks",
+      subheading: "Sri Lanka's Ultimate Adventure Trail",
+      description: "Experience world-class wildlife safaris."
+    }
   },
 
   adventure: {
@@ -423,11 +471,33 @@ const categoryData: Record<string, {
     description: "Rejuvenate your mind and body with Sri Lanka's ancient healing traditions.",
     heroImage: teaImg,
     tours: [
-      { id: 1, slug: "romantic-honeymoon-escape", title: "Sri Lanka Ayurveda Stay", duration: "10 Nights / 11 Days", image: honeymoonImg, recommended: ["Wellness", "Relaxation"] },
-      { id: 2, slug: "romantic-honeymoon-escape", title: "Forever Glowing", duration: "7 Nights / 8 Days", image: teaImg, recommended: ["Spa", "Healing"] },
+      {
+        id: 1,
+        slug: "romantic-honeymoon-escape",
+        title: "Sri Lanka Ayurveda Stay",
+        duration: "10 Nights / 11 Days",
+        image: honeymoonImg,
+        recommended: ["Wellness", "Relaxation"]
+      },
+      {
+        id: 2,
+        slug: "romantic-honeymoon-escape",
+        title: "Forever Glowing",
+        duration: "7 Nights / 8 Days",
+        image: teaImg,
+        recommended: ["Spa", "Healing"]
+      },
     ],
-    features: [{ name: "Ayurvedic Spa Resort", values: [true, true] }, { name: "Yoga Sessions", values: [true, true] }, { name: "Meditation", values: [true, true] }],
-    mapText: { heading: "Rejuvenate Your Mind and Body", subheading: "With Sri Lanka's Ayurvedic Escapes", description: "Experience ancient healing traditions." }
+    features: [
+      { name: "Ayurvedic Spa Resort", values: [true, true] },
+      { name: "Yoga Sessions", values: [true, true] },
+      { name: "Meditation", values: [true, true] }
+    ],
+    mapText: {
+      heading: "Rejuvenate Your Mind and Body",
+      subheading: "With Sri Lanka's Ayurvedic Escapes",
+      description: "Experience ancient healing traditions."
+    }
   },
 
   family: {
@@ -435,11 +505,33 @@ const categoryData: Record<string, {
     description: "Create unforgettable memories with family-friendly adventures across Sri Lanka.",
     heroImage: familyImg,
     tours: [
-      { id: 1, slug: "family-adventure-tour", title: "Family Adventure Tour", duration: "9 Days / 8 Nights", image: familyImg, recommended: ["Kids", "Family"] },
-      { id: 2, slug: "family-adventure-tour", title: "Family Escapade in Sri Lanka", duration: "14 Nights / 15 Days", image: wildlifeImg, recommended: ["Adventure", "Family"] },
+      {
+        id: 1,
+        slug: "family-adventure-tour",
+        title: "Family Adventure Tour",
+        duration: "9 Days / 8 Nights",
+        image: familyImg,
+        recommended: ["Kids", "Family"]
+      },
+      {
+        id: 2,
+        slug: "family-adventure-tour",
+        title: "Family Escapade in Sri Lanka",
+        duration: "14 Nights / 15 Days",
+        image: wildlifeImg,
+        recommended: ["Adventure", "Family"]
+      },
     ],
-    features: [{ name: "Elephant Safari", values: [true, true] }, { name: "Scenic Train Ride", values: [true, true] }, { name: "Beach Activities", values: [true, true] }],
-    mapText: { heading: "Unforgettable Family Adventures", subheading: "Sri Lanka's Best Family Destinations", description: "Create lasting memories with family-friendly tours." }
+    features: [
+      { name: "Elephant Safari", values: [true, true] },
+      { name: "Scenic Train Ride", values: [true, true] },
+      { name: "Beach Activities", values: [true, true] }
+    ],
+    mapText: {
+      heading: "Unforgettable Family Adventures",
+      subheading: "Sri Lanka's Best Family Destinations",
+      description: "Create lasting memories with family-friendly tours."
+    }
   },
 
   ramayana: {
@@ -474,41 +566,9 @@ const categoryData: Record<string, {
     ],
 
     features: [
-      { name: "Chilaw", values: [false, false, false] },
-      { name: "Munneshwaram Kovil", values: [false, false, false] },
-
-      { name: "Kandy", values: [false, false, false] },
-      { name: "Temple of the Tooth Relic", values: [true, true, false] },
-
-      { name: "Nuwara Eliya", values: [false, false, false] },
-      { name: "Sri Bhaktha Hanuman Temple", values: [false, false, false] },
-      { name: "Tea Plantation", values: [false, false, false] },
-      { name: "Divurumpola", values: [false, false, true] },
-      { name: "Seeta Amman Temple", values: [false, false, false] },
-      { name: "Ashoka Vatika", values: [false, true, false] },
-      { name: "Gayathri Peedam", values: [false, true, false] },
-
-      { name: "Colombo", values: [false, false, false] },
-      { name: "Panchamuga Anjaneyar Temple", values: [false, false, false] },
-      { name: "Kelaniya Rajamaha Temple", values: [false, false, false] },
-
-      { name: "Ella", values: [true, false, true] },
-
-      { name: "Kataragama", values: [true, false, true] },
-      { name: "Kataragama Temple", values: [true, false, true] },
-
-      { name: "Unawatuna", values: [true, false, false] },
-      { name: "Roomassala Temple", values: [true, false, false] },
-
-      { name: "Bentota", values: [true, false, false] },
-
-      { name: "Galle", values: [true, true, false] },
-      { name: "Dambulla", values: [true, true, false] },
-      { name: "Dambulla Cave Temple", values: [true, true, false] },
-      { name: "Sigiriya", values: [true, true, false] },
-
-      { name: "Trincomalee", values: [true, true, false] },
-      { name: "Koneshwaram Temple", values: [true, true, false] }
+      { name: "Sita Amman Temple", values: [true, true, true] },
+      { name: "Ravana Cave", values: [true, true, true] },
+      { name: "Hakgala Gardens", values: [true, true, true] }
     ],
 
     mapText: {
@@ -523,27 +583,32 @@ const categoryData: Record<string, {
     description: "Sri Lanka is home to some of the oldest and finest golf courses in South Asia.",
     heroImage: golfImg,
     tours: [
-      { id: 1, slug: "cultural-triangle-explorer", title: "18 Holes of Golfing", duration: "6 Nights / 7 Days", image: golfImg, recommended: ["Golf", "Luxury"] },
-      { id: 2, slug: "cultural-triangle-explorer", title: "The Ultimate Golf Escape", duration: "10 Nights / 11 Days", image: golfImg, recommended: ["Golf", "Premium"] },
+      {
+        id: 1,
+        slug: "cultural-triangle-explorer",
+        title: "18 Holes of Golfing",
+        duration: "6 Nights / 7 Days",
+        image: golfImg,
+        recommended: ["Golf", "Luxury"]
+      },
+      {
+        id: 2,
+        slug: "cultural-triangle-explorer",
+        title: "The Ultimate Golf Escape",
+        duration: "10 Nights / 11 Days",
+        image: golfImg,
+        recommended: ["Golf", "Premium"]
+      },
     ],
-    features: [{ name: "Colombo", values: [false, false] },
-    { name: "City Tour", values: [false, false] },
-    { name: "Royal Colombo Golf Club", values: [true, false] },
-
-    { name: "Kandy", values: [false, false] },
-    { name: "Temple of the Tooth", values: [false, false] },
-    { name: "Victoria Golf Club", values: [false, false] },
-    { name: "Royal Botanical Garden", values: [true, false] },
-
-    { name: "Negombo", values: [false, false] },
-
-    { name: "Nuwara Eliya", values: [true, false] },
-    { name: "Tea Factory", values: [true, false] },
-    { name: "Nuwara Eliya Golf Club", values: [true, false] },
-
-    { name: "Hambantota", values: [true, false] },
-    { name: "Shangri La Golf Course", values: [true, false] }],
-    mapText: { heading: "Sri Lanka's Golf Paradise", subheading: "World-Class Courses in Tropical Settings", description: "Experience world-class golfing in stunning settings." }
+    features: [
+      { name: "Royal Colombo Golf Club", values: [true, true] },
+      { name: "Victoria Golf Club", values: [true, true] },
+      { name: "Nuwara Eliya Golf Club", values: [true, true] }],
+    mapText: {
+      heading: "Sri Lanka's Golf Paradise",
+      subheading: "World-Class Courses in Tropical Settings",
+      description: "Experience world-class golfing in stunning settings."
+    }
   }
 };
 
