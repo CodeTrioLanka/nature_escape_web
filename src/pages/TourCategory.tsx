@@ -632,9 +632,33 @@ const categoryData: Record<string, {
       },
     ],
     features: [
-      { name: "Ayurvedic Spa Resort", values: [true, true] },
-      { name: "Yoga Sessions", values: [true, true] },
-      { name: "Meditation", values: [true, true] }
+      { name: "Negombo", values: [true, false] },
+
+      { name: "Kandy", values: [true, true] },
+      { name: "Temple of the Tooth", values: [true, false] },
+      { name: "Hanthana", values: [true, false] },
+
+      { name: "Nuwara Eliya", values: [true, false] },
+      { name: "Horton Plains National Park", values: [true, false] },
+
+      { name: "Ella", values: [true, false] },
+      { name: "9 Arch Bridge", values: [true, false] },
+      { name: "Rawana Falls", values: [true, false] },
+      { name: "Ella Gap", values: [true, false] },
+
+      { name: "Yala", values: [true, false] },
+      { name: "Yala National Park Safari", values: [true, false] },
+
+      { name: "Mirissa", values: [true, false] },
+      { name: "Surfing", values: [true, false] },
+
+      { name: "Beruwala", values: [false, true] },
+
+      { name: "Colombo", values: [true, false] },
+      { name: "City Tour and Shopping", values: [true, false] },
+
+      { name: "Sigiriya", values: [false, true] },
+      { name: "Weligama", values: [false, true] }
     ],
     mapText: {
       heading: "Rejuvenate Your Mind and Body",
