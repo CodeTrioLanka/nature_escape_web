@@ -549,9 +549,57 @@ const categoryData: Record<string, {
     ],
 
     features: [
-      { name: "White Water Rafting", values: [true, true, true] },
-      { name: "Ella Hiking", values: [true, true, true] },
-      { name: "Surfing", values: [true, false, true] }
+      { name: "Negombo", values: [false, true, true] },
+
+      { name: "Kandy", values: [false, true, true] },
+      { name: "Temple of the Tooth", values: [false, true, true] },
+      { name: "Hanthana", values: [false, true, true] },
+
+      { name: "Hatton", values: [false, true, true] },
+      { name: "Kithulgala White Water Rafting", values: [false, false, true] },
+      { name: "Luxapana Water Fall - Rope Jump", values: [false, true, true] },
+
+      { name: "Nuwara Eliya", values: [false, false, true] },
+      { name: "Horton Plains National Park", values: [false, false, true] },
+
+      { name: "Ella", values: [false, false, true] },
+      { name: "9 Arch Bridge", values: [false, false, true] },
+      { name: "Rawana Falls", values: [false, false, true] },
+      { name: "Ella Gap", values: [false, false, true] },
+      { name: "Mini Adam's Peak", values: [false, false, true] },
+      { name: "Rawana Zip Line", values: [false, false, true] },
+
+      { name: "Yala", values: [true, false, true] },
+      { name: "Yala National Park Safari", values: [true, false, true] },
+
+      { name: "Mirissa", values: [true, false, true] },
+      { name: "Surfing", values: [true, false, false] },
+      { name: "Whale and Dolphin Watching", values: [true, false, true] },
+
+      { name: "Galle", values: [true, false, true] },
+      { name: "Galle Fort Tour", values: [true, false, true] },
+
+      { name: "Hikkaduwa", values: [false, false, true] },
+      { name: "Kayaking", values: [false, false, true] },
+
+      { name: "Colombo", values: [false, true, true] },
+      { name: "Street Food Tour", values: [true, false, false] },
+      { name: "City Tour and Shopping", values: [true, true, true] },
+
+      { name: "Kalpitiya", values: [false, true, false] },
+      { name: "Kite Surfing", values: [false, true, false] },
+      { name: "Dolphin Watching", values: [false, true, false] },
+      { name: "Fishing", values: [false, true, false] },
+      { name: "Cookery Demonstration", values: [false, true, false] },
+      { name: "Wilpattu National Park Safari", values: [false, true, false] },
+
+      { name: "Cultural Triangle", values: [false, false, false] },
+      { name: "Sigiriya", values: [false, false, false] },
+      { name: "Pidurangala Rock", values: [false, false, false] },
+      { name: "Minneriya National Park Safari", values: [false, false, false] },
+
+      { name: "Bentota", values: [true, false, false] },
+      { name: "Madu River Boat Safari", values: [true, false, false] }
     ],
 
     mapText: {
