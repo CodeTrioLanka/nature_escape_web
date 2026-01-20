@@ -186,28 +186,62 @@ const categoryData: Record<string, {
     description: "Journey through Sri Lanka's ancient heritage with UNESCO World Heritage sites, sacred temples, and historic kingdoms. Discover the Cultural Triangle featuring Sigiriya, Polonnaruwa, and Anuradhapura.",
     heroImage: sigiriyaImg,
     tours: [
-      { id: 1, slug: "cultural-triangle-explorer", title: "Cultural Triangle Explorer", duration: "8 Days / 7 Nights", image: sigiriyaImg, recommended: ["Cultural", "History"] },
-      { id: 2, slug: "temple-trail-pilgrimage", title: "Temple Trail Pilgrimage", duration: "6 Days / 5 Nights", image: templeImg, recommended: ["Spiritual", "Cultural"] },
-      { id: 3, slug: "cultural-triangle-explorer", title: "The Heritage Legacy", duration: "14 Nights / 15 Days", image: sigiriyaImg, recommended: ["Adventure", "Cultural"] },
+      {
+        id: 1,
+        slug: "cultural-triangle-explorer",
+        title: "Cultural Triangle Explorer",
+        duration: "8 Days / 7 Nights",
+        image: sigiriyaImg,
+        recommended: ["Cultural", "History"]
+      },
+      {
+        id: 2,
+        slug: "temple-trail-pilgrimage",
+        title: "Temple Trail Pilgrimage",
+        duration: "6 Days / 5 Nights",
+        image: templeImg,
+        recommended: ["Spiritual", "Cultural"]
+      },
+      {
+        id: 3,
+        slug: "cultural-triangle-explorer",
+        title: "The Heritage Legacy",
+        duration: "14 Nights / 15 Days",
+        image: sigiriyaImg,
+        recommended: ["Adventure", "Cultural"]
+      },
     ],
+
     features: [
-      { name: "Negombo", values: [true, true, true] },
-      { name: "Dambulla Cave Temple", values: [true, true, true] },
-      { name: "Sigiriya Rock Fortress", values: [true, true, true] },
-      { name: "Polonnaruwa Ancient City", values: [true, true, true] },
-      { name: "Anuradhapura", values: [false, true, true] },
-      { name: "Mihintale", values: [false, true, true] },
-      { name: "Kandy", values: [true, true, true] },
-      { name: "Temple of the Tooth", values: [true, true, true] },
-      { name: "Cultural Dance Show", values: [true, true, true] },
-      { name: "Royal Botanical Gardens", values: [true, true, true] },
-      { name: "Nuwara Eliya", values: [false, true, true] },
-      { name: "Tea Factory Visit", values: [true, true, true] },
-      { name: "Ella", values: [false, true, true] },
-      { name: "Nine Arch Bridge", values: [false, true, true] },
-      { name: "Yala Safari", values: [false, false, true] },
-      { name: "Galle Fort", values: [true, true, true] },
-      { name: "Colombo City Tour", values: [true, true, true] },
+      {
+        section: "Negombo",
+        items: [
+          { name: "Negombo", values: [true, true, true] },
+        ]
+      },
+      {
+        section: "Anuradhapura",
+        items: [
+          { name: "Mihintale", values: [false, true, true] },
+        ]
+      },
+      {
+        section: "Kandy",
+        items: [
+          { name: "Temple of the Tooth", values: [true, true, true] },
+          { name: "Cultural Dance Show", values: [true, true, true] },
+          { name: "Royal Botanical Gardens", values: [true, true, true] },
+        ]
+      },
+      {
+        section: "Nuwara Eliya",
+        items: [
+          { name: "Tea Factory Visit", values: [true, true, true] },
+          { name: "Ella", values: [false, true, true] },
+          { name: "Nine Arch Bridge", values: [false, true, true] },
+        ]
+      },
+
     ],
     mapText: {
       heading: "Sri Lanka",
@@ -246,6 +280,7 @@ const categoryData: Record<string, {
         recommended: ["Romantic", "Scenic"]
       },
     ],
+    
     features: [
       {
         section: "Colombo",
