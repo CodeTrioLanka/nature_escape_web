@@ -50,70 +50,130 @@ const categoryData: Record<string, {
     description: "Sri Lanka’s coast dazzles with golden beaches, turquoise waters, vibrant coral reefs, and bustling fishing villages, offering relaxation, adventure, rich culture, and breathtaking sunsets along its endless tropical shoreline.",
     heroImage: beachSurfImg,
     tours: [
-      { id: 1, slug: "unawatuna-beach-escape", title: "Eastern Blue Bliss", duration: "11 Nights & 12 Days", image: beachUnawatunaImg, recommended: ["Adventure", "Honeymoon"] },
-      { id: 2, slug: "mirissa-surf-retreat", title: "Southern Sands Voyage", duration: "09 Nights & 10 Days", image: honeymoonImgCard2, recommended: ["Adventure", "Honeymoon"] },
-      { id: 3, slug: "bentota-paradise", title: "Sunrise Shores Tour", duration: "13 Nights & 14 Days", image: honeymoonImgCard3, recommended: ["Family"] },
+      {
+        id: 1,
+        slug: "unawatuna-beach-escape",
+        title: "Eastern Blue Bliss",
+        duration: "11 Nights & 12 Days",
+        image: beachUnawatunaImg,
+        recommended: ["Adventure", "Honeymoon"]
+      },
+      {
+        id: 2,
+        slug: "mirissa-surf-retreat",
+        title: "Southern Sands Voyage",
+        duration: "09 Nights & 10 Days",
+        image: honeymoonImgCard2,
+        recommended: ["Adventure", "Honeymoon"]
+      },
+      {
+        id: 3,
+        slug: "bentota-paradise",
+        title: "Sunrise Shores Tour",
+        duration: "13 Nights & 14 Days",
+        image: honeymoonImgCard3,
+        recommended: ["Family"]
+      },
     ],
+
     features: [
-      { name: "Negombo", values: [false, false, false] },
-
-      { name: "Tangalle", values: [false, true, true] },
-      { name: "Hummanaya Blow Hole", values: [false, true, true] },
-      { name: "Mulgirigala Temple", values: [false, true, true] },
-      { name: "Kalametiya Bird Sanctuary", values: [false, true, true] },
-      { name: "Scuba Diving", values: [false, true, true] },
-
-      { name: "Habarana", values: [true, false, true] },
-      { name: "Sigiriya", values: [true, false, true] },
-
-      { name: "Trincomalee", values: [true, false, false] },
-      { name: "Pigeon Island", values: [true, false, false] },
-      { name: "Koneshwaram Temple", values: [true, false, true] },
-
-      { name: "Pasikudah", values: [true, false, true] },
-
-      { name: "Arugambay", values: [true, false, true] },
-      { name: "Surfing", values: [true, false, true] },
-
-      { name: "Yala", values: [true, false, true] },
-      { name: "Yala National Park Safari", values: [true, false, true] },
-
-      { name: "Mirissa", values: [false, true, true] },
-      { name: "Surfing (Mirissa)", values: [false, true, true] },
-      { name: "Whale and Dolphin Watching", values: [false, true, true] },
-
-      { name: "Unawatuna", values: [false, true, true] },
-      { name: "Jungle Beach", values: [false, true, true] },
-
-      { name: "Galle", values: [false, false, true] },
-      { name: "Galle Fort Tour", values: [false, false, true] },
-
-      { name: "Hikkaduwa", values: [false, true, true] },
-      { name: "Snorkelling", values: [false, true, true] },
-      { name: "Kayaking", values: [false, true, true] },
-
-      { name: "Bentota", values: [false, true, true] },
-      { name: "Kosgoda Sea Turtle Hatchery", values: [false, false, true] },
-
-      { name: "Kalpitiya", values: [true, true, false] },
-      { name: "Kite Surfing", values: [true, true, false] },
-      { name: "Dolphin Watching", values: [true, true, false] },
-      { name: "Fishing", values: [true, true, false] },
-      { name: "Cookery Demonstration", values: [true, true, false] },
-      { name: "Wilpattu National Park Safari", values: [true, true, false] },
-
-      { name: "Colombo", values: [true, false, false] },
-      { name: "Street Food Tour", values: [true, false, false] },
-      { name: "City Tour and Shopping", values: [true, false, false] },
-
-      { name: "Mannar", values: [true, true, false] },
-      { name: "Mannar Fort", values: [true, true, false] },
-
-      { name: "Jaffna", values: [true, true, false] },
-      { name: "KKS Beach", values: [true, true, false] },
-      { name: "Casuarina Beach", values: [true, true, false] },
-      { name: "Keerimalai Hot Water Spring", values: [true, true, false] }
+      {
+        section: "Negombo",
+        items: [
+          { name: "Tangalle", values: [false, true, true] },
+          { name: "Hummanaya Blow Hole", values: [false, true, true] },
+          { name: "Mulgirigala Temple", values: [false, true, true] },
+          { name: "Kalametiya Bird Sanctuary", values: [false, true, true] },
+          { name: "Scuba Diving", values: [false, true, true] },
+        ]
+      },
+      {
+        section: "Habarana",
+        items: [
+          { name: "Sigiriya", values: [true, false, true] },
+        ]
+      },
+      {
+        section: "Trincomalee",
+        items: [
+          { name: "Pigeon Island", values: [true, false, false] },
+          { name: "Koneshwaram Temple", values: [true, false, true] },
+          { name: "Pasikudah", values: [true, false, true] },
+          { name: "Arugambay", values: [true, false, true] },
+          { name: "Surfing", values: [true, false, true] },
+        ]
+      },
+      {
+        section: "Yala",
+        items: [
+          { name: "Yala National Park Safari", values: [true, false, true] },
+        ]
+      },
+      {
+        section: "Mirissa",
+        items: [
+          { name: "Surfing (Mirissa)", values: [false, true, true] },
+          { name: "Whale and Dolphin Watching", values: [false, true, true] },
+        ]
+      },
+      {
+        section: "Unawatuna",
+        items: [
+          { name: "Jungle Beach", values: [false, true, true] },
+        ]
+      },
+      {
+        section: "Galle",
+        items: [
+          { name: "Galle Fort Tour", values: [false, false, true] },
+        ]
+      },
+      {
+        section: "Hikkaduwa",
+        items: [
+          { name: "Snorkelling", values: [false, true, true] },
+          { name: "Kayaking", values: [false, true, true] },
+        ]
+      },
+      {
+        section: "Bentota",
+        items: [
+          { name: "Kosgoda Sea Turtle Hatchery", values: [false, false, true] },
+        ]
+      },
+      {
+        section: "Kalpitiya",
+        items: [
+          { name: "Kite Surfing", values: [true, true, false] },
+          { name: "Dolphin Watching", values: [true, true, false] },
+          { name: "Fishing", values: [true, true, false] },
+          { name: "Cookery Demonstration", values: [true, true, false] },
+          { name: "Wilpattu National Park Safari", values: [true, true, false] },
+        ]
+      },
+      {
+        section: "Colombo",
+        items: [
+          { name: "Street Food Tour", values: [true, false, false] },
+          { name: "City Tour and Shopping", values: [true, false, false] },
+        ]
+      },
+      {
+        section: "Mannar",
+        items: [
+          { name: "Mannar Fort", values: [true, true, false] },
+        ]
+      },
+      {
+        section: "Jaffna",
+        items: [
+          { name: "KKS Beach", values: [true, true, false] },
+          { name: "Casuarina Beach", values: [true, true, false] },
+          { name: "Keerimalai Hot Water Spring", values: [true, true, false] }
+        ]
+      },
     ],
+
     mapText: {
       heading: "Sun, Sand, and Sea",
       subheading: "Sri Lanka's Beach Paradise Awaits",
@@ -392,7 +452,7 @@ const categoryData: Record<string, {
         section: "Udawalawe",
         items: [
           { name: "Udawalawe National Park", values: [true, false, false] },
-      { name: "Udawalawe Transit Home", values: [true, false, false] },
+          { name: "Udawalawe Transit Home", values: [true, false, false] },
         ]
       },
       {
@@ -414,7 +474,7 @@ const categoryData: Record<string, {
         ]
       },
     ],
-    
+
     mapText: {
       heading: "From Wild Parks to Peaks",
       subheading: "Sri Lanka's Ultimate Adventure Trail",
@@ -600,10 +660,13 @@ const categoryData: Record<string, {
         recommended: ["Golf", "Premium"]
       },
     ],
+
     features: [
       { name: "Royal Colombo Golf Club", values: [true, true] },
       { name: "Victoria Golf Club", values: [true, true] },
-      { name: "Nuwara Eliya Golf Club", values: [true, true] }],
+      { name: "Nuwara Eliya Golf Club", values: [true, true] }
+    ],
+
     mapText: {
       heading: "Sri Lanka's Golf Paradise",
       subheading: "World-Class Courses in Tropical Settings",
