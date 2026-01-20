@@ -280,7 +280,7 @@ const categoryData: Record<string, {
         recommended: ["Romantic", "Scenic"]
       },
     ],
-    
+
     features: [
       {
         section: "Colombo",
@@ -618,9 +618,52 @@ const categoryData: Record<string, {
       },
     ],
     features: [
-      { name: "Elephant Safari", values: [true, true] },
-      { name: "Scenic Train Ride", values: [true, true] },
-      { name: "Beach Activities", values: [true, true] }
+      { name: "Negombo", values: [true, true] },
+
+      { name: "Kandy", values: [true, true] },
+      { name: "Temple of the Tooth", values: [true, true] },
+      { name: "Ambuluwawa Tower", values: [false, true] },
+
+      { name: "Habarana", values: [true, true] },
+      { name: "Minneriya National Park Safari", values: [true, true] },
+      { name: "Dambulla Cave Temple", values: [true, true] },
+      { name: "Sigiriya", values: [true, true] },
+      { name: "Hiriwadunna", values: [true, true] },
+
+      { name: "Anuradhapura", values: [false, true] },
+
+      { name: "Nuwara Eliya", values: [true, true] },
+      { name: "Gregory Lake", values: [true, true] },
+      { name: "Horton Plains", values: [true, true] },
+
+      { name: "Ella", values: [true, true] },
+      { name: "Ravana Falls", values: [true, true] },
+      { name: "Nine Arch Bridge", values: [true, true] },
+      { name: "Ravana Zipline", values: [true, true] },
+      { name: "Mini Adam's Peak", values: [true, true] },
+
+      { name: "Yala", values: [true, true] },
+      { name: "Yala National Park", values: [true, true] },
+
+      { name: "Weligama", values: [true, true] },
+      { name: "Surfing", values: [true, true] },
+
+      { name: "Galle", values: [true, true] },
+      { name: "Galle Fort Tour", values: [true, true] },
+
+      { name: "Bentota", values: [true, true] },
+      { name: "Madu River Boat Safari", values: [true, true] },
+
+      { name: "Colombo", values: [true, true] },
+      { name: "Red Mosque", values: [true, true] },
+      { name: "City Tour and Shopping", values: [true, true] },
+
+      { name: "Kalpitiya", values: [false, true] },
+      { name: "Kite Surfing", values: [false, true] },
+      { name: "Dolphin Watching", values: [false, true] },
+      { name: "Fishing", values: [false, true] },
+      { name: "Cookery Demonstration", values: [false, true] },
+      { name: "Wilpattu National Park Safari", values: [false, true] }
     ],
     mapText: {
       heading: "Unforgettable Family Adventures",
