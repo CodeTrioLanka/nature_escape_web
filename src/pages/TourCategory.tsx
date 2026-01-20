@@ -849,9 +849,19 @@ const categoryData: Record<string, {
     ],
 
     features: [
-      { name: "Royal Colombo Golf Club", values: [true, true] },
-      { name: "Victoria Golf Club", values: [true, true] },
-      { name: "Nuwara Eliya Golf Club", values: [true, true] }
+      { name: "Colombo", values: [true, true] },
+      { name: "City Tour", values: [true, true] },
+      { name: "Colombo Golf Course", values: [false, true] },
+      { name: "Kandy", values: [true, true] },
+      { name: "Temple of the Tooth", values: [true, true] },
+      { name: "Victoria Golf Course", values: [true, true] },
+      { name: "Royal Botanical Garden", values: [false, true] },
+      { name: "Negombo", values: [true, true] },
+      { name: "Nuwara Eliya", values: [false, true] },
+      { name: "Tea Factory", values: [false, true] },
+      { name: "Nuwara Eliya Golf Club", values: [false, true] },
+      { name: "Hambantota", values: [false, false] },
+      { name: "Shangri La Golf Course", values: [false, true] }
     ],
 
     mapText: {
