@@ -776,9 +776,46 @@ const categoryData: Record<string, {
     ],
 
     features: [
-      { name: "Sita Amman Temple", values: [true, true, true] },
-      { name: "Ravana Cave", values: [true, true, true] },
-      { name: "Hakgala Gardens", values: [true, true, true] }
+      { name: "Chilaw", values: [true, true, true] },
+      { name: "Munneshwaram Kovil", values: [true, true, true] },
+
+      { name: "Kandy", values: [true, true, true] },
+      { name: "Temple of the Tooth Relic", values: [true, true, true] },
+
+      { name: "Nuwara Eliya", values: [true, true, true] },
+      { name: "Sri Bhaktha Hanuman Temple", values: [true, true, true] },
+      { name: "Tea Plantation", values: [true, true, true] },
+      { name: "Divurumpola", values: [true, true, true] },
+      { name: "Seeta Amman Temple", values: [true, true, true] },
+      { name: "Ashoka Vatika", values: [true, true, true] },
+      { name: "Gayathri Peedam", values: [true, true, true] },
+
+      { name: "Colombo", values: [true, true, true] },
+      { name: "Panchamuga Anjaneyar Temple", values: [true, true, true] },
+      { name: "Kelaniya Rajamaha Temple", values: [true, true, true] },
+
+      { name: "Ella", values: [false, true, false] },
+
+      { name: "Kataragama", values: [false, true, false] },
+      { name: "Kataragama Temple", values: [false, true, false] },
+
+      { name: "Unawatuna", values: [false, true, true] },
+
+      { name: "Roomassala", values: [false, true, true] },
+      { name: "Roomassala Temple", values: [false, true, true] },
+
+      { name: "Bentota", values: [false, true, true] },
+
+      { name: "Galle", values: [false, false, true] },
+      { name: "Galle Fort", values: [false, false, true] },
+
+      { name: "Dambulla", values: [false, false, true] },
+      { name: "Dambulla Cave Temple", values: [false, false, true] },
+
+      { name: "Sigiriya", values: [false, false, true] },
+
+      { name: "Trincomalee", values: [false, false, true] },
+      { name: "Koneshwaram Temple", values: [false, false, true] }
     ],
 
     mapText: {
