@@ -78,25 +78,16 @@ const Services = () => {
             </h1>
             <div className="max-w-4xl mx-auto space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                At Walkers Tours, with over five decades of expertise in Sri Lanka's tourism industry, 
-                we proudly offer a comprehensive range of travel services to guests from around the world. 
-                As one of the country's most trusted destination management companies, our experience, 
-                professionalism, and deep local knowledge allow us to deliver exceptional and tailor-made 
-                travel solutions, while remaining committed to eco-conscious and responsible tourism practices.
+                At Nature Escape Tours, we specialize in crafting meaningful travel experiences that showcase the natural beauty, culture, and heritage of Sri Lanka. With a passion for exploration and a strong understanding of the island’s diverse landscapes, we provide thoughtfully designed journeys for travelers seeking authentic and responsible adventures.
               </p>
               <p>
-                Our services include bespoke tour planning, premium accommodation arrangements, expertly guided excursions, 
-                reliable transportation, and visa assistance. We also specialize in MICE (Meetings, Incentives, 
-                Conferences, and Exhibitions) offering seamless support for corporate travel and events.
+                Our services include customized tour packages, carefully selected accommodations, knowledgeable local guides, comfortable transportation, and complete travel assistance. We also cater to special interest travel, including nature-based experiences, cultural tours, adventure travel, and small group excursions.
               </p>
               <p>
-                Whether you're a solo traveler, couple, family, or group, every journey is thoughtfully designed 
-                to minimize environmental impact while maximizing cultural immersion and comfort.
+                Whether you are traveling alone, with family, or as part of a group, each itinerary is carefully planned to balance comfort, discovery, and sustainability while respecting local communities and the environment.
               </p>
               <p>
-                From arrival to departure, our dedicated team ensures smooth, enriching, and memorable experiences 
-                across Sri Lanka. At Walkers Tours, we do not just plan holidays; we create sustainable and 
-                unforgettable journeys with care and the warmth of Sri Lankan hospitality.
+                From your arrival to your departure, our dedicated team is committed to delivering seamless, memorable, and enriching travel experiences. At Nature Escape Tours, we go beyond sightseeing—we create journeys that connect you with nature, culture, and the true spirit of Sri Lanka.
               </p>
             </div>
           </motion.div>
@@ -111,8 +102,8 @@ const Services = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Link 
-                  to={service.slug === "excursions" ? "/excursions" : service.slug === "mice" ? "/mice" : `/service/${service.slug}`} 
+                <Link
+                  to={service.slug === "excursions" ? "/excursions" : service.slug === "mice" ? "/mice" : `/service/${service.slug}`}
                   className="block group"
                 >
                   <div className="relative h-[280px] overflow-hidden">
