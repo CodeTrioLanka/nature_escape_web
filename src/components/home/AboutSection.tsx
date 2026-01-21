@@ -8,7 +8,7 @@ import AnimatedCounter from "@/components/ui/AnimatedCounter";
 const stats = [
   { value: 56, suffix: "+", label: "Years of Experience" },
   { value: 175, suffix: "+", label: "Expert Team Members" },
-  { value: 300, suffix: "+", label: "Curated Destinations" },
+  { value: 300, suffix: "+", label: "Total Tours" },
   { value: 600, suffix: "+", label: "Happy Travelers" },
 ];
 
