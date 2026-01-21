@@ -3,12 +3,23 @@ import { ArrowRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import heroImage from "@/assets/hero-srilanka.jpg";
+import { useEffect, useState } from "react";
+import { fetchHomeData, HomeData } from "@/api/home.api";
 
 const Hero = () => {
+  const [homeData, setHomeData] = useState<HomeData | null>(null);
+ useEffect(() => {
+  fetchHomeData().then((data) => {
+    console.log('Fetched home data:', data);
+    setHomeData(data);
+  }).catch(console.error);
+}, []);
+
+
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
@@ -16,23 +27,29 @@ const Hero = () => {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const particlesY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const backgroundImage = homeData?.homebg || heroImage;
+console.log('Background image URL:', homeData?.homebg);
 
+  
   return (
-    <section ref={ref} className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden">
+    <section
+      ref={ref}
+      className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden"
+    >
       {/* Background Image with Parallax Effect */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ 
-          backgroundImage: `url(${heroImage})`,
+        style={{
+      backgroundImage: `url(${backgroundImage})`,
           y: backgroundY,
-          scale: backgroundScale
+          scale: backgroundScale,
         }}
       >
         <div className="absolute inset-0 hero-overlay" />
       </motion.div>
 
       {/* Floating Particles with Parallax */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 overflow-hidden pointer-events-none"
         style={{ y: particlesY }}
       >
@@ -74,7 +91,7 @@ const Hero = () => {
       />
 
       {/* Content with Parallax */}
-      <motion.div 
+      <motion.div
         className="container mx-auto px-4 relative z-10"
         style={{ y: textY, opacity }}
       >
@@ -88,7 +105,7 @@ const Hero = () => {
             ✨ Discover Untouched Paradise
           </motion.span>
            */}
-          <motion.h1 
+          <motion.h1
             className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-primary-foreground leading-tight mb-6"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -99,45 +116,47 @@ const Hero = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Escape Into{" "}
+              {homeData?.title?.split(' ').slice(0, 2).join(' ') || "Escape Into"}{" "}
             </motion.span>
-            <motion.span 
+            <motion.span
               className="text-gold inline-block"
               initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
               whileHover={{ scale: 1.1, rotate: 3 }}
             >
-              Nature's
+              {homeData?.title?.split(' ')[2] }
             </motion.span>
             <br />
-            <motion.span 
+            <motion.span
               className="text-primary-foreground/90"
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              Wonders
+              {homeData?.title?.split(' ').slice(3).join(' ') || "Wonders"}
             </motion.span>
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             className="text-lg md:text-xl text-primary-foreground/85 max-w-xl mb-8 leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Immerse yourself in Sri Lanka's pristine beaches, ancient rainforests, 
-            and breathtaking wildlife. Your adventure into nature begins here.
+            {homeData?.subtitle || "Immerse yourself in Sri Lanka's pristine beaches, ancient rainforests, and breathtaking wildlife. Your adventure into nature begins here."}
           </motion.p>
 
-          <motion.div 
+          <motion.div
             className="flex flex-wrap gap-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            <motion.div whileHover={{ scale: 1.05, x: 5 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              whileHover={{ scale: 1.05, x: 5 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Link
                 to="/sri-lanka-tours"
                 className="group inline-flex items-center gap-2 px-8 py-4 bg-forest text-primary-foreground font-semibold rounded-lg hover:bg-forest/90 hover:shadow-lg hover:shadow-forest/30 transition-all duration-300"
@@ -146,7 +165,10 @@ const Hero = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05, x: -5 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              whileHover={{ scale: 1.05, x: -5 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Link
                 to="/things-to-do"
                 className="group inline-flex items-center gap-2 px-8 py-4 bg-primary-foreground/10 text-primary-foreground font-semibold rounded-lg backdrop-blur-md border border-primary-foreground/30 hover:bg-primary-foreground/20 hover:border-primary-foreground/50 transition-all duration-300"
@@ -159,14 +181,14 @@ const Hero = () => {
       </motion.div>
 
       {/* Scroll Indicator with Parallax */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
         style={{ opacity }}
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="flex flex-col items-center gap-2">
-          <motion.span 
+          <motion.span
             className="text-primary-foreground/60 text-sm font-medium"
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -174,7 +196,7 @@ const Hero = () => {
             Scroll to explore
           </motion.span>
           <div className="w-8 h-12 border-2 border-primary-foreground/50 rounded-full flex justify-center pt-2">
-            <motion.div 
+            <motion.div
               className="w-1.5 h-3 bg-secondary rounded-full"
               animate={{ y: [0, 12, 0], opacity: [1, 0.5, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
