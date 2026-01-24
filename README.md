@@ -71,3 +71,16 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+<h6> @copyright
+  <hr>
+  
+<div style="display: flex; align-items: center; gap: 15px;">
+  <a href="https://www.facebook.com/profile.php?id=61586191610766" target="blank">
+    <img src="src/assets/CodeTrioLankaLOGO.png" alt="CodeTrio Lanka Logo" height="60" width="65" />
+  </a>
+  <div>
+    <h3 style="margin: 0;">CodeTrio Lanka</h3>
+    <h3 style="margin: 0;">Solutions</h3>
+  </div>
+</div>
