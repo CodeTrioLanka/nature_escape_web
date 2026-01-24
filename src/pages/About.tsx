@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Users, Award, Heart, Globe, Leaf, Shield, MapPin, Clock, Star, ArrowRight } from "lucide-react";
+import { Users, Award, Heart, Globe, Leaf, Shield, MapPin, Clock, Star, ArrowRight, Milestone } from "lucide-react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
@@ -18,6 +18,7 @@ const stats = [
   { number: 50, suffix: "+", label: "Destinations", icon: Globe },
 ];
 
+// Core Value Section
 const values = [
   {
     icon: Heart,
@@ -57,6 +58,7 @@ const values = [
   },
 ];
 
+// Member Section
 const team = [
   {
     name: "Rajitha Fernando",
@@ -84,6 +86,7 @@ const team = [
   },
 ];
 
+// Milestones Section
 const milestones = [
   { year: "2010", event: "Founded Nature Escape", description: "Started with a dream to share Sri Lanka" },
   { year: "2014", event: "First 1000 Customers", description: "Milestone of trust and quality" },
