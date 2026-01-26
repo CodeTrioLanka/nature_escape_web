@@ -3,7 +3,6 @@ import { Users, Award, Heart, Globe, Leaf, Shield, MapPin, Clock, Star, ArrowRig
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import TeamGallery from "@/components/about/TeamGallery";
 import teaPlantations from "@/assets/tea-plantations.jpg";
 import wildlife from "@/assets/wildlife.jpg";
 import sigiriya from "@/assets/sigiriya.jpg";
@@ -579,9 +578,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      {/* Team Photo Gallery */}
-      <TeamGallery />
 
       {/* CTA Section - Immersive */}
       <section className="py-32 relative overflow-hidden">
