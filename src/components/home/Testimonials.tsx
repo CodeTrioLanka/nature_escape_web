@@ -55,18 +55,18 @@ const Testimonials = () => {
 
       {/* Background Text with Parallax */}
       <motion.div 
-        className="absolute top-0 left-0 right-0 text-center pointer-events-none"
+        className="absolute top-3 left-0 right-0 text-center pointer-events-none"
         style={{ y: textY }}
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1 }}
       >
-        <span className="text-[80px] md:text-[140px] font-display italic font-bold text-primary-foreground/5 leading-none select-none">
-          real stories
+        <span className="text-[80px] md:text-[140px] font-display italic font-bold text-primary-foreground/10 leading-none select-none">
+          Real Stories
         </span>
       </motion.div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mt-10  mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
