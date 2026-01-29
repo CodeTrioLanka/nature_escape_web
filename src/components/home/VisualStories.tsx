@@ -31,7 +31,7 @@ const VisualStories = () => {
         transition={{ duration: 1 }}
       >
         <span className="text-[80px] md:text-[140px] font-display italic font-bold text-muted-foreground/10 leading-none select-none">
-          visual stories
+          Visual Stories
         </span>
       </motion.div>
 
