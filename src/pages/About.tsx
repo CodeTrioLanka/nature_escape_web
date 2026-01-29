@@ -647,9 +647,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Photo Gallery */}
-      <TeamGallery />
-
       {/* CTA Section - Immersive */}
       <section className="py-32 relative overflow-hidden">
         <motion.div
