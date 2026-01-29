@@ -74,17 +74,17 @@ const TourPackages = () => {
   const headerY = useTransform(scrollYProgress, [0, 1], [50, -30]);
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden" ref={ref}>
+    <section className="py-20 bg-background relative overflow-hidden" ref={ref}>
       {/* Background Text with Parallax */}
       <motion.div 
-        className="absolute top-10 left-0 right-0 text-center pointer-events-none"
+        className="absolute top-12 left-0 right-0 text-center pointer-events-none"
         style={{ y: bgTextY }}
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1 }}
       >
-        <span className="text-[100px] md:text-[160px] font-display font-bold text-muted/20 leading-none select-none">
-          unforgettable
+        <span className="text-[100px] md:text-[160px] font-display font-bold text-muted/100 leading-none select-none">
+          Unforgettable
         </span>
       </motion.div>
 
