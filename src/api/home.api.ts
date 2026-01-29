@@ -17,7 +17,7 @@ interface ApiResponse {
 
 export const fetchHomeData = async (): Promise<HomeData> => {
   try {
-    const baseUrl = import.meta.env.BASE_URI || 'http://localhost:5000';
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     const response = await fetch(`${baseUrl}/api/home`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
