@@ -49,6 +49,7 @@ const AboutSection = () => {
   const contentY = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const decorY = useTransform(scrollYProgress, [0, 1], [150, -150]);
   const statsY = useTransform(scrollYProgress, [0, 1], [80, -40]);
+  const circleY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
 
   // Show loading state
   if (isLoading) {
@@ -101,7 +102,7 @@ const AboutSection = () => {
             />
             <motion.div
               className="absolute -top-4 -left-4 w-24 h-24 bg-secondary/20 rounded-full blur-2xl hidden lg:block"
-              style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
+              style={{ y: circleY }}
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 4, repeat: Infinity }}
             />

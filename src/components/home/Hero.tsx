@@ -8,12 +8,12 @@ import { fetchHomeData, HomeData } from "@/api/home.api";
 
 const Hero = () => {
   const [homeData, setHomeData] = useState<HomeData | null>(null);
- useEffect(() => {
-  fetchHomeData().then((data) => {
-    console.log('Fetched home data:', data);
-    setHomeData(data);
-  }).catch(console.error);
-}, []);
+  useEffect(() => {
+    fetchHomeData().then((data) => {
+      console.log('Fetched home data:', data);
+      setHomeData(data);
+    }).catch(console.error);
+  }, []);
 
 
   const ref = useRef(null);
@@ -28,9 +28,9 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const particlesY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const backgroundImage = homeData?.homebg || heroImage;
-console.log('Background image URL:', homeData?.homebg);
+  console.log('Background image URL:', homeData?.homebg);
 
-  
+
   return (
     <section
       ref={ref}
@@ -40,7 +40,7 @@ console.log('Background image URL:', homeData?.homebg);
       <motion.div
         className="absolute inset-0  bg-cover bg-center scale-x-[-1]  bg-no-repeat"
         style={{
-      backgroundImage: `url(${backgroundImage})`,
+          backgroundImage: `url(${backgroundImage})`,
           y: backgroundY,
           scale: backgroundScale,
         }}
@@ -96,7 +96,7 @@ console.log('Background image URL:', homeData?.homebg);
         style={{ y: textY, opacity }}
       >
         <div className="max-w-3xl">
-          {/* <motion.span 
+          <motion.span
             className="inline-block px-4 py-1.5 bg-forest/90 backdrop-blur-sm text-primary-foreground text-sm font-medium rounded-full mb-6"
             initial={{ opacity: 0, y: 20, x: -50 }}
             animate={{ opacity: 1, y: 0, x: 0 }}
@@ -104,7 +104,6 @@ console.log('Background image URL:', homeData?.homebg);
           >
             ✨ Discover Untouched Paradise
           </motion.span>
-           */}
           <motion.h1
             className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-primary-foreground leading-tight mb-6"
             initial={{ opacity: 0, y: 50 }}
@@ -125,7 +124,7 @@ console.log('Background image URL:', homeData?.homebg);
               transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
               whileHover={{ scale: 1.1, rotate: 3 }}
             >
-              {homeData?.title?.split(' ')[2] }
+              {homeData?.title?.split(' ')[2]}
             </motion.span>
             <br />
             <motion.span
