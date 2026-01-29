@@ -15,12 +15,12 @@ const features = [
 const BespokeTours = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
-  
+
   const contentY = useTransform(scrollYProgress, [0, 1], [50, -30]);
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -50]);
 
@@ -42,7 +42,7 @@ const BespokeTours = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <motion.span 
+            <motion.span
               className="text-secondary font-medium tracking-wider uppercase text-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -50,7 +50,7 @@ const BespokeTours = () => {
             >
               Personalized
             </motion.span>
-            <motion.h2 
+            <motion.h2
               className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold mt-3 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -58,27 +58,27 @@ const BespokeTours = () => {
             >
               Tailor-made Bespoke Tours
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-primary-foreground/80 mb-8 leading-relaxed text-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              Create your perfect Sri Lanka journey with our bespoke tour service. 
-              Tell us your dreams, and we'll craft an exclusive itinerary tailored 
+              Create your perfect Sri Lanka journey with our bespoke tour service.
+              Tell us your dreams, and we'll craft an exclusive itinerary tailored
               to your preferences, pace, and interests.
             </motion.p>
-            
+
             <ul className="space-y-4 mb-10">
               {features.map((feature, index) => (
-                <motion.li 
+                <motion.li
                   key={index}
                   className="flex items-center gap-4"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
                 >
-                  <motion.span 
+                  <motion.span
                     className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center"
                     whileHover={{ scale: 1.1, rotate: 360 }}
                     transition={{ duration: 0.3 }}
@@ -89,7 +89,7 @@ const BespokeTours = () => {
                 </motion.li>
               ))}
             </ul>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -106,7 +106,7 @@ const BespokeTours = () => {
           </motion.div>
 
           {/* Image */}
-          <motion.div 
+          <motion.div
             className="relative"
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -122,9 +122,9 @@ const BespokeTours = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
             </div>
-            
+
             {/* Floating Stats Card with Animated Counter */}
-            <motion.div 
+            <motion.div
               className="absolute -bottom-6 -left-6 bg-card text-foreground p-6 rounded-2xl shadow-2xl hidden lg:block"
               initial={{ opacity: 0, y: 20, scale: 0.8 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
@@ -148,6 +148,7 @@ const BespokeTours = () => {
           </motion.div>
         </div>
       </div>
+
     </section>
   );
 };

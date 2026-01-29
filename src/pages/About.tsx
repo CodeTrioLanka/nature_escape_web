@@ -3,7 +3,7 @@ import { Users, Award, Heart, Globe, Leaf, Shield, MapPin, Clock, Star, ArrowRig
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import TeamGallery from "@/components/about/TeamGallery";
+// 
 import { fetchAboutUsData, AboutUsData } from "@/api/aboutUs.api";
 import teaPlantations from "@/assets/tea-plantations.jpg";
 import wildlife from "@/assets/wildlife.jpg";
@@ -580,7 +580,7 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-24 bg-sand overflow-hidden">
+      {/* <section className="py-24 bg-sand overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center mb-16"
@@ -619,7 +619,7 @@ const About = () => {
                     transition={{ duration: 0.6 }}
                   />
 
-                  {/* Overlay */}
+                  
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-forest via-forest/50 to-transparent opacity-0 group-hover:opacity-90 transition-all duration-500 flex items-end justify-center pb-6"
                   >
@@ -645,10 +645,10 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Team Photo Gallery */}
-      <TeamGallery />
+      {/* <TeamGallery /> */}
 
       {/* CTA Section - Immersive */}
       <section className="py-32 relative overflow-hidden">
