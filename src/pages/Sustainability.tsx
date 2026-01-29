@@ -90,7 +90,7 @@ const Sustainability = () => {
               Our Commitment to the Planet
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              At Walkers Tours, sustainability isn't just a buzzword – it's at the heart of everything we do. 
+              At Nature Escape, sustainability isn't just a buzzword – it's at the heart of everything we do. 
               We believe that travel should enrich both the traveler and the destinations they visit. 
               Our sustainable tourism practices ensure that Sri Lanka's pristine beaches, lush forests, 
               and vibrant wildlife remain protected for generations to come.
@@ -251,7 +251,7 @@ const Sustainability = () => {
               Travel with Purpose
             </h2>
             <p className="text-muted-foreground mb-8">
-              Join us in making travel a force for good. Every journey with Walkers Tours 
+              Join us in making travel a force for good. Every journey with Nature Escape 
               contributes to conservation, community development, and cultural preservation.
             </p>
           </motion.div>

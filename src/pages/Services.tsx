@@ -72,7 +72,7 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <p className="text-sm text-muted-foreground mb-2">Walkers Tours</p>
+            <p className="text-sm text-muted-foreground mb-2">Nature Escape</p>
             <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-8">
               Our Services
             </h1>

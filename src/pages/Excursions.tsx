@@ -108,7 +108,7 @@ const Excursions = () => {
           >
             <p className="text-sm text-muted-foreground mb-2">Explore Sri Lanka with</p>
             <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
-              Walkers Tours Excursions
+              Nature Escape Excursions
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Experience thrilling safaris at Yala National Park, scenic hot air balloon rides, 
