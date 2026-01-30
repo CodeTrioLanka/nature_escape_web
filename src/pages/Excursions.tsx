@@ -1,9 +1,10 @@
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import wildlife from "@/assets/wildlife.jpg";
 import sigiriya from "@/assets/sigiriya.jpg";
+import { fetchExcursionFilters } from "@/api/excursion.api";
 import teaPlantations from "@/assets/tea-plantations.jpg";
 import beachMirissa from "@/assets/beach-mirissa.jpg";
 import temple from "@/assets/temple.jpg";
@@ -66,14 +67,30 @@ const excursions = [
   }
 ];
 
-const timeOptions = ["All", "Half Day", "Full Day"];
-const destinationOptions = ["All", "Colombo", "Sigiriya", "Yala", "Galle", "Nuwara Eliya", "Kitulgala"];
-const categoryOptions = ["All", "City Tour", "Adventure", "Wildlife", "Cultural"];
 
 const Excursions = () => {
   const [timeFilter, setTimeFilter] = useState("All");
   const [destinationFilter, setDestinationFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
+
+  const [timeOptions, setTimeOptions] = useState(["All"]);
+  const [destinationOptions, setDestinationOptions] = useState(["All"]);
+  const [categoryOptions, setCategoryOptions] = useState(["All"]);
+
+  useEffect(() => {
+    const loadFilters = async () => {
+      try {
+        const filters = await fetchExcursionFilters();
+        if (filters.time) setTimeOptions(filters.time);
+        if (filters.destination) setDestinationOptions(filters.destination);
+        if (filters.category) setCategoryOptions(filters.category);
+      } catch (error) {
+        console.error("Failed to load excursion filters", error);
+        // Fallback or leave as ["All"]
+      }
+    };
+    loadFilters();
+  }, []);
 
   const filteredExcursions = excursions.filter((excursion) => {
     const matchTime = timeFilter === "All" || excursion.time === timeFilter;
@@ -111,7 +128,7 @@ const Excursions = () => {
               Walkers Tours Excursions
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Experience thrilling safaris at Yala National Park, scenic hot air balloon rides, 
+              Experience thrilling safaris at Yala National Park, scenic hot air balloon rides,
               the historic charm of Galle, and vibrant Colombo - plus so much more! INQUIRE NOW!
             </p>
           </motion.div>
