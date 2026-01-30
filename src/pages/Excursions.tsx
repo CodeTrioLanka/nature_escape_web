@@ -10,9 +10,6 @@ import beachMirissa from "@/assets/beach-mirissa.jpg";
 import temple from "@/assets/temple.jpg";
 import adventure from "@/assets/adventure.jpg";
 
-
-
-
 const Excursions = () => {
   const [timeFilter, setTimeFilter] = useState("All");
   const [destinationFilter, setDestinationFilter] = useState("All");
