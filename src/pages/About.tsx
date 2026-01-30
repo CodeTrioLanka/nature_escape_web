@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Users, Award, Heart, Globe, Leaf, Shield, MapPin, Clock, Star, ArrowRight, Milestone } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+// 
+import { fetchAboutUsData, AboutUsData } from "@/api/aboutUs.api";
 import teaPlantations from "@/assets/tea-plantations.jpg";
 import wildlife from "@/assets/wildlife.jpg";
 import sigiriya from "@/assets/sigiriya.jpg";
@@ -17,48 +19,58 @@ const stats = [
   { number: 50, suffix: "+", label: "Destinations", icon: Globe },
 ];
 
-// Core Value Section
-const values = [
+// Icon mapping for dynamic values
+const iconMap: Record<string, any> = {
+  Heart,
+  Leaf,
+  Users,
+  Shield,
+  Award,
+  Globe,
+};
+
+// Fallback Core Values (used if API fails)
+const fallbackValues = [
   {
-    icon: Heart,
+    icon: "Heart",
     title: "Passion for Travel",
     description: "We believe travel transforms lives. Every journey we craft is designed to create meaningful experiences.",
     color: "from-rose-500 to-pink-600",
   },
   {
-    icon: Leaf,
+    icon: "Leaf",
     title: "Sustainability First",
     description: "We're committed to eco-friendly tourism that protects Sri Lanka's natural beauty for future generations.",
     color: "from-emerald-500 to-green-600",
   },
   {
-    icon: Users,
+    icon: "Users",
     title: "Local Expertise",
     description: "Our team of local guides brings authentic insights and hidden gems you won't find in guidebooks.",
     color: "from-blue-500 to-cyan-600",
   },
   {
-    icon: Shield,
+    icon: "Shield",
     title: "Safety & Trust",
     description: "Your safety is our priority. We ensure every aspect of your journey is secure and worry-free.",
     color: "from-violet-500 to-purple-600",
   },
   {
-    icon: Award,
+    icon: "Award",
     title: "Excellence",
     description: "Award-winning service that consistently exceeds expectations and creates unforgettable memories.",
     color: "from-amber-500 to-orange-600",
   },
   {
-    icon: Globe,
+    icon: "Globe",
     title: "Cultural Connection",
     description: "We bridge cultures, helping travelers connect deeply with Sri Lanka's rich heritage and warm people.",
     color: "from-teal-500 to-emerald-600",
   },
 ];
 
-// Member Section
-const team = [
+// Fallback Team Members (used if API fails)
+const fallbackTeam = [
   {
     name: "Rajitha Fernando",
     role: "Founder & CEO",
@@ -85,18 +97,79 @@ const team = [
   },
 ];
 
-// Milestones Section
-const milestones = [
-  { year: "2010", event: "Founded Nature Escape", description: "Started with a dream to share Sri Lanka" },
-  { year: "2014", event: "First 1000 Customers", description: "Milestone of trust and quality" },
-  { year: "2018", event: "Eco-Tourism Award", description: "Recognized for sustainable practices" },
-  { year: "2022", event: "Digital Transformation", description: "Modern booking experience" },
-  { year: "2024", event: "10,000+ Happy Travelers", description: "Continuing to grow" },
+// Fallback Milestones (used if API fails)
+const fallbackMilestones = [
+  { year: 2010, event: "Founded Nature Escape", mstone_description: "Started with a dream to share Sri Lanka" },
+  { year: 2014, event: "First 1000 Customers", mstone_description: "Milestone of trust and quality" },
+  { year: 2018, event: "Eco-Tourism Award", mstone_description: "Recognized for sustainable practices" },
+  { year: 2022, event: "Digital Transformation", mstone_description: "Modern booking experience" },
+  { year: 2024, event: "10,000+ Happy Travelers", mstone_description: "Continuing to grow" },
 ];
 
 const About = () => {
   const heroRef = useRef(null);
   const timelineRef = useRef(null);
+
+  // State for dynamic data
+  const [aboutData, setAboutData] = useState<AboutUsData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch data on component mount
+  useEffect(() => {
+    const loadAboutData = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchAboutUsData();
+        setAboutData(data);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to fetch About Us data:', err);
+        setError('Failed to load data');
+        // Will use fallback data
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadAboutData();
+  }, []);
+
+  // Prepare data with fallbacks
+  const stats = aboutData?.stats ? [
+    { number: aboutData.stats.yearExperience || 15, suffix: "+", label: "Years Experience", icon: Clock },
+    { number: aboutData.stats.happyTravelers || 10000, suffix: "+", label: "Happy Travelers", icon: Users },
+    { number: aboutData.stats.toursCompleted || 500, suffix: "+", label: "Tours Completed", icon: MapPin },
+    { number: aboutData.stats.destination || 50, suffix: "+", label: "Destinations", icon: Globe },
+  ] : [
+    { number: 15, suffix: "+", label: "Years Experience", icon: Clock },
+    { number: 10000, suffix: "+", label: "Happy Travelers", icon: Users },
+    { number: 500, suffix: "+", label: "Tours Completed", icon: MapPin },
+    { number: 50, suffix: "+", label: "Destinations", icon: Globe },
+  ];
+
+  const values = (aboutData?.values && aboutData.values.length > 0)
+    ? aboutData.values.map(value => ({
+      ...value,
+      icon: iconMap[value.icon] || Heart,
+    }))
+    : fallbackValues.map(value => ({
+      ...value,
+      icon: iconMap[value.icon] || Heart,
+    }));
+
+  const team = (aboutData?.team && aboutData.team.length > 0)
+    ? aboutData.team
+    : fallbackTeam;
+
+  const milestones = (aboutData?.milestones && aboutData.milestones.length > 0)
+    ? aboutData.milestones
+    : fallbackMilestones;
+
+  // Hero section data with fallbacks
+  const heroBackground = aboutData?.hero?.heroBackground || sigiriya;
+  const heroTitle = aboutData?.hero?.heroTitle || "We Create Memories";
+  const heroDescription = aboutData?.hero?.heroDescription || "Your trusted partner in discovering Sri Lanka's natural wonders since 2010";
 
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -124,7 +197,7 @@ const About = () => {
           className="absolute inset-0"
           style={{ y: heroY, scale: heroScale }}
         >
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${sigiriya})` }} />
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroBackground})` }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
         </motion.div>
 
@@ -141,7 +214,7 @@ const About = () => {
         />
 
         {/* Hero Content */}
-        <motion.div 
+        <motion.div
           className="container mx-auto px-4 relative z-10"
           style={{ opacity: heroOpacity, y: heroTextY }}
         >
@@ -152,41 +225,36 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="mb-6"
             >
-             
+
             </motion.div>
-            
-            <motion.h1 
+
+            <motion.h1
               className="text-5xl md:text-6xl lg:text-8xl font-display font-bold text-primary-foreground mb-6"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <motion.span
-                className="inline-block"
-                initial={{ opacity: 0, x: -100, rotate: -10 }}
-                animate={{ opacity: 1, x: 0, rotate: 0 }}
-                transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
-              >
-                We Create
-              </motion.span>
-              <br />
-              <motion.span 
-                className="text-gold inline-block"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
-              >
-                Memories
-              </motion.span>
+              {heroTitle.split(' ').map((word, index) => (
+                <motion.span
+                  key={index}
+                  className={index === heroTitle.split(' ').length - 1 ? "text-gold inline-block" : "inline-block"}
+                  initial={{ opacity: 0, x: index === 0 ? -100 : 0, scale: index === heroTitle.split(' ').length - 1 ? 0 : 1, rotate: index === 0 ? -10 : 0 }}
+                  animate={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 + (index * 0.2), type: "spring" }}
+                >
+                  {word}{index < heroTitle.split(' ').length - 1 && ' '}
+                  {index === heroTitle.split(' ').length - 2 && <br />}
+                </motion.span>
+              ))}
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               className="text-xl md:text-2xl text-primary-foreground/80 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Your trusted partner in discovering Sri Lanka's natural wonders since 2010
+              {heroDescription}
             </motion.p>
 
             {/* Scroll Indicator */}
@@ -298,7 +366,7 @@ const About = () => {
               </div>
 
               {/* Floating Badge */}
-              <motion.div 
+              <motion.div
                 className="absolute -bottom-6 -right-6 bg-gradient-to-br from-gold to-gold-light p-6 rounded-2xl shadow-2xl hidden lg:block"
                 initial={{ opacity: 0, scale: 0, rotate: -20 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -323,7 +391,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <motion.span 
+              <motion.span
                 className="inline-block px-4 py-1.5 bg-forest/10 text-forest font-medium rounded-full text-sm mb-4"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -331,8 +399,8 @@ const About = () => {
               >
                 Our Story
               </motion.span>
-              
-              <motion.h2 
+
+              <motion.h2
                 className="text-4xl md:text-5xl font-display font-bold mb-6"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -386,7 +454,7 @@ const About = () => {
       {/* Timeline Section */}
       <section ref={timelineRef} className="py-24 bg-sand relative overflow-hidden">
         {/* Background Text */}
-        <motion.div 
+        <motion.div
           className="absolute top-10 left-0 right-0 text-center pointer-events-none"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -416,7 +484,7 @@ const About = () => {
           <div className="relative max-w-4xl mx-auto">
             {/* Animated Line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-border -translate-x-1/2 hidden md:block">
-              <motion.div 
+              <motion.div
                 className="w-full bg-gradient-to-b from-forest to-gold"
                 style={{ height: timelineLineHeight }}
               />
@@ -440,12 +508,12 @@ const About = () => {
                   >
                     <span className="text-3xl font-display font-bold text-forest">{milestone.year}</span>
                     <h3 className="text-xl font-semibold mt-2">{milestone.event}</h3>
-                    <p className="text-muted-foreground mt-1">{milestone.description}</p>
+                    <p className="text-muted-foreground mt-1">{milestone.mstone_description}</p>
                   </motion.div>
                 </div>
 
                 {/* Dot */}
-                <motion.div 
+                <motion.div
                   className="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-forest rounded-full border-4 border-background shadow-lg hidden md:block"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
@@ -488,11 +556,11 @@ const About = () => {
                 className="group relative bg-card p-8 rounded-3xl shadow-lg border border-border/50 overflow-hidden"
               >
                 {/* Gradient Background on Hover */}
-                <motion.div 
+                <motion.div
                   className={`absolute inset-0 bg-gradient-to-br ${value.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
                 />
 
-                <motion.div 
+                <motion.div
                   className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${value.color} flex items-center justify-center mb-6 shadow-lg`}
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
@@ -512,7 +580,7 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-24 bg-sand overflow-hidden">
+      {/* <section className="py-24 bg-sand overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center mb-16"
@@ -539,7 +607,7 @@ const About = () => {
                 whileHover={{ y: -15 }}
                 className="group text-center"
               >
-                <motion.div 
+                <motion.div
                   className="relative mb-6 overflow-hidden rounded-3xl shadow-xl"
                   whileHover={{ scale: 1.02 }}
                 >
@@ -550,9 +618,9 @@ const About = () => {
                     whileHover={{ scale: 1.15 }}
                     transition={{ duration: 0.6 }}
                   />
+
                   
-                  {/* Overlay */}
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-forest via-forest/50 to-transparent opacity-0 group-hover:opacity-90 transition-all duration-500 flex items-end justify-center pb-6"
                   >
                     <div className="text-primary-foreground text-center">
@@ -566,7 +634,7 @@ const About = () => {
                   </motion.div>
                 </motion.div>
 
-                <motion.h3 
+                <motion.h3
                   className="text-xl font-bold mb-1"
                   whileHover={{ scale: 1.05 }}
                 >
@@ -577,7 +645,10 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+
+      {/* Team Photo Gallery */}
+      {/* <TeamGallery /> */}
 
       {/* CTA Section - Immersive */}
       <section className="py-32 relative overflow-hidden">
@@ -601,7 +672,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <motion.h2 
+            <motion.h2
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground mb-6"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -611,15 +682,15 @@ const About = () => {
               Ready to Start Your{" "}
               <span className="text-gold">Adventure?</span>
             </motion.h2>
-            
-            <motion.p 
+
+            <motion.p
               className="text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              Let us help you discover the wonders of Sri Lanka. Contact our team today 
+              Let us help you discover the wonders of Sri Lanka. Contact our team today
               to start planning your perfect nature escape.
             </motion.p>
 

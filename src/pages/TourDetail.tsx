@@ -65,7 +65,6 @@ const toursData: Record<string, TourData> = {
     heroImage: beachUnawatunaImg,
     description: "Tucked away from the usual tourist trails, the North Eastern coast of Sri Lanka is a hidden paradise waiting to be discovered. With golden beaches that stretch for miles, untouched coral reefs teeming with marine life, and a rich cultural tapestry woven from Tamil and colonial heritage, this region offers an experience that’s both serene and soul-stirring. Whether you’re chasing adventure, seeking spiritual depth, or simply craving a quiet stretch of sand to call your own, Sri Lanka’s North Eastern coast is a treasure trove of authentic, unspoiled beauty.",
     itinerary: [
-
       {
         day: "Day 01",
         title: "Arrival",
@@ -77,55 +76,48 @@ const toursData: Record<string, TourData> = {
         title: "Habarana",
         description: "Make a stop for the day at the cultural triangle of the country,Visit the Sigiriya Rock this evening for a spectacular sunset and the Sigiriya Rock is a UNESCO World Heritage site, whose ancient architectural tactics are bound to marvel you."
       },
-
-
       {
         day: "Day 03 & 04",
         title: "Trincomalee",
         description: "Spend the day exploring Trincomalee, a coastal gem in Sri Lanka’s North Eastern province, renowned for one of the world’s finest natural harbors. Enjoy crystal-clear waters, golden beaches, and rich cultural heritage as you visit the sacred Koneswaram Temple, take in panoramic views from Swami Rock, or dive into the vibrant marine life at Pigeon Island for an unforgettable seaside experience."
       },
-
       {
         day: "Day 05 & 06",
         title: "Pasikudah",
         description: "After breakfast, travel to Pasikudah on Sri Lanka’s east coast. This quiet coastal paradise is famous for its shallow, calm waters and long stretches of soft golden sand. The bay is ideal for safe swimming, as the sea remains waist-deep far from the shore, making it perfect for all ages."
       },
-
       {
         day: "Day 07 & 08",
         title: "Arugambay",
         description: "Bid farewell to Pasikudah and travel to Arugam Bay, a surfer’s paradise on Sri Lanka’s southeast coast. Known for its world-class waves, laid-back atmosphere, and palm-fringed beaches, Arugam Bay attracts surfers from around the world, especially from May to September when the swells are at their best."
       },
-
       {
         day: "Day 09",
         title: "Yala",
         description: "Making your way to the South, make a stop at Yala today. Head out on an evening safari at Yala National Park. With the highest density of leopards in Sri Lanka, test your luck with an exciting drive in search of the spotted leopard and many other endemic species."
       },
-
       {
         day: "Day 10",
         title: "Galle",
         description: "Today's stop is at the city of Galle, a perfect blend of colonial charm and seaside elegance. Explore the historic Galle Fort, a UNESCO World Heritage Site built by the Portuguese and later fortified by the Dutch. Wander through cobbled streets lined with cozy cafés, art galleries, boutique hotels, and admire old-world architecture embraced by the salty sea breeze."
       },
-
       {
         day: "Day 11",
         title: "Colombo",
         description: "Make your way to Colombo, the commercial hub of the country, for a perfect end to your Sri Lankan adventure. En-route, stop by the Kosgoda Turtle Hatchery. Enjoy some last-minute shopping and a tour around the city before departure."
       },
-
       {
         day: "Day 12",
         title: "Departure",
         description: "After a fun-filled and adventurous holiday in Sri Lanka, it's time to say goodbye! Today you will be transferred to the airport in time for your departure flight. Until next time, Ayubowan!"
       },
-
     ],
+
     gallery: [beachParadiseImg, beachMirissaImg, wildlifeImg],
     inclusions: [
       "Accommodation – Transportation in an air-conditioned vehicle with the services of a chauffeur guide -Entrance Tickets – Government Taxes",
     ],
+    
     exclusions: [
       "Alcoholic Beverages",
       "Extra meals/snacks and beverages ordered from the hotel or outside the hotel.",
