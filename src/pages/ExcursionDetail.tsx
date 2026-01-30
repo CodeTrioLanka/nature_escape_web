@@ -42,7 +42,7 @@ interface ExcursionData {
 const excursionsData: Record<string, ExcursionData> = {
   "colombo-tuk-tuk": {
     title: "Colombo By Tuk Tuk",
-    category: "Walkers Tours Excursions",
+    category: "Nature Escape Excursions",
     categoryTag: "ADVENTURE | CITY | COLOMBO | HALF DAY",
     heroImage: temple,
     description: `Hop into a colorful tuk tuk and dive into the vibrant heart of Colombo on an unforgettable urban adventure! Feel the buzz of the city as you zip through bustling streets, colonial landmarks, lively markets, and hidden alleyways only the locals know.
@@ -87,7 +87,7 @@ Whether it's your first visit or a return trip, Colombo by Tuk Tuk offers a fun,
   },
   "hot-air-balloon": {
     title: "Hot Air Balloon Ride",
-    category: "Walkers Tours Excursions",
+    category: "Nature Escape Excursions",
     categoryTag: "ADVENTURE | SIGIRIYA | HALF DAY",
     heroImage: sigiriya,
     description: `Experience the magic of Sri Lanka from the skies on a breathtaking hot air balloon ride over the Cultural Triangle. As dawn breaks and the first rays of sunlight paint the horizon, gently rise above the misty plains for panoramic views of ancient ruins, lush jungles, and iconic landmarks.
@@ -132,7 +132,7 @@ This once-in-a-lifetime adventure combines tranquility with thrill, offering an 
   },
   "yala-luxury-safari": {
     title: "Yala National Park – Luxury Jeep Safari",
-    category: "Walkers Tours Excursions",
+    category: "Nature Escape Excursions",
     categoryTag: "WILDLIFE | YALA | FULL DAY",
     heroImage: wildlife,
     description: `Embark on an extraordinary wildlife adventure in Yala National Park, home to one of the highest leopard densities in the world. Our luxury jeep safari offers an exclusive, comfortable experience as you traverse the rugged terrain in search of Sri Lanka's magnificent wildlife.
@@ -177,7 +177,7 @@ Travel in style in our premium 4x4 vehicles equipped with comfortable seating, r
   },
   "galle-fort-tour": {
     title: "Galle Fort Walking Tour",
-    category: "Walkers Tours Excursions",
+    category: "Nature Escape Excursions",
     categoryTag: "CULTURAL | GALLE | HALF DAY",
     heroImage: beachMirissa,
     description: `Step back in time as you explore the UNESCO World Heritage Galle Fort, a living monument to 400 years of colonial history. Wander through cobblestone streets lined with Dutch colonial buildings, boutique shops, art galleries, and charming cafes.
@@ -222,7 +222,7 @@ Experience the perfect blend of history, culture, and coastal beauty in one unfo
   },
   "tea-plantation": {
     title: "Tea Plantation Experience",
-    category: "Walkers Tours Excursions",
+    category: "Nature Escape Excursions",
     categoryTag: "CULTURAL | NUWARA ELIYA | FULL DAY",
     heroImage: teaPlantations,
     description: `Immerse yourself in the world of Ceylon Tea with an authentic plantation experience in the misty hills of Nuwara Eliya. Visit a working tea estate and discover the journey from leaf to cup that has made Sri Lankan tea famous worldwide.
@@ -267,7 +267,7 @@ Take home not just memories, but a deeper appreciation for the craft and culture
   },
   "white-water-rafting": {
     title: "White Water Rafting",
-    category: "Walkers Tours Excursions",
+    category: "Nature Escape Excursions",
     categoryTag: "ADVENTURE | KITULGALA | FULL DAY",
     heroImage: adventure,
     description: `Get your adrenaline pumping with an exhilarating white water rafting adventure on the Kelani River in Kitulgala! Navigate through thrilling rapids, surrounded by pristine rainforest and stunning scenery.

@@ -36,7 +36,7 @@ const MICE = () => {
             
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
-                At Walkers Tours, we specialize in delivering world-class MICE (Meetings, Incentives, 
+                At Nature Escape, we specialize in delivering world-class MICE (Meetings, Incentives, 
                 Conferences, and Exhibitions) services tailored to the unique needs of corporate clients. 
                 With decades of experience and a deep understanding of Sri Lanka's hospitality landscape, 
                 we create seamless, impactful events that leave lasting impressions.
@@ -56,7 +56,7 @@ const MICE = () => {
               <p>
                 Sri Lanka's diverse landscapes — from pristine beaches to misty highlands, ancient ruins 
                 to modern cities — provide the perfect backdrop for unforgettable corporate experiences. 
-                Let Walkers Tours transform your next business event into an extraordinary journey.
+                Let Nature Escape transform your next business event into an extraordinary journey.
               </p>
             </div>
 

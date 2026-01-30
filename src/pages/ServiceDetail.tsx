@@ -37,10 +37,10 @@ const servicesData: Record<string, ServiceData> = {
     title: "Tour Guide",
     heroImage: teaPlantations,
     paragraphs: [
-      "At Walkers Tours, our tour guides play an indispensable role in delivering exceptional travel experiences. Serving as the bridge between our guests and the destination, they are much more than guides — they are storytellers, cultural interpreters, and trusted companions on every journey.",
+      "At Nature Escape, our tour guides play an indispensable role in delivering exceptional travel experiences. Serving as the bridge between our guests and the destination, they are much more than guides — they are storytellers, cultural interpreters, and trusted companions on every journey.",
       "With extensive local knowledge, professionalism, and a genuine passion for hospitality, our guides bring Sri Lanka's history, culture, and landscapes to life. Their ability to manage itineraries, respond to guest needs, and offer insightful commentary ensures each tour is smooth, enriching, and enjoyable.",
       "Whether leading a city exploration, a historical site visit, or a scenic excursion, our tour guides create meaningful connections that leave lasting impressions. They help navigate language and cultural differences with ease, providing both comfort and confidence to every traveler.",
-      "At Walkers Tours, we recognize that the success of any journey lies in the hands of those who lead it. Our tour guides truly are the heart of what we do."
+      "At Nature Escape, we recognize that the success of any journey lies in the hands of those who lead it. Our tour guides truly are the heart of what we do."
     ],
     ctaType: "inquire"
   },
@@ -48,9 +48,9 @@ const servicesData: Record<string, ServiceData> = {
     title: "Cruise Operations",
     heroImage: beachMirissa,
     paragraphs: [
-      "At Walkers Tours, we are proud to offer professional and seamless ground handling services for cruise passengers arriving on the shores of Sri Lanka. From the moment a vessel berths, our experienced team ensures that every aspect of the onshore experience is meticulously managed with efficiency, care, and attention to detail.",
+      "At Nature Escape, we are proud to offer professional and seamless ground handling services for cruise passengers arriving on the shores of Sri Lanka. From the moment a vessel berths, our experienced team ensures that every aspect of the onshore experience is meticulously managed with efficiency, care, and attention to detail.",
       "Our comprehensive services include well-organized disembarkation, curated shore excursions, reliable transportation, and, where required, premium accommodation arrangements. Whether guests wish to explore historic landmarks, vibrant cities, or the natural beauty of the countryside, we craft itineraries that reflect the richness of Sri Lanka within the available timeframe.",
-      "We work in close collaboration with cruise lines, port authorities, and local partners to uphold the highest standards of safety and service. Backed by decades of industry experience and deep destination knowledge, Walkers Tours is a trusted partner in delivering refined, memorable, and culturally immersive cruise experiences, enhanced by the warmth and hospitality for which Sri Lanka is renowned."
+      "We work in close collaboration with cruise lines, port authorities, and local partners to uphold the highest standards of safety and service. Backed by decades of industry experience and deep destination knowledge, Nature Escape is a trusted partner in delivering refined, memorable, and culturally immersive cruise experiences, enhanced by the warmth and hospitality for which Sri Lanka is renowned."
     ],
     ctaType: "inquire"
   },
@@ -68,10 +68,10 @@ const servicesData: Record<string, ServiceData> = {
     title: "Transportation",
     heroImage: heroImage,
     paragraphs: [
-      "At Walkers Tours, we understand that reliable, comfortable transportation is essential to a seamless travel experience. Our fleet of modern, well-maintained vehicles ensures you travel in style and comfort throughout your Sri Lankan journey.",
+      "At Nature Escape, we understand that reliable, comfortable transportation is essential to a seamless travel experience. Our fleet of modern, well-maintained vehicles ensures you travel in style and comfort throughout your Sri Lankan journey.",
       "From luxury coaches for group tours to private cars with experienced chauffeur-guides, we offer a range of transportation options tailored to your needs. All our vehicles are air-conditioned, regularly serviced, and equipped with safety features to ensure your peace of mind.",
       "Our professional drivers are more than just chauffeurs — they are trained guides with extensive knowledge of local routes, attractions, and culture. They ensure timely arrivals, smooth transfers, and can offer valuable insights throughout your journey.",
-      "Whether you need airport transfers, day excursions, or comprehensive tour transportation, Walkers Tours delivers punctual, safe, and comfortable travel solutions across Sri Lanka."
+      "Whether you need airport transfers, day excursions, or comprehensive tour transportation, Nature Escape delivers punctual, safe, and comfortable travel solutions across Sri Lanka."
     ],
     ctaType: "inquire"
   }
