@@ -2,8 +2,9 @@ import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Check, X, MapPin, Calendar, Users, Clock, ChevronRight, ChevronLeft, Phone } from "lucide-react";
+import { Check, X, MapPin, Calendar, Users, Clock, ChevronRight, ChevronLeft, Phone, Loader2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { fetchPackageBySlug, Package } from "@/api/packages.api";
 
 // Import images
 import beachParadiseImg from "@/assets/beach-paradise.jpg";
@@ -503,8 +504,77 @@ const DestinationsCarousel = ({ destinations, categoryLabel }: {
 
 const TourDetail = () => {
   const { tourSlug } = useParams<{ tourSlug: string }>();
+  const [tour, setTour] = useState<TourData | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const tour = tourSlug ? toursData[tourSlug] : null;
+  useEffect(() => {
+    const loadTour = async () => {
+      setLoading(true);
+      if (!tourSlug) {
+        setLoading(false);
+        return;
+      }
+
+      // 1. Try fetching from backend
+      try {
+        const pkg = await fetchPackageBySlug(tourSlug);
+        if (pkg) {
+          // Map backend package to frontend TourData
+          setTour({
+            title: pkg.packageName,
+            subtitle: pkg.hero?.title || "",
+            duration: `${pkg.overview?.duration?.days || 0} Days / ${pkg.overview?.duration?.nights || 0} Nights`,
+            groupSize: pkg.overview?.groupSize || "Small Group",
+            category: "custom",
+            categoryLabel: "Sri Lanka Tours",
+            heroImage: pkg.hero?.backgroundImage || "",
+            description: pkg.hero?.description || "",
+            itinerary: (pkg.itinerary || []).map(day => ({
+              day: `Day ${day.day}`,
+              title: day.title,
+              description: day.description
+            })),
+            gallery: pkg.galleries?.[0]?.images || [],
+            // Default fallbacks for fields not yet in backend
+            inclusions: ["Accommodation at 3/4 Star Hotels", "Daily Breakfast", "Transportation in AC Vehicle", "English Speaking Chauffeur Guide", "all Government Taxes"],
+            exclusions: ["Airfare & Visa", "Entrance Fees to visiting sites", "Lunch & Dinner", "Personal Expenses", "Tips & Portages"],
+            paymentMethods: ["Bank Transfer", "Credit Card (Visa/Master)", "Online Payment Link"],
+            paymentpolicies: ["30% advance payment to confirm the booking", "Balance payment on arrival"],
+            faqs: [
+              { question: "Is airport transfer included?", answer: "Yes, we provide airport pickup and drop-off." }
+            ],
+            relatedTours: [],
+            destinations: []
+          });
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        console.log("Backend fetch failed or not found, checking static data...", err);
+      }
+
+      // 2. Fallback to hardcoded data
+      const hardcodedTour = toursData[tourSlug];
+      if (hardcodedTour) {
+        setTour(hardcodedTour);
+      } else {
+        setTour(null);
+      }
+      setLoading(false);
+    };
+
+    loadTour();
+  }, [tourSlug]);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+        </div>
+      </Layout>
+    );
+  }
 
   if (!tour) {
     return (
@@ -653,7 +723,7 @@ const TourDetail = () => {
             {/* Departure Info */}
             <div>
               <h3 className="font-semibold text-lg mb-4 text-foreground border-b border-primary pb-2">
-              PAYMENT METHODS
+                PAYMENT METHODS
               </h3>
               <ul className="space-y-2">
                 {tour.paymentMethods.map((item, index) => (

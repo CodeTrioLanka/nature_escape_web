@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ArrowRight, Check, X } from "lucide-react";
+import { ArrowRight, Check, X, Loader2 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { fetchTourCategoryBySlug, TourCategory as ITourCategory } from "@/api/tours.api";
+import { fetchPackagesByCategoryId, Package } from "@/api/packages.api";
 
 // Images
 import beachSurfImg from "@/assets/beach-surf.jpg";
@@ -873,10 +875,92 @@ const categoryData: Record<string, {
 };
 
 const TourCategory = () => {
-  const { category } = useParams<{ category: string }>();
-  const data = categoryData[category || "beach"] || categoryData.beach;
+  const { category: categorySlug } = useParams<{ category: string }>();
+  const [tourCategory, setTourCategory] = useState<ITourCategory | null>(null);
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Static data fallback for features/mapText which aren't in backend yet
+  const staticData = categoryData[categorySlug || "beach"] || categoryData.beach;
+
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!categorySlug) return;
+
+      try {
+        setLoading(true);
+        // 1. Fetch Tour Category
+        const categoryData = await fetchTourCategoryBySlug(categorySlug);
+
+        if (!categoryData) {
+          setError("Category not found");
+          // Don't return here if we want to fallback to static data completely?
+          // But user wants backend integration.
+        } else {
+          setTourCategory(categoryData);
+
+          // 2. Fetch Packages for this category
+          const packagesData = await fetchPackagesByCategoryId(categoryData._id);
+          setPackages(packagesData);
+        }
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Failed to load data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [categorySlug]);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="h-[60vh] flex flex-col items-center justify-center">
+          <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
+          <p className="text-muted-foreground">Loading specific {categorySlug?.replace('-', ' ')} tours...</p>
+        </div>
+      </Layout>
+    );
+  }
+
+  // If backend data is missing, we could fallback to staticData entirely, 
+  // but for now let's try to use what we have.
+  // If tourCategory is null (not found in backend), fall back to staticData if available
+  const data = tourCategory ? {
+    title: tourCategory.title,
+    description: tourCategory.description || staticData.description,
+    heroImage: tourCategory.images?.[0] || staticData.heroImage,
+    tours: packages.map(pkg => ({
+      id: pkg._id,
+      slug: pkg.slug,
+      title: pkg.packageName,
+      duration: `${pkg.overview?.duration?.days || 0} Days / ${pkg.overview?.duration?.nights || 0} Nights`, // Adjust based on data availability
+      image: pkg.hero?.backgroundImage || staticData.tours[0]?.image || beachSurfImg,
+      recommended: pkg.hero?.title ? [pkg.hero.title] : ["Adventure"] // Placeholder
+    })),
+    features: staticData.features, // Backend doesn't have features yet
+    mapText: staticData.mapText // Backend doesn't have mapText yet
+  } : staticData;
+
+  // If even static data is missing (unlikely given the specific keys), show error
+  if (!data) {
+    return (
+      <Layout>
+        <div className="py-20 text-center">
+          <h2 className="text-2xl font-bold mb-4">Tour Category Not Found</h2>
+          <Link to="/sri-lanka-tours" className="inline-flex items-center gap-2 text-primary hover:underline">
+            <ArrowRight className="rotate-180 w-4 h-4" /> Return to Tours
+          </Link>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -926,201 +1010,214 @@ const TourCategory = () => {
       {/* Featured Tours - Modern Card Design */}
       <section className="py-8 pb-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {data.tours.map((tour, index) => (
-              <motion.div
-                key={tour.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Link
-                  to={`/tour/${tour.slug}`}
-                  className="group block"
+          {data.tours.length === 0 ? (
+            <div className="text-center py-10">
+              <p className="text-muted-foreground">No tour packages available for this category yet.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {data.tours.map((tour, index) => (
+                <motion.div
+                  key={tour.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="relative overflow-hidden aspect-[4/5] rounded-lg shadow-lg">
-                    {/* Background Image */}
-                    <img
-                      src={tour.image}
-                      alt={tour.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                  <Link
+                    to={`/tour/${tour.slug}`}
+                    className="group block"
+                  >
+                    <div className="relative overflow-hidden aspect-[4/5] rounded-lg shadow-lg">
+                      {/* Background Image */}
+                      <img
+                        src={tour.image}
+                        alt={tour.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent" />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent" />
 
-                    {/* Recommended Tag - Top */}
-                    <div className="absolute top-4 left-4 right-4">
-                      <span className="inline-block px-3 py-1.5 bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-[10px] font-semibold tracking-wider uppercase rounded">
-                        Recommended for {tour.recommended.join(", ")}
-                      </span>
-                    </div>
-
-                    {/* Content - Bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      {/* Category Label */}
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="text-[10px] font-semibold tracking-widest uppercase text-primary-foreground/80">
-                          {data.title}
+                      {/* Recommended Tag - Top */}
+                      <div className="absolute top-4 left-4 right-4">
+                        <span className="inline-block px-3 py-1.5 bg-secondary/90 backdrop-blur-sm text-secondary-foreground text-[10px] font-semibold tracking-wider uppercase rounded">
+                          Recommended for {(tour.recommended || []).join(", ")}
                         </span>
-                        <span className="w-8 h-[1px] bg-primary-foreground/50" />
                       </div>
 
-                      {/* Tour Title */}
-                      <h3 className="text-xl font-display font-bold text-primary-foreground mb-2 group-hover:text-secondary transition-colors duration-300">
-                        {tour.title.toUpperCase()}
-                      </h3>
+                      {/* Content - Bottom */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        {/* Category Label */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-[10px] font-semibold tracking-widest uppercase text-primary-foreground/80">
+                            {data.title}
+                          </span>
+                          <span className="w-8 h-[1px] bg-primary-foreground/50" />
+                        </div>
 
-                      {/* Duration */}
-                      <p className="text-sm text-primary-foreground/80">
-                        {tour.duration}
-                      </p>
+                        {/* Tour Title */}
+                        <h3 className="text-xl font-display font-bold text-primary-foreground mb-2 group-hover:text-secondary transition-colors duration-300">
+                          {(tour.title || "").toUpperCase()}
+                        </h3>
+
+                        {/* Duration */}
+                        <p className="text-sm text-primary-foreground/80">
+                          {tour.duration}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* Comparison Table */}
-      <section className="py-12 bg-sand">
-        <div className="container mx-auto px-4">
-          <div className="overflow-x-auto">
-            <table className="w-full max-w-4xl mx-auto bg-card rounded-xl shadow-lg overflow-hidden">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left p-4 font-display font-semibold text-foreground">
-                    Inclusions
-                  </th>
-                  {data.tours.map((tour) => (
-                    <th key={tour.id} className="p-4 text-center">
-                      <div className="font-display font-semibold text-foreground text-sm">
-                        {tour.title}
-                      </div>
-                      <div className="text-muted-foreground text-xs mt-1">
-                        {tour.duration}
-                      </div>
+      {data.features && data.features.length > 0 && (
+        <section className="py-12 bg-sand">
+          <div className="container mx-auto px-4">
+            <div className="overflow-x-auto">
+              <table className="w-full max-w-4xl mx-auto bg-card rounded-xl shadow-lg overflow-hidden">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left p-4 font-display font-semibold text-foreground">
+                      Inclusions
                     </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.features.map((group, groupIndex) => {
-                  // Handle grouped sections
-                  if ('section' in group) {
-                    return (
-                      <React.Fragment key={group.section}>
-                        {/* SECTION HEADER ROW */}
-                        <tr className="bg-muted/60">
-                          <td
-                            colSpan={data.tours.length + 1}
-                            className="p-4 font-display font-semibold text-foreground uppercase tracking-wide"
-                          >
-                            {group.section}
-                          </td>
-                        </tr>
-
-                        {/* FEATURE ROWS */}
-                        {group.items.map((item, idx) => (
-                          <tr
-                            key={item.name}
-                            className={idx % 2 === 0 ? "bg-card" : "bg-muted/30"}
-                          >
-                            <td className="p-4 text-sm text-foreground pl-8">
-                              {item.name}
+                    {/* Only show up to 3 tours in comparison to fit/avoid overflow if many packages */}
+                    {data.tours.slice(0, 3).map((tour) => (
+                      <th key={tour.id} className="p-4 text-center">
+                        <div className="font-display font-semibold text-foreground text-sm">
+                          {tour.title}
+                        </div>
+                        <div className="text-muted-foreground text-xs mt-1">
+                          {tour.duration}
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.features.map((group, groupIndex) => {
+                    // Handle grouped sections
+                    if ('section' in group) {
+                      return (
+                        <React.Fragment key={group.section}>
+                          {/* SECTION HEADER ROW */}
+                          <tr className="bg-muted/60">
+                            <td
+                              colSpan={Math.min(data.tours.length, 3) + 1}
+                              className="p-4 font-display font-semibold text-foreground uppercase tracking-wide"
+                            >
+                              {group.section}
                             </td>
-
-                            {item.values.map((value, i) => (
-                              <td key={i} className="p-4 text-center">
-                                {value ? (
-                                  <Check className="w-5 h-5 text-forest mx-auto" />
-                                ) : (
-                                  <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
-                                )}
-                              </td>
-                            ))}
                           </tr>
-                        ))}
-                      </React.Fragment>
-                    );
-                  }
 
-                  // Handle flat features
-                  return (
-                    <tr
-                      key={group.name}
-                      className={groupIndex % 2 === 0 ? "bg-card" : "bg-muted/30"}
-                    >
-                      <td className="p-4 text-sm text-foreground">
-                        {group.name}
-                      </td>
+                          {/* FEATURE ROWS */}
+                          {group.items.map((item, idx) => (
+                            <tr
+                              key={item.name}
+                              className={idx % 2 === 0 ? "bg-card" : "bg-muted/30"}
+                            >
+                              <td className="p-4 text-sm text-foreground pl-8">
+                                {item.name}
+                              </td>
 
-                      {group.values.map((value, i) => (
-                        <td key={i} className="p-4 text-center">
-                          {value ? (
-                            <Check className="w-5 h-5 text-forest mx-auto" />
-                          ) : (
-                            <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
-                          )}
+                              {item.values.slice(0, Math.min(data.tours.length, 3)).map((value, i) => (
+                                <td key={i} className="p-4 text-center">
+                                  {value ? (
+                                    <Check className="w-5 h-5 text-forest mx-auto" />
+                                  ) : (
+                                    <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
+                                  )}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </React.Fragment>
+                      );
+                    }
+
+                    // Handle flat features
+                    return (
+                      <tr
+                        key={group.name}
+                        className={groupIndex % 2 === 0 ? "bg-card" : "bg-muted/30"}
+                      >
+                        <td className="p-4 text-sm text-foreground">
+                          {group.name}
                         </td>
-                      ))}
-                    </tr>
-                  );
-                })}
-              </tbody>
 
-            </table>
+                        {group.values.slice(0, Math.min(data.tours.length, 3)).map((value, i) => (
+                          <td key={i} className="p-4 text-center">
+                            {value ? (
+                              <Check className="w-5 h-5 text-forest mx-auto" />
+                            ) : (
+                              <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+
+              </table>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Map Section */}
-      <section className="py-16 bg-accent">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative order-2 lg:order-1">
-              <img
-                src={mapImg}
-                alt="Map of Sri Lanka"
-                className="w-full max-w-sm mx-auto rounded-2xl shadow-xl"
-              />
-            </div>
-
-            <div className="order-1 lg:order-2">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mt-3 mb-2">
-                {data.mapText.heading}
-              </h2>
-              <h3 className="text-xl md:text-2xl font-display font-medium text-primary mb-6">
-                {data.mapText.subheading}
-              </h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                {data.mapText.description}
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-card p-4 rounded-lg">
-                  <span className="text-2xl font-display font-bold text-primary">{data.tours.length}</span>
-                  <p className="text-muted-foreground text-sm">Tour Packages</p>
-                </div>
-                <div className="bg-card p-4 rounded-lg">
-                  <span className="text-2xl font-display font-bold text-primary">4-14</span>
-                  <p className="text-muted-foreground text-sm">Days Duration</p>
-                </div>
+      {data.mapText && (
+        <section className="py-16 bg-accent">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="relative order-2 lg:order-1">
+                <img
+                  src={mapImg}
+                  alt="Map of Sri Lanka"
+                  className="w-full max-w-sm mx-auto rounded-2xl shadow-xl"
+                />
               </div>
 
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-ocean-light transition-all"
-              >
-                Get a Custom Quote
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="order-1 lg:order-2">
+                <h2 className="text-3xl md:text-4xl font-display font-bold mt-3 mb-2">
+                  {data.mapText.heading}
+                </h2>
+                <h3 className="text-xl md:text-2xl font-display font-medium text-primary mb-6">
+                  {data.mapText.subheading}
+                </h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  {data.mapText.description}
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="bg-card p-4 rounded-lg">
+                    <span className="text-2xl font-display font-bold text-primary">{data.tours.length}</span>
+                    <p className="text-muted-foreground text-sm">Tour Packages</p>
+                  </div>
+                  <div className="bg-card p-4 rounded-lg">
+                    <span className="text-2xl font-display font-bold text-primary">
+                      {data.tours.length > 0 ? "4-14" : "0"}
+                    </span>
+                    <p className="text-muted-foreground text-sm">Days Duration</p>
+                  </div>
+                </div>
+
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-ocean-light transition-all"
+                >
+                  Get a Custom Quote
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA Banner */}
       <section className="py-16 bg-ocean-dark">
