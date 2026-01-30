@@ -1,79 +1,44 @@
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import wildlife from "@/assets/wildlife.jpg";
 import sigiriya from "@/assets/sigiriya.jpg";
+import { fetchExcursionFilters, getAllExcursions, Excursion } from "@/api/excursion.api";
 import teaPlantations from "@/assets/tea-plantations.jpg";
 import beachMirissa from "@/assets/beach-mirissa.jpg";
 import temple from "@/assets/temple.jpg";
 import adventure from "@/assets/adventure.jpg";
 
-const excursions = [
-  {
-    id: 1,
-    title: "COLOMBO BY TUK TUK",
-    image: temple,
-    destination: "Colombo",
-    category: "City Tour",
-    time: "Half Day",
-    slug: "colombo-tuk-tuk"
-  },
-  {
-    id: 2,
-    title: "HOT AIR BALLOON RIDE",
-    image: sigiriya,
-    destination: "Sigiriya",
-    category: "Adventure",
-    time: "Half Day",
-    slug: "hot-air-balloon"
-  },
-  {
-    id: 3,
-    title: "YALA NATIONAL PARK – LUXURY JEEP SAFARI",
-    image: wildlife,
-    destination: "Yala",
-    category: "Wildlife",
-    time: "Full Day",
-    slug: "yala-luxury-safari"
-  },
-  {
-    id: 4,
-    title: "GALLE FORT WALKING TOUR",
-    image: beachMirissa,
-    destination: "Galle",
-    category: "Cultural",
-    time: "Half Day",
-    slug: "galle-fort-tour"
-  },
-  {
-    id: 5,
-    title: "TEA PLANTATION EXPERIENCE",
-    image: teaPlantations,
-    destination: "Nuwara Eliya",
-    category: "Cultural",
-    time: "Full Day",
-    slug: "tea-plantation"
-  },
-  {
-    id: 6,
-    title: "WHITE WATER RAFTING",
-    image: adventure,
-    destination: "Kitulgala",
-    category: "Adventure",
-    time: "Full Day",
-    slug: "white-water-rafting"
-  }
-];
-
-const timeOptions = ["All", "Half Day", "Full Day"];
-const destinationOptions = ["All", "Colombo", "Sigiriya", "Yala", "Galle", "Nuwara Eliya", "Kitulgala"];
-const categoryOptions = ["All", "City Tour", "Adventure", "Wildlife", "Cultural"];
-
 const Excursions = () => {
   const [timeFilter, setTimeFilter] = useState("All");
   const [destinationFilter, setDestinationFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
+
+  const [timeOptions, setTimeOptions] = useState(["All"]);
+  const [destinationOptions, setDestinationOptions] = useState(["All"]);
+  const [categoryOptions, setCategoryOptions] = useState(["All"]);
+  const [excursions, setExcursions] = useState<Excursion[]>([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [filters, excursionList] = await Promise.all([
+          fetchExcursionFilters(),
+          getAllExcursions()
+        ]);
+
+        if (filters.time) setTimeOptions(filters.time);
+        if (filters.destination) setDestinationOptions(filters.destination);
+        if (filters.category) setCategoryOptions(filters.category);
+
+        setExcursions(excursionList);
+      } catch (error) {
+        console.error("Failed to load excursion data", error);
+      }
+    };
+    loadData();
+  }, []);
 
   const filteredExcursions = excursions.filter((excursion) => {
     const matchTime = timeFilter === "All" || excursion.time === timeFilter;
@@ -111,7 +76,7 @@ const Excursions = () => {
               Nature Escape Excursions
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Experience thrilling safaris at Yala National Park, scenic hot air balloon rides, 
+              Experience thrilling safaris at Yala National Park, scenic hot air balloon rides,
               the historic charm of Galle, and vibrant Colombo - plus so much more! INQUIRE NOW!
             </p>
           </motion.div>
@@ -171,7 +136,7 @@ const Excursions = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredExcursions.map((excursion, index) => (
               <motion.div
-                key={excursion.id}
+                key={excursion._id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
