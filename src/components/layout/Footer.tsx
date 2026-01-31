@@ -7,27 +7,27 @@ const Footer = () => {
   return (
     <footer className="relative text-primary-foreground">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${srilanka_beach})` }}
       />
       <div className="absolute inset-0 bg-black/40" />
       <div className="relative z-10 container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center md:text-left">
           {/* Brand */}
           <div>
-            <Link to="/">
-              <img 
-                src={logo} 
-                alt="Nature Escape" 
-                className="h-20 w-auto object-contain mb-4"
+            <Link to="/" className="inline-block">
+              <img
+                src={logo}
+                alt="Nature Escape"
+                className="h-20 w-auto object-contain mb-4 mx-auto md:mx-0"
               />
             </Link>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
-              Your gateway to unforgettable nature experiences in Sri Lanka. 
+              Your gateway to unforgettable nature experiences in Sri Lanka.
               Discover pristine beaches, lush forests, and exotic wildlife.
             </p>
-            <div className="flex space-x-4 mt-6">
+            <div className="flex justify-center md:justify-start space-x-4 mt-6">
               <a href="#" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
@@ -75,17 +75,17 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3">
+              <li className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3">
                 <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/70 text-sm">
                   130 Galle Road, Colombo 03, Sri Lanka
                 </span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3">
                 <Phone className="w-5 h-5 text-secondary shrink-0" />
                 <span className="text-primary-foreground/70 text-sm">+94 11 234 5678</span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3">
                 <Mail className="w-5 h-5 text-gold shrink-0" />
                 <span className="text-primary-foreground/80 text-sm">info@natureescape.com</span>
               </li>

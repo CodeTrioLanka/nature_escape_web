@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, ChevronRight } from "lucide-react";
 import logo from "@/assets/nature-escape-logo.png";
 import { fetchTourCategories } from "@/api/tours.api";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [dropdownItems, setDropdownItems] = useState<{ name: string; href: string }[]>([]);
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -25,6 +27,18 @@ const Header = () => {
     };
     loadCategories();
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
 
   const navItems = [
     { name: "HOME", href: "/" },
@@ -45,107 +59,206 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/50 backdrop-blur-sm">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <img
-              src={logo}
-              alt="Nature Escape"
-              className="h-14 w-auto object-contain"
-            />
-            <span className="text-xl font-display font-bold text-foreground hidden sm:block">
-              Nature<span className="text-forest">Escape</span>
-            </span>
-          </Link>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3 relative z-50">
+              <img
+                src={logo}
+                alt="Nature Escape"
+                className="h-14 w-auto object-contain"
+              />
+              <span className="text-xl font-display font-bold text-foreground hidden sm:block">
+                Nature<span className="text-forest">Escape</span>
+              </span>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <div
-                key={item.name}
-                className="relative"
-                onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.name)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <Link
-                  to={item.href}
-                  className={`px-4 py-2 flex items-center gap-1 text-foreground font-medium text-sm tracking-wide transition-colors duration-200 hover:text-ocean ${location.pathname === item.href ||
-                    (item.hasDropdown && location.pathname.startsWith(item.href))
-                    ? "text-ocean"
-                    : ""
-                    }`}
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-1">
+              {navItems.map((item) => (
+                <div
+                  key={item.name}
+                  className="relative group"
+                  onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {item.name}
+                  <Link
+                    to={item.href}
+                    className={`px-4 py-2 flex items-center gap-1 text-foreground font-medium text-sm tracking-wide transition-colors duration-200 hover:text-ocean ${location.pathname === item.href ||
+                      (item.hasDropdown && location.pathname.startsWith(item.href))
+                      ? "text-ocean"
+                      : ""
+                      }`}
+                  >
+                    {item.name}
+                    {item.hasDropdown && (
+                      <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
+                    )}
+                  </Link>
+
+                  {/* Desktop Dropdown */}
                   {item.hasDropdown && (
-                    <ChevronDown className="w-4 h-4 transition-transform duration-200"
-                      style={{ transform: activeDropdown === item.name ? "rotate(180deg)" : "rotate(0)" }}
-                    />
+                    <div className={`absolute top-full left-0 w-64 pt-2 transition-all duration-200 ${activeDropdown === item.name ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
+                      <div className="bg-white shadow-xl rounded-xl overflow-hidden border border-border/50 py-2">
+                        {item.dropdown?.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            to={subItem.href}
+                            className="block px-4 py-2.5 text-sm text-foreground/80 hover:text-primary hover:bg-accent/50 transition-colors duration-150"
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                   )}
-                </Link>
+                </div>
+              ))}
+            </nav>
 
-                {/* Dropdown */}
-                {item.hasDropdown && activeDropdown === item.name && (
-                  <div className="absolute top-full left-0 w-56 bg-card shadow-xl rounded-md overflow-hidden animate-fade-in">
-                    {item.dropdown?.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        to={subItem.href}
-                        className="dropdown-item"
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+            {/* Mobile Menu Button */}
+            <button
+              className="lg:hidden p-2 text-foreground relative z-50 focus:outline-none"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <div className="relative w-6 h-6">
+                <AnimatePresence mode="wait">
+                  {isMobileMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ opacity: 0, rotate: -90 }}
+                      animate={{ opacity: 1, rotate: 0 }}
+                      exit={{ opacity: 0, rotate: 90 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="w-6 h-6" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ opacity: 0, rotate: 90 }}
+                      animate={{ opacity: 1, rotate: 0 }}
+                      exit={{ opacity: 0, rotate: -90 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="w-6 h-6" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            ))}
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white/90 backdrop-blur-sm border-t border-border">
-          <nav className="container mx-auto px-4 py-4 space-y-2">
-            {navItems.map((item) => (
-              <div key={item.name}>
-                <Link
-                  to={item.href}
-                  className="block py-2 text-foreground font-medium text-sm"
-                  onClick={() => !item.hasDropdown && setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-                {item.hasDropdown && (
-                  <div className="pl-4 space-y-1">
-                    {item.dropdown?.map((subItem) => (
+      {/* Mobile Menu Overlay - Separate from Header to ensure full screen coverage */}
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 lg:hidden"
+          >
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+              onClick={() => setIsMobileMenuOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+
+            {/* Menu Content */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-white/95 backdrop-blur-xl shadow-2xl pt-24 pb-8 px-6 overflow-y-auto border-l border-white/20"
+            >
+              <nav className="flex flex-col space-y-6">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + index * 0.05 }}
+                    className="group"
+                  >
+                    <div className="flex items-center justify-between border-b border-gray-100/50 pb-2">
                       <Link
-                        key={subItem.name}
-                        to={subItem.href}
-                        className="block py-1.5 text-sm text-muted-foreground hover:text-foreground"
+                        to={item.href}
+                        className="text-xl font-display font-medium text-gray-800 group-hover:text-primary transition-colors block flex-1"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        {subItem.name}
+                        {item.name}
                       </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
+                      {item.hasDropdown && (
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setMobileSubmenuOpen(mobileSubmenuOpen === item.name ? null : item.name);
+                          }}
+                          className="p-2 text-gray-400 hover:text-primary transition-colors"
+                        >
+                          <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${mobileSubmenuOpen === item.name ? 'rotate-90 text-primary' : ''}`} />
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Mobile Submenu */}
+                    <AnimatePresence>
+                      {item.hasDropdown && mobileSubmenuOpen === item.name && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pl-4 py-3 space-y-3 mt-1 border-l-2 border-primary/10 ml-1">
+                            {item.dropdown?.map((subItem) => (
+                              <Link
+                                key={subItem.name}
+                                to={subItem.href}
+                                className="block text-base text-gray-600 hover:text-primary hover:translate-x-1 transition-all duration-200"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+              </nav>
+
+              {/* Mobile Menu Footer */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="mt-12 pt-6 border-t border-gray-100"
+              >
+                <div className="flex justify-center space-x-4 mb-4">
+                  {/* Add your social icons here if needed */}
+                </div>
+                <p className="text-center text-gray-400 text-xs tracking-wider uppercase">
+                  © 2024 Nature Escape
+                </p>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
