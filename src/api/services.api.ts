@@ -82,3 +82,27 @@ export const getServiceById = async (id: string): Promise<Service> => {
     }
 };
 
+export interface ServicePageData {
+    hero: ServiceHero | null;
+    services: Service[];
+}
+
+// Fetch complete service page data (hero + services) in one request
+export const fetchServicePageData = async (): Promise<ServicePageData> => {
+    try {
+        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const response = await fetch(`${baseUrl}/api/service-page`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new Error('Response is not JSON');
+        }
+        const data: ServicePageData = await response.json();
+        return data;
+    } catch (error) {
+        console.error('API Error:', error);
+        throw error;
+    }
+};
