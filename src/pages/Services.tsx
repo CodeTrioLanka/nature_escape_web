@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { fetchServices, Service } from "@/api/services.api";
 import heroImage from "@/assets/hero-srilanka.jpg";
 import sigiriya from "@/assets/sigiriya.jpg";
 import wildlife from "@/assets/wildlife.jpg";
@@ -9,45 +11,69 @@ import temple from "@/assets/temple.jpg";
 import adventure from "@/assets/adventure.jpg";
 import teaPlantations from "@/assets/tea-plantations.jpg";
 
-const services = [
+// Fallback static services data
+const staticServices = [
   {
+    _id: "mice",
     title: "MICE",
     image: temple,
-    slug: "mice"
+    description: "",
   },
   {
+    _id: "visa",
     title: "VISA",
     image: sigiriya,
-    slug: "visa"
+    description: "",
   },
   {
+    _id: "tour-guide",
     title: "TOUR GUIDE",
     image: heroImage,
-    slug: "tour-guide"
+    description: "",
   },
   {
+    _id: "cruise-operations",
     title: "CRUISE OPERATIONS",
     image: beachMirissa,
-    slug: "cruise-operations"
+    description: "",
   },
   {
+    _id: "csr",
     title: "CSR",
     image: teaPlantations,
-    slug: "csr"
+    description: "",
   },
   {
+    _id: "excursions",
     title: "EXCURSIONS",
     image: adventure,
-    slug: "excursions"
+    description: "",
   },
   {
+    _id: "transportation",
     title: "TRANSPORTATION",
     image: wildlife,
-    slug: "transportation"
+    description: "",
   }
 ];
 
 const Services = () => {
+  const [services, setServices] = useState<(Service | typeof staticServices[0])[]>(staticServices);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchServices()
+      .then((data) => {
+        if (data && data.length > 0) {
+          setServices(data);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to fetch services:", error);
+        // Keep using static services on error
+      })
+      .finally(() => setLoading(false));
+  }, []);
   return (
     <Layout>
       {/* Hero Section */}
@@ -94,35 +120,38 @@ const Services = () => {
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Link
-                  to={service.slug === "excursions" ? "/excursions" : service.slug === "mice" ? "/mice" : `/service/${service.slug}`}
-                  className="block group"
+            {services.map((service, index) => {
+              const slug = service._id;
+              return (
+                <motion.div
+                  key={service._id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="relative h-[280px] overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="text-white text-lg font-semibold tracking-wide">
-                        {service.title}
-                        <span className="inline-block ml-3 w-10 h-[2px] bg-primary align-middle" />
-                      </h3>
+                  <Link
+                    to={slug === "excursions" ? "/excursions" : slug === "mice" ? "/mice" : `/service/${slug}`}
+                    className="block group"
+                  >
+                    <div className="relative h-[280px] overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <h3 className="text-white text-lg font-semibold tracking-wide">
+                          {service.title}
+                          <span className="inline-block ml-3 w-10 h-[2px] bg-primary align-middle" />
+                        </h3>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  </Link>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
