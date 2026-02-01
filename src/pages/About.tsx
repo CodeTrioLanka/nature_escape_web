@@ -3,6 +3,7 @@ import { Users, Award, Heart, Globe, Leaf, Shield, MapPin, Clock, Star, ArrowRig
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import PageHero from "@/components/common/PageHero";
 // 
 import { fetchAboutUsData, AboutUsData } from "@/api/aboutUs.api";
 import teaPlantations from "@/assets/tea-plantations.jpg";
@@ -190,90 +191,13 @@ const About = () => {
 
   return (
     <Layout>
-      {/* Hero Section - Immersive Full Screen */}
-      <section ref={heroRef} className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
-        {/* Animated Background Images */}
-        <motion.div
-          className="absolute inset-0"
-          style={{ y: heroY, scale: heroScale }}
-        >
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroBackground})` }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
-        </motion.div>
-
-        {/* Floating Elements */}
-        <motion.div
-          className="absolute top-1/4 right-1/4 w-64 h-64 bg-gold/20 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-forest/20 rounded-full blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-
-        {/* Hero Content */}
-        <motion.div
-          className="container mx-auto px-4 relative z-10"
-          style={{ opacity: heroOpacity, y: heroTextY }}
-        >
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="mb-6"
-            >
-
-            </motion.div>
-
-            <motion.h1
-              className="text-5xl md:text-6xl lg:text-8xl font-display font-bold text-primary-foreground mb-6"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              {heroTitle.split(' ').map((word, index) => (
-                <motion.span
-                  key={index}
-                  className={index === heroTitle.split(' ').length - 1 ? "text-gold inline-block" : "inline-block"}
-                  initial={{ opacity: 0, x: index === 0 ? -100 : 0, scale: index === heroTitle.split(' ').length - 1 ? 0 : 1, rotate: index === 0 ? -10 : 0 }}
-                  animate={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3 + (index * 0.2), type: "spring" }}
-                >
-                  {word}{index < heroTitle.split(' ').length - 1 && ' '}
-                  {index === heroTitle.split(' ').length - 2 && <br />}
-                </motion.span>
-              ))}
-            </motion.h1>
-
-            <motion.p
-              className="text-xl md:text-2xl text-primary-foreground/80 max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              {heroDescription}
-            </motion.p>
-
-            {/* Scroll Indicator */}
-            {/* <motion.div
-              className="absolute bottom-10 left-1/2 -translate-x-1/2"
-              animate={{ y: [0, 15, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <div className="w-8 h-14 border-2 border-primary-foreground/50 rounded-full flex justify-center pt-2">
-                <motion.div 
-                  className="w-2 h-3 bg-gold rounded-full"
-                  animate={{ y: [0, 16, 0], opacity: [1, 0.3, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
-              </div>
-            </motion.div> */}
-          </div>
-        </motion.div>
-      </section>
+      {/* Hero Section - Using PageHero Component */}
+      <PageHero
+        title={heroTitle}
+        subtitle={heroDescription}
+        backgroundImage={heroBackground}
+        height="h-[70vh] min-h-[500px]"
+      />
 
       {/* Stats Section - Floating Cards */}
       <section className="py-8 relative z-20 -mt-20">

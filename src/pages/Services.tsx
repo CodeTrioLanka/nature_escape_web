@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
+import PageHero from "@/components/common/PageHero";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { fetchServicePageData, Service, ServiceHero } from "@/api/services.api";
+
 const Services = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [hero, setHero] = useState<ServiceHero | null>(null);
@@ -37,41 +39,19 @@ const Services = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative h-[45vh] min-h-[350px]">
-        <div className="absolute inset-0">
-          <img
-            src={hero.heroImage}
-            alt={hero.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
-      </section>
+      {/* Hero Section with PageHero Component */}
+      <PageHero
+        title={hero.title}
+        subtitle={hero.description}
+        backgroundImage={hero.heroImage}
+        height="h-[60vh] min-h-[450px]"
+      />
 
-      {/* Content Section */}
+      {/* Services Grid Section */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          {/* Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <p className="text-sm text-muted-foreground mb-2">{hero.subtitle}</p>
-            <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-8">
-              {hero.title}
-            </h1>
-            <div className="max-w-4xl mx-auto space-y-4 text-muted-foreground leading-relaxed">
-              {hero.description?.split('\n\n').map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-          </motion.div>
-
           {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => {
               const slug = service._id;
               return (
@@ -86,7 +66,7 @@ const Services = () => {
                     to={slug === "excursions" ? "/excursions" : slug === "mice" ? "/mice" : `/service/${slug}`}
                     className="block group"
                   >
-                    <div className="relative h-[280px] overflow-hidden">
+                    <div className="relative h-[280px] overflow-hidden rounded-xl">
                       <img
                         src={service.image}
                         alt={service.title}

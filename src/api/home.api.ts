@@ -7,6 +7,7 @@ export interface HomeData {
   happy_travelers: number;
   gallery: string[];
   homebg: string;
+  homebgVideo: string;
   destinationImage: string;
   personalizedImage: string;
 }

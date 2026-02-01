@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Layout from "@/components/layout/Layout";
+import PageHero from "@/components/common/PageHero";
 import { fetchTourCategories, TourCategory } from "@/api/tours.api";
 
 // Hero images
@@ -83,31 +84,13 @@ const SriLankaTours = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
-        <motion.div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${beachSurfImg})` }}
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5 }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-foreground/40 via-transparent to-foreground/60" />
-        </motion.div>
-
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-          <div className="container mx-auto">
-            <motion.h1
-              className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-primary-foreground"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              Sri Lanka Tours
-            </motion.h1>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with PageHero Component */}
+      <PageHero
+        title="Sri Lanka Tours"
+        subtitle="Explore the pearl of the Indian Ocean with our curated tour packages"
+        backgroundImage={beachSurfImg}
+        height="h-[65vh] min-h-[500px]"
+      />
 
       {/* Across Sri Lanka Section */}
       <section className="py-20 bg-background" ref={toursRef}>
