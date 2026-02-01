@@ -2,109 +2,38 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { fetchServices, fetchServiceHero, Service, ServiceHero } from "@/api/services.api";
-import heroImage from "@/assets/hero-srilanka.jpg";
-import sigiriya from "@/assets/sigiriya.jpg";
-import wildlife from "@/assets/wildlife.jpg";
-import beachMirissa from "@/assets/beach-mirissa.jpg";
-import temple from "@/assets/temple.jpg";
-import adventure from "@/assets/adventure.jpg";
-import teaPlantations from "@/assets/tea-plantations.jpg";
-
-// Fallback static services data
-const staticServices = [
-  {
-    _id: "mice",
-    title: "MICE",
-    image: temple,
-    description: "",
-  },
-  {
-    _id: "visa",
-    title: "VISA",
-    image: sigiriya,
-    description: "",
-  },
-  {
-    _id: "tour-guide",
-    title: "TOUR GUIDE",
-    image: heroImage,
-    description: "",
-  },
-  {
-    _id: "cruise-operations",
-    title: "CRUISE OPERATIONS",
-    image: beachMirissa,
-    description: "",
-  },
-  {
-    _id: "csr",
-    title: "CSR",
-    image: teaPlantations,
-    description: "",
-  },
-  {
-    _id: "excursions",
-    title: "EXCURSIONS",
-    image: adventure,
-    description: "",
-  },
-  {
-    _id: "transportation",
-    title: "TRANSPORTATION",
-    image: wildlife,
-    description: "",
-  }
-];
-
-// Fallback static hero data
-const staticHero = {
-  heroImage: heroImage,
-  title: "Our Services",
-  subtitle: "Nature Escape",
-  description: `At Nature Escape Tours, we specialize in crafting meaningful travel experiences that showcase the natural beauty, culture, and heritage of Sri Lanka. With a passion for exploration and a strong understanding of the island's diverse landscapes, we provide thoughtfully designed journeys for travelers seeking authentic and responsible adventures.
-
-Our services include customized tour packages, carefully selected accommodations, knowledgeable local guides, comfortable transportation, and complete travel assistance. We also cater to special interest travel, including nature-based experiences, cultural tours, adventure travel, and small group excursions.
-
-Whether you are traveling alone, with family, or as part of a group, each itinerary is carefully planned to balance comfort, discovery, and sustainability while respecting local communities and the environment.
-
-From your arrival to your departure, our dedicated team is committed to delivering seamless, memorable, and enriching travel experiences. At Nature Escape Tours, we go beyond sightseeing—we create journeys that connect you with nature, culture, and the true spirit of Sri Lanka.`
-};
-
+import { fetchServicePageData, Service, ServiceHero } from "@/api/services.api";
 const Services = () => {
-  const [services, setServices] = useState<(Service | typeof staticServices[0])[]>(staticServices);
-  const [hero, setHero] = useState<ServiceHero | typeof staticHero>(staticHero);
+  const [services, setServices] = useState<Service[]>([]);
+  const [hero, setHero] = useState<ServiceHero | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        // Fetch hero data
-        const heroData = await fetchServiceHero();
-        if (heroData) {
-          setHero(heroData);
-        }
+        const data = await fetchServicePageData();
+        if (data.hero) setHero(data.hero);
+        if (data.services) setServices(data.services);
       } catch (error) {
-        console.error("Failed to fetch service hero:", error);
-        // Keep using static hero on error
+        console.error("Failed to fetch service page data:", error);
+      } finally {
+        setLoading(false);
       }
-
-      try {
-        // Fetch services
-        const servicesData = await fetchServices();
-        if (servicesData && servicesData.length > 0) {
-          setServices(servicesData);
-        }
-      } catch (error) {
-        console.error("Failed to fetch services:", error);
-        // Keep using static services on error
-      }
-
-      setLoading(false);
     };
-
     loadData();
   }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (!hero) return null;
 
   return (
     <Layout>
@@ -135,7 +64,7 @@ const Services = () => {
               {hero.title}
             </h1>
             <div className="max-w-4xl mx-auto space-y-4 text-muted-foreground leading-relaxed">
-              {hero.description.split('\n\n').map((paragraph, index) => (
+              {hero.description?.split('\n\n').map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
             </div>
