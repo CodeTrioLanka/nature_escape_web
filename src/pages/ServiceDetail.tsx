@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getServiceById, Service } from "@/api/services.api";
 import sigiriya from "@/assets/sigiriya.jpg";
 import wildlife from "@/assets/wildlife.jpg";
 import beachMirissa from "@/assets/beach-mirissa.jpg";
@@ -19,7 +21,8 @@ interface ServiceData {
   ctaText?: string;
 }
 
-const servicesData: Record<string, ServiceData> = {
+// Fallback static services data
+const staticServicesData: Record<string, ServiceData> = {
   "visa": {
     title: "Visa",
     heroImage: sigiriya,
@@ -79,7 +82,61 @@ const servicesData: Record<string, ServiceData> = {
 
 const ServiceDetail = () => {
   const { serviceSlug } = useParams();
-  const service = servicesData[serviceSlug || ""];
+  const [service, setService] = useState<ServiceData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadService = async () => {
+      if (!serviceSlug) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Try to fetch from backend
+        const backendService = await getServiceById(serviceSlug);
+        if (backendService) {
+          // Convert backend data to ServiceData format
+          const serviceData: ServiceData = {
+            title: backendService.title,
+            heroImage: backendService.image || staticServicesData[serviceSlug]?.heroImage || heroImage,
+            paragraphs: backendService.description
+              ? backendService.description.split('\n\n').filter(p => p.trim())
+              : staticServicesData[serviceSlug]?.paragraphs || [],
+            ctaType: (backendService as any).ctaType || staticServicesData[serviceSlug]?.ctaType || "inquire",
+            ctaLink: (backendService as any).ctaLink || staticServicesData[serviceSlug]?.ctaLink,
+            ctaText: (backendService as any).ctaText || staticServicesData[serviceSlug]?.ctaText
+          };
+          setService(serviceData);
+        } else {
+          // Use static data as fallback
+          setService(staticServicesData[serviceSlug] || null);
+        }
+      } catch (error) {
+        console.error("Failed to fetch service:", error);
+        // Fallback to static data on error
+        setService(staticServicesData[serviceSlug] || null);
+      }
+
+      setLoading(false);
+    };
+
+    loadService();
+  }, [serviceSlug]);
+
+  // Loading state
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!service) {
     return (
@@ -123,7 +180,7 @@ const ServiceDetail = () => {
             <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-10">
               {service.title}
             </h1>
-            
+
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               {service.paragraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
@@ -140,9 +197,9 @@ const ServiceDetail = () => {
                   </Button>
                 </Link>
               ) : (
-                <a 
-                  href={service.ctaLink} 
-                  target="_blank" 
+                <a
+                  href={service.ctaLink}
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Button className="rounded-full px-8" size="lg">
