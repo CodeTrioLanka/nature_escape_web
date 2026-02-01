@@ -9,11 +9,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { fetchThingsToDo, ThingsToDoItem } from "@/api/thingsToDo.api";
+import { fetchThingsToDo, ThingsToDoItem, HeroItem } from "@/api/thingsToDo.api";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const ThingsToDo = () => {
   const [activities, setActivities] = useState<ThingsToDoItem[]>([]);
+  const [heroData, setHeroData] = useState<HeroItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedActivity, setSelectedActivity] = useState<ThingsToDoItem | null>(null);
 
@@ -21,7 +22,14 @@ const ThingsToDo = () => {
     const loadActivities = async () => {
       try {
         const data = await fetchThingsToDo();
-        setActivities(data);
+        if (data && data.length > 0) {
+          // Assuming we take the most recent or first document
+          const latestDoc = data[0];
+          setActivities(latestDoc.thingsToDo || []);
+          if (latestDoc.thingsToDoHeroes && latestDoc.thingsToDoHeroes.length > 0) {
+            setHeroData(latestDoc.thingsToDoHeroes[0]);
+          }
+        }
       } catch (error) {
         console.error("Failed to load activities", error);
       } finally {
@@ -38,7 +46,7 @@ const ThingsToDo = () => {
       <section className="relative h-[50vh] min-h-[400px]">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${adventureImage})` }}
+          style={{ backgroundImage: `url(${heroData?.heroImage || adventureImage})` }}
         >
           <div className="absolute inset-0 bg-black/30" />
         </div>
@@ -55,7 +63,7 @@ const ThingsToDo = () => {
               viewport={{ once: true }}
               className="text-muted-foreground mb-4"
             >
-              Unforgettable Sri Lankan Adventures
+              {heroData?.subtitle || "Unforgettable Sri Lankan Adventures"}
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -64,20 +72,20 @@ const ThingsToDo = () => {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6"
             >
-              Crafted for Every Traveller
+              {heroData?.title || "Crafted for Every Traveller"}
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-muted-foreground leading-relaxed"
+              className="text-muted-foreground leading-relaxed whitespace-pre-wrap"
             >
-              Sri Lanka is a land where every moment can be turned into an adventure. Whether it's climbing misty peaks at sunrise, cycling through
+              {heroData?.description || `Sri Lanka is a land where every moment can be turned into an adventure. Whether it's climbing misty peaks at sunrise, cycling through
               ancient cities, or drifting high above the landscape on a hot air balloon, experiences here are as diverse as the island itself. Safari across
               national parks to see elephants and leopards, trek cloud forests with naturalists, or wander into temples rich with history and rituals. From
               tea estate walks and cultural dance shows to whale watching, rafting, and snorkelling, there's always something extraordinary waiting to be
-              discovered.
+              discovered.`}
             </motion.p>
           </div>
 

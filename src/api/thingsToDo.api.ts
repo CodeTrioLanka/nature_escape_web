@@ -1,21 +1,27 @@
+export interface HeroItem {
+    _id: string;
+    heroImage: string;
+    title: string;
+    subtitle: string;
+    description: string;
+}
+
 export interface ThingsToDoItem {
     _id: string;
     title: string;
     description: string;
     image: string;
+}
+
+export interface ThingsToDoDocument {
+    _id: string;
+    thingsToDoHeroes: HeroItem[];
+    thingsToDo: ThingsToDoItem[];
     createdAt?: string;
     updatedAt?: string;
 }
 
-interface ApiResponse {
-    // Based on the controller, it returns the array directly, NOT wrapped in { data: ... } or { success: ... }.
-    // See thingsToDo.controller.js: res.status(200).json(activities);
-    // Wait, I should double check if the fetch returns array or object.
-    // Controller: res.status(200).json(activities); -> It returns [ ... ]
-    // So the response IS the array.
-}
-
-export const fetchThingsToDo = async (): Promise<ThingsToDoItem[]> => {
+export const fetchThingsToDo = async (): Promise<ThingsToDoDocument[]> => {
     try {
         const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
         const response = await fetch(`${baseUrl}/api/things-to-do`);
@@ -29,7 +35,7 @@ export const fetchThingsToDo = async (): Promise<ThingsToDoItem[]> => {
             throw new Error('Response is not JSON');
         }
 
-        const data: ThingsToDoItem[] = await response.json();
+        const data: ThingsToDoDocument[] = await response.json();
         return data;
     } catch (error) {
         console.error('API Error fetching Things To Do data:', error);
