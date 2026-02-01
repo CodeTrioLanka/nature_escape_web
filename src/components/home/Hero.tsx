@@ -46,7 +46,7 @@ const Hero = () => {
   return (
     <section
       ref={ref}
-      className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden"
+      className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden -mt-20"
     >
       {/* Background Video/Image with Parallax Effect */}
       {isVideo ? (

@@ -218,7 +218,7 @@ const Reviews = () => {
     <Layout>
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[40vh] flex items-center justify-center overflow-hidden -mt-20">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
