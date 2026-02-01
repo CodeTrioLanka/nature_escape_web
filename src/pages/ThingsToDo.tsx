@@ -35,7 +35,7 @@ const ThingsToDo = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px]">
+      <section className="relative h-[50vh] min-h-[400px] -mt-20">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${adventureImage})` }}

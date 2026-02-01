@@ -32,7 +32,7 @@ const PageHero = ({
     return (
         <section
             ref={ref}
-            className={`relative ${height} flex items-center justify-center overflow-hidden`}
+            className={`relative ${height} flex items-center justify-center overflow-hidden -mt-20`}
         >
             {/* Background Image with Parallax Effect */}
             <motion.div

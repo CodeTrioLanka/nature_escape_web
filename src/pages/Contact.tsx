@@ -97,6 +97,35 @@ const Contact = () => {
 
   return (
     <Layout>
+      {/* Hero Section */}
+      <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden -mt-20">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80')`,
+          }}
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative z-10 text-center text-primary-foreground px-4">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4"
+          >
+            Contact Us
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg md:text-xl max-w-2xl mx-auto opacity-90"
+          >
+            Let's plan your perfect Sri Lanka adventure together
+          </motion.p>
+        </div>
+      </section>
+
       <section className="py-24 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div
