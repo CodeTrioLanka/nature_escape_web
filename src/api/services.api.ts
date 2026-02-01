@@ -28,7 +28,7 @@ export interface ServiceHeroResponse {
 export const fetchServiceHero = async (): Promise<ServiceHero | null> => {
     try {
         const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-        const response = await fetch(`${baseUrl}/api/service-hero`);
+        const response = await fetch(`${baseUrl}/api/service-page/hero`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -47,7 +47,7 @@ export const fetchServiceHero = async (): Promise<ServiceHero | null> => {
 export const fetchServices = async (): Promise<Service[]> => {
     try {
         const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-        const response = await fetch(`${baseUrl}/api/service/`);
+        const response = await fetch(`${baseUrl}/api/service-page/services`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -66,7 +66,7 @@ export const fetchServices = async (): Promise<Service[]> => {
 export const getServiceById = async (id: string): Promise<Service> => {
     try {
         const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-        const response = await fetch(`${baseUrl}/api/service/${id}`);
+        const response = await fetch(`${baseUrl}/api/service-page/services/${id}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
