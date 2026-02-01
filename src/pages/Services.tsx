@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { fetchServices, Service } from "@/api/services.api";
+import { fetchServices, fetchServiceHero, Service, ServiceHero } from "@/api/services.api";
 import heroImage from "@/assets/hero-srilanka.jpg";
 import sigiriya from "@/assets/sigiriya.jpg";
 import wildlife from "@/assets/wildlife.jpg";
@@ -57,31 +57,63 @@ const staticServices = [
   }
 ];
 
+// Fallback static hero data
+const staticHero = {
+  heroImage: heroImage,
+  title: "Our Services",
+  subtitle: "Nature Escape",
+  description: `At Nature Escape Tours, we specialize in crafting meaningful travel experiences that showcase the natural beauty, culture, and heritage of Sri Lanka. With a passion for exploration and a strong understanding of the island's diverse landscapes, we provide thoughtfully designed journeys for travelers seeking authentic and responsible adventures.
+
+Our services include customized tour packages, carefully selected accommodations, knowledgeable local guides, comfortable transportation, and complete travel assistance. We also cater to special interest travel, including nature-based experiences, cultural tours, adventure travel, and small group excursions.
+
+Whether you are traveling alone, with family, or as part of a group, each itinerary is carefully planned to balance comfort, discovery, and sustainability while respecting local communities and the environment.
+
+From your arrival to your departure, our dedicated team is committed to delivering seamless, memorable, and enriching travel experiences. At Nature Escape Tours, we go beyond sightseeing—we create journeys that connect you with nature, culture, and the true spirit of Sri Lanka.`
+};
+
 const Services = () => {
   const [services, setServices] = useState<(Service | typeof staticServices[0])[]>(staticServices);
+  const [hero, setHero] = useState<ServiceHero | typeof staticHero>(staticHero);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchServices()
-      .then((data) => {
-        if (data && data.length > 0) {
-          setServices(data);
+    const loadData = async () => {
+      try {
+        // Fetch hero data
+        const heroData = await fetchServiceHero();
+        if (heroData) {
+          setHero(heroData);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
+        console.error("Failed to fetch service hero:", error);
+        // Keep using static hero on error
+      }
+
+      try {
+        // Fetch services
+        const servicesData = await fetchServices();
+        if (servicesData && servicesData.length > 0) {
+          setServices(servicesData);
+        }
+      } catch (error) {
         console.error("Failed to fetch services:", error);
         // Keep using static services on error
-      })
-      .finally(() => setLoading(false));
+      }
+
+      setLoading(false);
+    };
+
+    loadData();
   }, []);
+
   return (
     <Layout>
       {/* Hero Section */}
       <section className="relative h-[45vh] min-h-[350px]">
         <div className="absolute inset-0">
           <img
-            src={heroImage}
-            alt="Our Services"
+            src={hero.heroImage}
+            alt={hero.title}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/30" />
@@ -98,23 +130,14 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <p className="text-sm text-muted-foreground mb-2">Nature Escape</p>
+            <p className="text-sm text-muted-foreground mb-2">{hero.subtitle}</p>
             <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-8">
-              Our Services
+              {hero.title}
             </h1>
             <div className="max-w-4xl mx-auto space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                At Nature Escape Tours, we specialize in crafting meaningful travel experiences that showcase the natural beauty, culture, and heritage of Sri Lanka. With a passion for exploration and a strong understanding of the island’s diverse landscapes, we provide thoughtfully designed journeys for travelers seeking authentic and responsible adventures.
-              </p>
-              <p>
-                Our services include customized tour packages, carefully selected accommodations, knowledgeable local guides, comfortable transportation, and complete travel assistance. We also cater to special interest travel, including nature-based experiences, cultural tours, adventure travel, and small group excursions.
-              </p>
-              <p>
-                Whether you are traveling alone, with family, or as part of a group, each itinerary is carefully planned to balance comfort, discovery, and sustainability while respecting local communities and the environment.
-              </p>
-              <p>
-                From your arrival to your departure, our dedicated team is committed to delivering seamless, memorable, and enriching travel experiences. At Nature Escape Tours, we go beyond sightseeing—we create journeys that connect you with nature, culture, and the true spirit of Sri Lanka.
-              </p>
+              {hero.description.split('\n\n').map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
           </motion.div>
 
