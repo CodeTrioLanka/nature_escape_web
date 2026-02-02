@@ -13,8 +13,8 @@ export interface Excursion {
     time: string;
     destination: string;
     slug: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export const getAllExcursions = async (): Promise<Excursion[]> => {
@@ -28,8 +28,15 @@ export const getAllExcursions = async (): Promise<Excursion[]> => {
         if (!contentType || !contentType.includes('application/json')) {
             throw new Error('Response is not JSON');
         }
-        const data: Excursion[] = await response.json();
-        return data;
+        // The backend returns an array of Page documents. 
+        // We want the 'excursion' list from the most recent one.
+        const data = await response.json();
+
+        if (Array.isArray(data) && data.length > 0 && data[0].excursion) {
+            return data[0].excursion;
+        }
+
+        return [];
     } catch (error) {
         console.error('API Error:', error);
         throw error;
