@@ -1,10 +1,13 @@
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import teaImg from "@/assets/tea-plantations.jpg";
+import { fetchPublicReviews, Review } from "@/api/reviews.api";
 
-const testimonials = [
+const staticTestimonials = [
   {
     name: "Sarah Johnson",
     location: "United Kingdom",
@@ -34,27 +37,57 @@ const testimonials = [
 const Testimonials = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  
+  const [reviews, setReviews] = useState<any[]>(staticTestimonials);
+  const [loading, setLoading] = useState(true);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
-  
+
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const textY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
   const cardsY = useTransform(scrollYProgress, [0, 1], [100, -50]);
 
+  useEffect(() => {
+    const loadReviews = async () => {
+      try {
+        const data = await fetchPublicReviews();
+        if (data && data.length > 0) {
+          // Sort by rating (desc) and take top 3
+          const topReviews = data
+            .sort((a, b) => b.rating - a.rating)
+            .slice(0, 3)
+            .map(r => ({
+              name: r.name,
+              location: r.source === 'google' ? 'Google Review' : 'Verified Traveler',
+              rating: r.rating,
+              text: r.reviewText,
+              tour: new Date(r.reviewDate || r.createdAt).toLocaleDateString(),
+              avatar: r.name.charAt(0).toUpperCase() + (r.name.split(' ')[1]?.[0]?.toUpperCase() || '')
+            }));
+          setReviews(topReviews);
+        }
+      } catch (error) {
+        console.error("Failed to fetch reviews for home page", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadReviews();
+  }, []);
+
   return (
     <section className="py-24 relative overflow-hidden" ref={ref}>
       {/* Background with Parallax */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${teaImg})`, y: bgY, scale: 1.1 }}
       />
       <div className="absolute inset-0 bg-foreground/90 backdrop-blur-sm" />
 
       {/* Background Text with Parallax */}
-      <motion.div 
+      <motion.div
         className="absolute top-3 left-0 right-0 text-center pointer-events-none"
         style={{ y: textY }}
         initial={{ opacity: 0 }}
@@ -67,7 +100,7 @@ const Testimonials = () => {
       </motion.div>
 
       <div className="container mt-10  mx-auto px-4 relative z-10">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -85,42 +118,46 @@ const Testimonials = () => {
         </motion.div>
 
         <motion.div className="grid md:grid-cols-3 gap-8" style={{ y: cardsY }}>
-          {testimonials.map((testimonial, index) => (
+          {reviews.map((testimonial, index) => (
             <motion.div
               key={index}
-              className="bg-card/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl"
+              className="bg-card/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl flex flex-col h-full justify-between"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: loading ? 0 : index * 0.2 }}
               whileHover={{ y: -10 }}
             >
-              <motion.div
-                initial={{ rotate: 0 }}
-                whileHover={{ rotate: 12, scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Quote className="w-12 h-12 text-secondary/30 mb-4" />
-              </motion.div>
-              
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.3, delay: 0.5 + i * 0.1 }}
-                  >
-                    <Star className="w-5 h-5 fill-secondary text-secondary" />
-                  </motion.div>
-                ))}
+              <div>
+                <motion.div
+                  initial={{ rotate: 0 }}
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Quote className="w-12 h-12 text-secondary/30 mb-4" />
+                </motion.div>
+
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.3, delay: 0.5 + i * 0.1 }}
+                    >
+                      <Star
+                        className={`w-5 h-5 ${i < testimonial.rating ? "fill-secondary text-secondary" : "text-muted"}`}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+
+                <p className="text-foreground mb-6 leading-relaxed italic line-clamp-4">
+                  "{testimonial.text}"
+                </p>
               </div>
-              
-              <p className="text-foreground mb-6 leading-relaxed italic">
-                "{testimonial.text}"
-              </p>
-              
-              <div className="border-t border-border pt-4 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
+
+              <div className="border-t border-border pt-4 flex items-center gap-4 mt-auto">
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold shrink-0">
                   {testimonial.avatar}
                 </div>
                 <div>
@@ -133,6 +170,23 @@ const Testimonials = () => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.6 }}
+        >
+          <Link to="/reviews">
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-primary-foreground border-primary-foreground/30 bg-primary-foreground/10 hover:bg-primary-foreground hover:text-primary backdrop-blur-sm gap-2"
+            >
+              Read All Reviews <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
