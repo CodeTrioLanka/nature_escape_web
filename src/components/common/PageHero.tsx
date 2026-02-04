@@ -18,7 +18,7 @@ const PageHero = ({
     children,
     showWave = true
 }: PageHeroProps) => {
-    const isVideo = backgroundImage.match(/\.(mp4|webm|ogg|mov)$|^https?:\/\/.*video.*$/i);
+    const isVideo = backgroundImage ? backgroundImage.match(/\.(mp4|webm|ogg|mov)$|^https?:\/\/.*video.*$/i) : null;
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -30,7 +30,7 @@ const PageHero = ({
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-    const isVideo = backgroundImage ? backgroundImage.match(/\.(mp4|webm|ogg|mov)$|^https:\/\/res\.cloudinary\.com\/.*\/video\/upload\//i) : null;
+
 
     return (
         <section
