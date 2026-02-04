@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import teaImg from "@/assets/tea-plantations.jpg";
+import testimonialsBg from "@/assets/testimonials-bg.jpg";
 import { fetchPublicReviews, Review } from "@/api/reviews.api";
 
 const staticTestimonials = [
@@ -82,9 +82,10 @@ const Testimonials = () => {
       {/* Background with Parallax */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${teaImg})`, y: bgY, scale: 1.1 }}
+        style={{ backgroundImage: `url(${testimonialsBg})`, y: bgY, scale: 1.1 }}
       />
-      <div className="absolute inset-0 bg-foreground/90 backdrop-blur-sm" />
+      {/* Gradient overlay to blend with sky */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-[#B8D4E8]/60 to-transparent" style={{ height: '50%' }} />
 
       {/* Background Text with Parallax */}
       <motion.div
@@ -94,7 +95,7 @@ const Testimonials = () => {
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1 }}
       >
-        <span className="text-[80px] md:text-[140px] font-display italic font-bold text-primary-foreground/10 leading-none select-none">
+        <span className="text-[80px] md:text-[140px] font-display italic font-bold text-gray-800/10 leading-none select-none">
           Real Stories
         </span>
       </motion.div>
@@ -112,11 +113,11 @@ const Testimonials = () => {
           >
             Testimonials
           </span>
-          <h2 className="text-4xl md:text-6xl font-display font-bold text-primary-foreground mb-6">
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-gray-900 mb-6">
             Tour Experiences
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-6" />
-          <p className="text-primary-foreground/70 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg leading-relaxed">
             Hear from travelers who've experienced the magic of Sri Lanka with us
           </p>
         </motion.div>

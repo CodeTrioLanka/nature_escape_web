@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { fetchTourCategories, TourCategory } from "@/api/tours.api";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
 import wildlifeImg from "@/assets/wildlife.jpg";
 import beachImg from "@/assets/beach-paradise.jpg";
 import adventureImg from "@/assets/adventure.jpg";
 import honeymoonImg from "@/assets/honeymoon.jpg";
+import tourCategoriesBg from "@/assets/tour-categories-bg.jpg";
 
-const categories = [
+const staticCategories = [
   {
     title: "Cultural Tours",
     image: sigiriyaImg,
@@ -49,11 +53,98 @@ const categories = [
 
 const TourCategories = () => {
   const ref = useRef(null);
+  const bgRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [categories, setCategories] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Parallax effect
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+
+  // Static fallback images
+  const fallbackImages: { [key: string]: string } = {
+    cultural: sigiriyaImg,
+    "hill-country": teaImg,
+    wildlife: wildlifeImg,
+    beach: beachImg,
+    adventure: adventureImg,
+    honeymoon: honeymoonImg,
+  };
+
+  // Rotation values for visual effect
+  const rotations = ["-3deg", "2deg", "-2deg", "4deg", "-4deg", "3deg"];
+
+  // GSAP Parallax Effect
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (bgRef.current) {
+      gsap.to(bgRef.current, {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await fetchTourCategories();
+        if (data && data.length > 0) {
+          const mappedCategories = data.map((cat, index) => ({
+            title: cat.title,
+            image: cat.images && cat.images.length > 0 ? cat.images[0] : fallbackImages[cat.slug] || sigiriyaImg,
+            href: `/sri-lanka-tours/${cat.slug}`,
+            rotate: rotations[index % rotations.length],
+          }));
+          setCategories(mappedCategories);
+        } else {
+          // Use static fallback
+          setCategories(staticCategories);
+        }
+      } catch (error) {
+        console.error("Failed to fetch tour categories:", error);
+        // Use static fallback
+        setCategories(staticCategories);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadCategories();
+  }, []);
 
   return (
-    <section className="py-28 bg-sand overflow-hidden" ref={ref}>
-      <div className="container mx-auto px-4">
+    <section className="relative py-28 overflow-hidden" ref={ref}>
+      {/* Parallax Background */}
+      <div
+        ref={bgRef}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${tourCategoriesBg})`,
+        }}
+      >
+        {/* Gradient overlay to blend with white section above */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-[#87CEEB]/30 to-transparent" style={{ height: '50%' }} />
+      </div>
+
+      {/* Content */}
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
@@ -66,17 +157,17 @@ const TourCategories = () => {
           >
             Explore
           </span>
-          <h2 className="text-4xl md:text-6xl font-display font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-gray-900 mb-6">
             Tour Categories
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-6" />
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg leading-relaxed">
             Discover the diverse experiences Sri Lanka has to offer
           </p>
         </motion.div>
 
         <div className="flex flex-wrap justify-center gap-8 md:gap-10 pb-10">
-          {categories.map((category, index) => (
+          {categories.slice(0, 6).map((category, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
@@ -115,6 +206,26 @@ const TourCategories = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* View All Tours Button */}
+        {categories.length > 6 && (
+          <motion.div
+            className="text-center mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.8 }}
+          >
+            <Link
+              to="/sri-lanka-tours"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+            >
+              <span>View All Tours</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );
