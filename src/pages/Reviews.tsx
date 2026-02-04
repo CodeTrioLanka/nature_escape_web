@@ -219,12 +219,27 @@ const Reviews = () => {
     <Layout>
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
+        {/* Hero Section */}
         <PageHero
-          title="Customer Reviews"
-          subtitle="See what our travelers say about their experiences"
           backgroundImage="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1920&q=80"
           height="h-[40vh]"
         />
+
+        {/* Title Section */}
+        <section className="pt-16 pb-8 bg-background">
+          <div className="container mx-auto px-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="section-title mb-4">Customer Reviews</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                See what our travelers say about their experiences
+              </p>
+            </motion.div>
+          </div>
+        </section>
 
         {/* Rating Summary */}
         <section className="py-12 bg-sand">

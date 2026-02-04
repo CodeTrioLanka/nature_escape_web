@@ -42,11 +42,25 @@ const Services = () => {
       {/* Hero Section with PageHero Component */}
       {/* Hero Section with PageHero Component */}
       <PageHero
-        title={hero.title}
-        subtitle={hero.description}
         backgroundImage={hero.heroImage}
         height="h-[90vh] min-h-[500px]"
       />
+
+      {/* Title Section */}
+      <section className="pt-16 pb-8 bg-background">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="section-title mb-4">{hero.title}</h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              {hero.description}
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Services Grid Section */}
       <section className="py-16 bg-background">
