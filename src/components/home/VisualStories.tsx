@@ -3,7 +3,9 @@ import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { fetchHomeData } from "@/api/home.api";
+import { optimizeImage } from "@/lib/utils";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
 import wildlifeImg from "@/assets/wildlife.jpg";
@@ -27,8 +29,17 @@ const staticImages = [
 const VisualStories = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [galleryImages, setGalleryImages] = useState<string[]>(staticImages);
-  const [loading, setLoading] = useState(true);
+
+  // React Query for data fetching
+  const { data: homeData, isLoading } = useQuery({
+    queryKey: ['homeData'], // Share key/cache with Hero
+    queryFn: fetchHomeData,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const galleryImages = (homeData?.gallery && homeData.gallery.length > 0)
+    ? homeData.gallery
+    : staticImages;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -44,23 +55,6 @@ const VisualStories = () => {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
-
-  useEffect(() => {
-    const loadGallery = async () => {
-      try {
-        const data = await fetchHomeData();
-        if (data && data.gallery && data.gallery.length > 0) {
-          setGalleryImages(data.gallery);
-        }
-      } catch (error) {
-        console.error("Failed to fetch gallery images:", error);
-        // Keep static images as fallback
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadGallery();
-  }, []);
 
   return (
     <section className="py-24 bg-sand relative overflow-hidden" ref={ref}>
@@ -108,24 +102,24 @@ const VisualStories = () => {
           {/* Column 1 */}
           <div className="flex flex-col gap-6 lg:h-full">
             <motion.div variants={itemVariants} className="flex-1 relative overflow-hidden rounded-[2rem] group">
-              <img src={galleryImages[0]} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={optimizeImage(galleryImages[0], 600)} alt="Gallery 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
             </motion.div>
             <motion.div variants={itemVariants} className="h-[180px] lg:h-[30%] relative overflow-hidden rounded-[2rem] group">
-              <img src={galleryImages[4]} alt="Gallery 5" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={optimizeImage(galleryImages[4], 600)} alt="Gallery 5" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
             </motion.div>
           </div>
 
           {/* Column 2 */}
           <div className="flex flex-col gap-6 lg:h-full">
             <motion.div variants={itemVariants} className="flex-1 relative overflow-hidden rounded-[2rem] group h-[400px] lg:h-full">
-              <img src={galleryImages[6]} alt="Gallery 7" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={optimizeImage(galleryImages[6], 600)} alt="Gallery 7" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
             </motion.div>
           </div>
 
           {/* Column 3 - Center */}
           <div className="flex flex-col gap-6 lg:h-full justify-center">
             <motion.div variants={itemVariants} className="aspect-square relative overflow-hidden rounded-[2rem] group">
-              <img src={galleryImages[1]} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={optimizeImage(galleryImages[1], 600)} alt="Gallery 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
             </motion.div>
 
@@ -150,17 +144,17 @@ const VisualStories = () => {
               className="flex-1 relative overflow-hidden rounded-[2rem] group h-[400px] lg:h-full"
               style={{ borderTopRightRadius: "4rem" }} // Decorative corner
             >
-              <img src={galleryImages[2]} alt="Gallery 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={optimizeImage(galleryImages[2], 600)} alt="Gallery 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
             </motion.div>
           </div>
 
           {/* Column 5 */}
           <div className="flex flex-col gap-6 lg:h-full">
             <motion.div variants={itemVariants} className="h-[200px] lg:h-[40%] relative overflow-hidden rounded-[2rem] group">
-              <img src={galleryImages[3]} alt="Gallery 4" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={optimizeImage(galleryImages[3], 600)} alt="Gallery 4" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
             </motion.div>
             <motion.div variants={itemVariants} className="flex-1 relative overflow-hidden rounded-[2rem] group">
-              <img src={galleryImages[5]} alt="Gallery 6" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={optimizeImage(galleryImages[5], 600)} alt="Gallery 6" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
             </motion.div>
           </div>
 

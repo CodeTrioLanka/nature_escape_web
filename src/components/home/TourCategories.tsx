@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { fetchTourCategories, TourCategory } from "@/api/tours.api";
+import { optimizeImage } from "@/lib/utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
@@ -55,8 +57,6 @@ const TourCategories = () => {
   const ref = useRef(null);
   const bgRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [categories, setCategories] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
 
 
@@ -95,32 +95,26 @@ const TourCategories = () => {
     };
   }, []);
 
+  // React Query for data fetching
+  const { data: fetchedCategories, isLoading } = useQuery({
+    queryKey: ['tourCategories'],
+    queryFn: fetchTourCategories,
+    staleTime: 1000 * 60 * 60, // 1 hour (categories rarely change)
+  });
+
+  const [categories, setCategories] = useState<any[]>(staticCategories);
+
   useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const data = await fetchTourCategories();
-        if (data && data.length > 0) {
-          const mappedCategories = data.map((cat, index) => ({
-            title: cat.title,
-            image: cat.images && cat.images.length > 0 ? cat.images[0] : fallbackImages[cat.slug] || sigiriyaImg,
-            href: `/sri-lanka-tours/${cat.slug}`,
-            rotate: rotations[index % rotations.length],
-          }));
-          setCategories(mappedCategories);
-        } else {
-          // Use static fallback
-          setCategories(staticCategories);
-        }
-      } catch (error) {
-        console.error("Failed to fetch tour categories:", error);
-        // Use static fallback
-        setCategories(staticCategories);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadCategories();
-  }, []);
+    if (fetchedCategories && fetchedCategories.length > 0) {
+      const mappedCategories = fetchedCategories.map((cat, index) => ({
+        title: cat.title,
+        image: cat.images && cat.images.length > 0 ? cat.images[0] : fallbackImages[cat.slug] || sigiriyaImg,
+        href: `/sri-lanka-tours/${cat.slug}`,
+        rotate: rotations[index % rotations.length],
+      }));
+      setCategories(mappedCategories);
+    }
+  }, [fetchedCategories]);
 
   return (
     <section className="relative py-28 overflow-hidden" ref={ref}>
@@ -181,9 +175,11 @@ const TourCategories = () => {
               >
                 <div className="relative w-64 h-64 md:w-72 md:h-72 overflow-hidden rounded-[1.5rem]">
                   <img
-                    src={category.image}
+                    src={optimizeImage(category.image, 600)}
                     alt={category.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
                   />
 
                   {/* Overlay Gradient */}

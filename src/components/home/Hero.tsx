@@ -1,20 +1,21 @@
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import heroImage from "@/assets/hero-srilanka.jpg";
+import { useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import logo from "@/assets/nature-escape-logo.png";
-import { useEffect, useState } from "react";
 import { fetchHomeData, HomeData } from "@/api/home.api";
+import { optimizeImage } from "@/lib/utils";
 
 const Hero = () => {
-  const [homeData, setHomeData] = useState<HomeData | null>(null);
-  useEffect(() => {
-    fetchHomeData().then((data) => {
-      console.log('Fetched home data:', data);
-      setHomeData(data);
-    }).catch(console.error);
-  }, []);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
+  // React Query for data fetching
+  const { data: homeData, isLoading } = useQuery({
+    queryKey: ['homeData'],
+    queryFn: fetchHomeData,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60, // Keep in cache for 1 hour
+  });
 
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -37,11 +38,9 @@ const Hero = () => {
 
   // Prioritize homebgVideo field, then check if homebg is a video, otherwise use as image
   const backgroundVideo = homeData?.homebgVideo || (isHomebgVideo ? homeData?.homebg : null);
-  const backgroundImage = !isHomebgVideo ? (homeData?.homebg) : homeData?.homebg;
+
+  const backgroundImage = (!isHomebgVideo) ? homeData?.homebg : null;
   const isVideo = !!backgroundVideo;
-
-  console.log('Background video URL:', backgroundVideo, 'Background image URL:', backgroundImage, 'Is Video:', isVideo);
-
 
   return (
     <section
@@ -67,19 +66,31 @@ const Hero = () => {
             className="absolute inset-0 w-full h-full object-cover"
             src={backgroundVideo}
             onError={(e) => console.error('Video failed to load:', e)}
-            onLoadedData={() => console.log('Video loaded successfully')}
           />
           <div className="absolute inset-0 bg-black/40" />
         </motion.div>
       ) : (
         <motion.div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0"
           style={{
-            backgroundImage: `url(${backgroundImage})`,
             y: backgroundY,
             scale: backgroundScale,
           }}
         >
+          {/* Use img tag for faster loading and priority */}
+          {/* Use img tag for faster loading and priority */}
+          <motion.img
+            src={optimizeImage(backgroundImage, 1920)}
+            alt="Hero Background"
+            className="absolute inset-0 w-full h-full object-cover"
+            // @ts-ignore - fetchPriority is standard but React might complain on some versions
+            fetchPriority="high"
+            loading="eager"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: imgLoaded ? 1 : 0 }}
+            transition={{ duration: 0.8 }}
+            onLoad={() => setImgLoaded(true)}
+          />
           <div className="absolute inset-0 bg-black/40" />
         </motion.div>
       )}

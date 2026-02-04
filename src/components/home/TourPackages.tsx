@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { fetchAllPackages } from "@/api/packages.api";
+import { optimizeImage } from "@/lib/utils";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
 import templeImg from "@/assets/temple.jpg";
@@ -186,9 +187,11 @@ const TourCard = ({ pkg, index }: { pkg: any, index: number }) => {
         {/* Background Image */}
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
           <img
-            src={pkg.image}
+            src={optimizeImage(pkg.image, 600)}
             alt={pkg.title}
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
           {/* Overlays */}
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
