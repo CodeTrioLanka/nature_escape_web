@@ -174,20 +174,7 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Wavy Bottom Edge - SVG */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-        <svg
-          className="relative block w-full h-[80px] md:h-[120px]"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,0 C150,100 350,0 600,50 C850,100 1050,0 1200,50 L1200,120 L0,120 Z"
-            fill="white"
-            className="drop-shadow-lg"
-          />
-        </svg>
-      </div>
+
 
       {/* Scroll Indicator */}
       {/* <motion.div
