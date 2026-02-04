@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/layout/Layout";
 import { fetchPublicReviews, fetchReviewStats, submitReview as submitReviewAPI, Review, ReviewStats } from "@/api/reviews.api";
+import PageHero from "@/components/common/PageHero";
 
 // Fallback static reviews data
 const staticReviews = [
@@ -218,33 +219,12 @@ const Reviews = () => {
     <Layout>
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative h-[40vh] flex items-center justify-center overflow-hidden -mt-20">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1920&q=80')`,
-            }}
-          />
-          <div className="absolute inset-0 hero-overlay" />
-          <div className="relative z-10 text-center text-primary-foreground px-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4"
-            >
-              Customer Reviews
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl max-w-2xl mx-auto opacity-90"
-            >
-              See what our travelers say about their experiences
-            </motion.p>
-          </div>
-        </section>
+        <PageHero
+          title="Customer Reviews"
+          subtitle="See what our travelers say about their experiences"
+          backgroundImage="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1920&q=80"
+          height="h-[40vh]"
+        />
 
         {/* Rating Summary */}
         <section className="py-12 bg-sand">
