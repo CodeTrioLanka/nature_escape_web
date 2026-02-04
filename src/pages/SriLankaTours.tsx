@@ -86,12 +86,26 @@ const SriLankaTours = () => {
     <Layout>
       {/* Hero Section with PageHero Component */}
       <PageHero
-        title="Sri Lanka Tours"
-        subtitle="Explore the pearl of the Indian Ocean with our curated tour packages"
         backgroundImage={beachSurfImg}
         height="h-[90vh] min-h-[500px]"
         showWave={false}
       />
+
+      {/* Title Section */}
+      <section className="pt-16 pb-8 bg-background">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="section-title mb-4">Sri Lanka Tours</h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Explore the pearl of the Indian Ocean with our curated tour packages
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Across Sri Lanka Section */}
       <section className="py-20 bg-background" ref={toursRef}>

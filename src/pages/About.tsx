@@ -193,15 +193,29 @@ const About = () => {
     <Layout>
       {/* Hero Section - Using PageHero Component */}
       <PageHero
-        title={heroTitle}
-        subtitle={heroDescription}
         backgroundImage={heroBackground}
         height="h-[90vh] min-h-[500px]"
         showWave={false}
       />
 
+      {/* Title Section */}
+      <section className="pt-16 pb-8 bg-background">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="section-title mb-4">{heroTitle}</h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              {heroDescription}
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Stats Section - Floating Cards */}
-      <section className="py-8 relative z-20 -mt-20">
+      <section className="py-8 relative z-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {stats.map((stat, index) => (

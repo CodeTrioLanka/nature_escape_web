@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, ReactNode } from "react";
 
 interface PageHeroProps {
-    title: string;
+    title?: string;
     subtitle?: string;
     backgroundImage: string;
     height?: string;
@@ -53,15 +53,17 @@ const PageHero = ({
             >
                 <div className="max-w-4xl mx-auto flex flex-col items-center">
                     {/* Title */}
-                    <motion.h1
-                        className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-primary-foreground leading-tight mb-6"
-                        style={{ textShadow: "0 4px 20px rgba(0,0,0,0.7)" }}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                    >
-                        {title}
-                    </motion.h1>
+                    {title && (
+                        <motion.h1
+                            className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-primary-foreground leading-tight mb-6"
+                            style={{ textShadow: "0 4px 20px rgba(0,0,0,0.7)" }}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                        >
+                            {title}
+                        </motion.h1>
+                    )}
 
                     {/* Subtitle */}
                     {subtitle && (

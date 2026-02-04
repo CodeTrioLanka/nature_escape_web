@@ -53,8 +53,6 @@ const Excursions = () => {
     <Layout>
       {/* Hero Section */}
       <PageHero
-        title={heroContent?.title || "Nature Escape Excursions"}
-        subtitle={heroContent?.subtitle || "Explore Sri Lanka with our exclusive excursions"}
         backgroundImage={heroContent?.heroImage || wildlife}
         height="h-[90vh] min-h-[500px]"
         showWave={false}

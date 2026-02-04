@@ -98,8 +98,6 @@ const Contact = () => {
     <Layout>
       {/* Hero Section */}
       <PageHero
-        title="Contact Us"
-        subtitle="Let's plan your perfect Sri Lanka adventure together"
         backgroundImage="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
         height="h-[60vh] min-h-[300px]"
         showWave={false}
