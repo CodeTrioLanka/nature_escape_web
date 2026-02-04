@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X, ChevronRight } from "lucide-react";
 import logo from "@/assets/nature-escape-logo.png";
 import { fetchTourCategories } from "@/api/tours.api";
 import { motion, AnimatePresence } from "framer-motion";
+import TypingText from "../ui/TypingText";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -86,9 +87,12 @@ const Header = () => {
                 alt="Nature Escape"
                 className="h-14 w-auto object-contain drop-shadow-md"
               />
-              <span className="text-xl font-display font-bold text-white hidden sm:block drop-shadow-lg">
-                Nature<span className="text-gold">Escape</span>
-              </span>
+              <TypingText
+                text="Nature Escape"
+                className="text-3xl font-signature text-white hidden sm:block drop-shadow-lg"
+                typingSpeed={100}
+                cursorClassName="bg-gold h-8"
+              />
             </Link>
 
             {/* Desktop Navigation */}

@@ -6,6 +6,13 @@
 }
 
 @font-face {
+  font-family: 'Magnolia Signature';
+  src: url('./assets/fonts/Magnolia Signature.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'DM Sans';
   src: url('./assets/fonts/DMSans-Italic-VariableFont_opsz,wght.ttf') format('truetype');
   font-weight: 100 900;
@@ -269,6 +276,7 @@
       transform: translateX(100%);
     }
   }
+
   .animate-shimmer {
     animation: shimmer 2s infinite;
   }

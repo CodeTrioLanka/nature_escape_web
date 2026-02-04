@@ -26,6 +26,10 @@ export default {
 					'DM Sans',
 					'sans-serif'
 				],
+				signature: [
+					'Magnolia Signature',
+					'cursive'
+				],
 				sans: [
 					'DM Sans',
 					'Inter',
