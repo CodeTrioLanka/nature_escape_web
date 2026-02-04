@@ -1,40 +1,38 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import DomeGallery from "../ui/dome-gallery";
-import { fetchHomeData } from "@/api/home.api";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+import sigiriyaImg from "@/assets/sigiriya.jpg";
+import teaImg from "@/assets/tea-plantations.jpg";
+import wildlifeImg from "@/assets/wildlife.jpg";
+import beachImg from "@/assets/beach-paradise.jpg";
+import adventureImg from "@/assets/adventure.jpg";
+import honeymoonImg from "@/assets/honeymoon.jpg";
+import templeImg from "@/assets/temple.jpg";
+import familyImg from "@/assets/family-beach.jpg";
 
 const VisualStories = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [isMobile, setIsMobile] = useState(false);
-  const [images, setImages] = useState<any[]>([]);
 
-  useEffect(() => {
-    const loadImages = async () => {
-      try {
-        const data = await fetchHomeData();
-        if (data && data.gallery) {
-          const formattedImages = data.gallery.map((url: string) => ({
-            src: url,
-            alt: "Nature Escape Gallery"
-          }));
-          setImages(formattedImages);
-        }
-      } catch (error) {
-        console.error("Failed to load gallery images", error);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
       }
-    };
-    loadImages();
+    }
+  };
 
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
 
   return (
-    <section className="py-24 bg-sand relative overflow-hidden min-h-screen" ref={ref}>
+    <section className="py-24 bg-sand relative overflow-hidden" ref={ref}>
       {/* Background Text */}
       <motion.div
         className="absolute top-0 left-0 right-0 text-center pointer-events-none z-0"
@@ -47,7 +45,7 @@ const VisualStories = () => {
         </span>
       </motion.div>
 
-      <div className="container mx-auto px-4 relative z-20 pointer-events-none pt-12">
+      <div className="container mx-auto px-4 relative z-20 pt-12">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -68,21 +66,74 @@ const VisualStories = () => {
             Glimpses of the unforgettable memories created with Nature Escape
           </p>
         </motion.div>
-      </div>
 
-      <div className="w-full relative z-10 h-[600px] md:h-[800px] mt-8">
-        <DomeGallery
-          images={images}
-          fit={0.7}
-          minRadius={isMobile ? 150 : 200}
-          maxVerticalRotationDeg={20}
-          segments={isMobile ? 24 : 34}
-          dragDampening={0.8}
-          grayscale={false}
-          openedImageWidth={isMobile ? "300px" : "600px"}
-          openedImageHeight={isMobile ? "400px" : "600px"}
-          overlayBlurColor="hsl(35, 30%, 95%)"
-        />
+        {/* Bento Grid Gallery */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 h-auto lg:h-[600px]"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {/* Column 1 */}
+          <div className="flex flex-col gap-6 lg:h-full">
+            <motion.div variants={itemVariants} className="flex-1 relative overflow-hidden rounded-[2rem] group">
+              <img src={sigiriyaImg} alt="Sigiriya" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </motion.div>
+            <motion.div variants={itemVariants} className="h-[180px] lg:h-[30%] relative overflow-hidden rounded-[2rem] group">
+              <img src={adventureImg} alt="Adventure" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </motion.div>
+          </div>
+
+          {/* Column 2 */}
+          <div className="flex flex-col gap-6 lg:h-full">
+            <motion.div variants={itemVariants} className="flex-1 relative overflow-hidden rounded-[2rem] group h-[400px] lg:h-full">
+              <img src={templeImg} alt="Temple" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </motion.div>
+          </div>
+
+          {/* Column 3 - Center */}
+          <div className="flex flex-col gap-6 lg:h-full justify-center">
+            <motion.div variants={itemVariants} className="aspect-square relative overflow-hidden rounded-[2rem] group">
+              <img src={teaImg} alt="Tea Plantations" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+            </motion.div>
+
+            {/* Explore Button */}
+            <motion.div variants={itemVariants}>
+              <Link
+                to="/gallery"
+                className="w-full bg-black text-white rounded-full py-4 px-6 flex items-center justify-between group hover:bg-gold transition-colors duration-300"
+              >
+                <span className="font-medium">Explore Gallery</span>
+                <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
+                  <ArrowUpRight className="w-4 h-4" />
+                </span>
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Column 4 */}
+          <div className="flex flex-col gap-6 lg:h-full">
+            <motion.div
+              variants={itemVariants}
+              className="flex-1 relative overflow-hidden rounded-[2rem] group h-[400px] lg:h-full"
+              style={{ borderTopRightRadius: "4rem" }} // Decorative corner
+            >
+              <img src={wildlifeImg} alt="Wildlife" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </motion.div>
+          </div>
+
+          {/* Column 5 */}
+          <div className="flex flex-col gap-6 lg:h-full">
+            <motion.div variants={itemVariants} className="h-[200px] lg:h-[40%] relative overflow-hidden rounded-[2rem] group">
+              <img src={beachImg} alt="Beach" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </motion.div>
+            <motion.div variants={itemVariants} className="flex-1 relative overflow-hidden rounded-[2rem] group">
+              <img src={honeymoonImg} alt="Honeymoon" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </motion.div>
+          </div>
+
+        </motion.div>
       </div>
     </section>
   );
