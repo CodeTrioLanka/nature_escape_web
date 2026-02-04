@@ -56,7 +56,7 @@ const Excursions = () => {
         title={heroContent?.title || "Nature Escape Excursions"}
         subtitle={heroContent?.subtitle || "Explore Sri Lanka with our exclusive excursions"}
         backgroundImage={heroContent?.heroImage || wildlife}
-        height="h-[65vh] min-h-[500px]"
+        height="h-[90vh] min-h-[500px]"
       />
 
       {/* Content Section */}
@@ -137,21 +137,20 @@ const Excursions = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group block relative aspect-[4/3] overflow-hidden rounded-lg shadow-md"
               >
-                <Link to={`/excursion/${excursion.slug}`} className="block group">
-                  <div className="relative h-[350px] overflow-hidden rounded-lg">
-                    <img
-                      src={excursion.image}
-                      alt={excursion.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="text-white text-lg font-semibold leading-tight">
-                        {excursion.title}
-                        <span className="inline-block ml-2 w-8 h-[2px] bg-primary align-middle" />
-                      </h3>
-                    </div>
+                <Link to={`/excursion/${excursion.slug}`} className="block w-full h-full">
+                  <img
+                    src={excursion.image}
+                    alt={excursion.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-white font-semibold text-lg uppercase tracking-wide">
+                      {excursion.title}
+                      <span className="block w-12 h-0.5 bg-secondary mt-2 transition-all duration-300 group-hover:w-20" />
+                    </h3>
                   </div>
                 </Link>
               </motion.div>

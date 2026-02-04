@@ -40,11 +40,12 @@ const Services = () => {
   return (
     <Layout>
       {/* Hero Section with PageHero Component */}
+      {/* Hero Section with PageHero Component */}
       <PageHero
         title={hero.title}
         subtitle={hero.description}
         backgroundImage={hero.heroImage}
-        height="h-[60vh] min-h-[450px]"
+        height="h-[90vh] min-h-[500px]"
       />
 
       {/* Services Grid Section */}
@@ -61,24 +62,23 @@ const Services = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group block relative aspect-[4/3] overflow-hidden rounded-lg shadow-md"
                 >
                   <Link
                     to={slug === "excursions" ? "/excursions" : slug === "mice" ? "/mice" : `/service/${slug}`}
-                    className="block group"
+                    className="block w-full h-full"
                   >
-                    <div className="relative h-[280px] overflow-hidden rounded-xl">
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <h3 className="text-white text-lg font-semibold tracking-wide">
-                          {service.title}
-                          <span className="inline-block ml-3 w-10 h-[2px] bg-primary align-middle" />
-                        </h3>
-                      </div>
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <h3 className="text-white font-semibold text-lg uppercase tracking-wide">
+                        {service.title}
+                        <span className="block w-12 h-0.5 bg-secondary mt-2 transition-all duration-300 group-hover:w-20" />
+                      </h3>
                     </div>
                   </Link>
                 </motion.div>

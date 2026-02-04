@@ -89,7 +89,7 @@ const SriLankaTours = () => {
         title="Sri Lanka Tours"
         subtitle="Explore the pearl of the Indian Ocean with our curated tour packages"
         backgroundImage={beachSurfImg}
-        height="h-[65vh] min-h-[500px]"
+        height="h-[90vh] min-h-[500px]"
       />
 
       {/* Across Sri Lanka Section */}
@@ -171,11 +171,14 @@ const SriLankaTours = () => {
             </h3>
           </motion.div>
 
-          {/* Categories Grid */}
+          {/* Categories Grid - Styled like ThingsToDo */}
           {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
-              <p className="mt-4 text-muted-foreground">Loading tour categories...</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="aspect-[4/3] rounded-lg overflow-hidden">
+                  <div className="w-full h-full bg-muted animate-pulse" />
+                </div>
+              ))}
             </div>
           ) : error ? (
             <div className="text-center py-12">
@@ -192,36 +195,29 @@ const SriLankaTours = () => {
               <p className="text-muted-foreground">No tour categories available at the moment.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {tourCategories.map((category, index) => (
                 <motion.div
                   key={category._id}
                   initial={{ opacity: 0, y: 30 }}
-                  animate={categoriesInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="group block relative aspect-[4/3] overflow-hidden rounded-lg shadow-md"
                 >
-                  <Link
-                    to={`/sri-lanka-tours/${category.slug}`}
-                    className="group block"
-                  >
-                    <div className="grid grid-cols-2 gap-1 mb-3 rounded-xl overflow-hidden">
-                      {category.images.map((img, idx) => (
-                        <motion.div
-                          key={idx}
-                          className="aspect-square overflow-hidden"
-                          whileHover={{ scale: 1.05 }}
-                        >
-                          <img
-                            src={img}
-                            alt={`${category.title} - Image ${idx + 1}`}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                        </motion.div>
-                      ))}
+                  <Link to={`/sri-lanka-tours/${category.slug}`} className="block w-full h-full">
+                    <img
+                      src={category.images && category.images.length > 0 ? category.images[0] : ""}
+                      alt={category.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <h3 className="text-white font-semibold text-lg uppercase tracking-wide">
+                        {category.title}
+                        <span className="block w-12 h-0.5 bg-secondary mt-2 transition-all duration-300 group-hover:w-20" />
+                      </h3>
                     </div>
-                    <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors text-center">
-                      {category.title}
-                    </h4>
                   </Link>
                 </motion.div>
               ))}
