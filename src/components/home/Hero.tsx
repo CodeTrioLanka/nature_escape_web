@@ -145,15 +145,31 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+            className="flex flex-col md:flex-row gap-4 justify-center items-center"
           >
-            <Link
-              to="/sri-lanka-tours"
-              className="inline-flex items-center gap-2 px-10 py-4 bg-primary-foreground text-forest font-bold text-lg rounded-lg hover:bg-primary-foreground/90 shadow-2xl hover:shadow-primary-foreground/30 transition-all duration-300"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
             >
-              View Adventure
-            </Link>
+              <Link
+                to="/sri-lanka-tours"
+                className="inline-flex items-center gap-2 px-10 py-4 bg-primary-foreground text-forest font-bold text-lg rounded-lg hover:bg-primary-foreground/90 shadow-2xl hover:shadow-primary-foreground/30 transition-all duration-300"
+              >
+                View Adventure
+              </Link>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Link
+                to="/excursions"
+                className="inline-flex items-center gap-2 px-10 py-4 bg-transparent border-2 border-primary-foreground text-primary-foreground font-bold text-lg rounded-lg hover:bg-primary-foreground/10 shadow-2xl transition-all duration-300 backdrop-blur-sm"
+              >
+                Excursions
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>

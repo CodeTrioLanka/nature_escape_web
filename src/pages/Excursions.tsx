@@ -1,7 +1,7 @@
 import Layout from "@/components/layout/Layout";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import wildlife from "@/assets/wildlife.jpg";
 import sigiriya from "@/assets/sigiriya.jpg";
 import { fetchExcursionFilters, getAllExcursions, Excursion } from "@/api/excursion.api";
@@ -19,6 +19,14 @@ const Excursions = () => {
   const [destinationOptions, setDestinationOptions] = useState(["All"]);
   const [categoryOptions, setCategoryOptions] = useState(["All"]);
   const [excursions, setExcursions] = useState<Excursion[]>([]);
+
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -50,15 +58,25 @@ const Excursions = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] -mt-20">
-        <div className="absolute inset-0">
+      {/* Hero Section */}
+      <section
+        ref={ref}
+        className="relative h-[50vh] min-h-[400px] -mt-20 overflow-hidden flex items-center justify-center"
+      >
+        <motion.div
+          className="absolute inset-0 w-full h-full"
+          style={{
+            y: backgroundY,
+            scale: backgroundScale,
+          }}
+        >
           <img
             src={wildlife}
             alt="Safari Excursion"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/30" />
-        </div>
+        </motion.div>
       </section>
 
       {/* Content Section */}
