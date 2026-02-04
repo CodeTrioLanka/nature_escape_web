@@ -378,7 +378,7 @@ const DestinationDetail = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+      <section ref={heroRef} className="relative h-[60vh] md:h-[70vh] overflow-hidden -mt-20">
         <motion.div
           style={{ y: heroY, scale: heroScale }}
           className="absolute inset-0"
@@ -428,7 +428,7 @@ const DestinationDetail = () => {
           <h2 className="text-2xl md:text-3xl font-serif text-center mb-8">
             {destination.name} at a Glance
           </h2>
-          
+
           <div className="flex flex-wrap justify-center gap-8 md:gap-16">
             <div className="flex flex-col items-center text-center">
               <MapPin className="w-6 h-6 mb-2 text-primary" />
@@ -456,7 +456,7 @@ const DestinationDetail = () => {
             <h3 className="text-sm uppercase tracking-wider font-medium">Places to Visit</h3>
             <div className="h-px bg-border flex-1 max-w-[60px]" />
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {destination.placesToVisit.map((place, index) => (
               <motion.div
@@ -494,7 +494,7 @@ const DestinationDetail = () => {
           <p className="text-muted-foreground leading-relaxed mb-6">
             {destination.taglineDescription}
           </p>
-          
+
           {/* Cafes */}
           {destination.cafes && destination.cafes.length > 0 && (
             <div className="mt-8">
@@ -591,7 +591,7 @@ const DestinationDetail = () => {
                         <div className="h-px bg-primary w-8" />
                       </div>
                     </div>
-                    
+
                     {/* Hover Explore Button */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="bg-primary/80 rounded-full p-3 flex items-center gap-2">

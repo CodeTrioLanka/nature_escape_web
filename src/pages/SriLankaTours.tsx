@@ -90,6 +90,7 @@ const SriLankaTours = () => {
         subtitle="Explore the pearl of the Indian Ocean with our curated tour packages"
         backgroundImage={beachSurfImg}
         height="h-[90vh] min-h-[500px]"
+        showWave={false}
       />
 
       {/* Across Sri Lanka Section */}

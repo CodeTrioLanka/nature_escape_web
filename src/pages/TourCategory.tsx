@@ -965,7 +965,7 @@ const TourCategory = () => {
   return (
     <Layout>
       {/* Hero Section with Parallax */}
-      <section className="relative h-[50vh] min-h-[350px] overflow-hidden">
+      <section className="relative h-[50vh] min-h-[350px] overflow-hidden -mt-20">
         <motion.div
           className="absolute inset-0 bg-cover bg-center scale-110"
           style={{

@@ -68,7 +68,7 @@ const ExcursionDetail = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative h-[45vh] min-h-[350px]">
+      <section className="relative h-[45vh] min-h-[350px] -mt-20">
         <div className="absolute inset-0">
           <img
             src={excursion.image}
