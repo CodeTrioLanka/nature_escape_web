@@ -58,14 +58,7 @@ const TourCategories = () => {
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Parallax effect
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   // Static fallback images
   const fallbackImages: { [key: string]: string } = {
