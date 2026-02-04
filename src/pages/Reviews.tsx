@@ -221,8 +221,8 @@ const Reviews = () => {
         {/* Hero Section */}
         {/* Hero Section */}
         <PageHero
-          backgroundImage="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1920&q=80"
-          height="h-[40vh]"
+          backgroundImage="https://res.cloudinary.com/dicyqfwrf/video/upload/v1770225883/q_cmkpgg.mp4"
+          height="h-[70vh]"
           showWave={false}
         />
 
