@@ -3,12 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import wildlife from "@/assets/wildlife.jpg";
-import sigiriya from "@/assets/sigiriya.jpg";
-import { fetchExcursionFilters, getAllExcursions, Excursion } from "@/api/excursion.api";
-import teaPlantations from "@/assets/tea-plantations.jpg";
-import beachMirissa from "@/assets/beach-mirissa.jpg";
-import temple from "@/assets/temple.jpg";
-import adventure from "@/assets/adventure.jpg";
+import { fetchExcursionFilters, getAllExcursions, getExcursionHeroes, Excursion, ExcursionHero } from "@/api/excursion.api";
 
 const Excursions = () => {
   const [timeFilter, setTimeFilter] = useState("All");
@@ -19,13 +14,15 @@ const Excursions = () => {
   const [destinationOptions, setDestinationOptions] = useState(["All"]);
   const [categoryOptions, setCategoryOptions] = useState(["All"]);
   const [excursions, setExcursions] = useState<Excursion[]>([]);
+  const [heroContent, setHeroContent] = useState<ExcursionHero | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [filters, excursionList] = await Promise.all([
+        const [filters, excursionList, heroes] = await Promise.all([
           fetchExcursionFilters(),
-          getAllExcursions()
+          getAllExcursions(),
+          getExcursionHeroes()
         ]);
 
         if (filters.time) setTimeOptions(filters.time);
@@ -33,6 +30,10 @@ const Excursions = () => {
         if (filters.category) setCategoryOptions(filters.category);
 
         setExcursions(excursionList);
+
+        if (heroes && heroes.length > 0) {
+          setHeroContent(heroes[0]);
+        }
       } catch (error) {
         console.error("Failed to load excursion data", error);
       }
@@ -53,8 +54,8 @@ const Excursions = () => {
       <section className="relative h-[50vh] min-h-[400px] -mt-20">
         <div className="absolute inset-0">
           <img
-            src={wildlife}
-            alt="Safari Excursion"
+            src={heroContent?.heroImage || wildlife}
+            alt={heroContent?.title || "Safari Excursion"}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/30" />
@@ -71,13 +72,12 @@ const Excursions = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-10"
           >
-            <p className="text-sm text-muted-foreground mb-2">Explore Sri Lanka with</p>
+            <p className="text-sm text-muted-foreground mb-2">{heroContent?.subtitle || "Explore Sri Lanka with"}</p>
             <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-6">
-              Nature Escape Excursions
+              {heroContent?.title || "Nature Escape Excursions"}
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Experience thrilling safaris at Yala National Park, scenic hot air balloon rides,
-              the historic charm of Galle, and vibrant Colombo - plus so much more! INQUIRE NOW!
+              {heroContent?.description || "Experience thrilling safaris at Yala National Park, scenic hot air balloon rides, the historic charm of Galle, and vibrant Colombo - plus so much more! INQUIRE NOW!"}
             </p>
           </motion.div>
 
