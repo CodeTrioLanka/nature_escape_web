@@ -40,6 +40,17 @@ const Header = () => {
     };
   }, [isMobileMenuOpen]);
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const navItems = [
     { name: "HOME", href: "/" },
     { name: "ABOUT US", href: "/about" },
@@ -60,7 +71,12 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10 transition-all duration-300 hover:bg-black/40">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+          ? "bg-black/20 backdrop-blur-md border-b border-white/10 hover:bg-black/40"
+          : "bg-transparent"
+          }`}
+      >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}

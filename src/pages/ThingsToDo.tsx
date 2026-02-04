@@ -44,7 +44,7 @@ const ThingsToDo = () => {
         title={heroData?.title || "Crafted for Every Traveller"}
         subtitle={heroData?.subtitle || "Unforgettable Sri Lankan Adventures"}
         backgroundImage={heroData?.heroImage || adventureImage}
-        height="h-[65vh] min-h-[500px]"
+        height="h-[90vh] min-h-[500px]"
       />
 
       {/* Content Section */}

@@ -196,7 +196,7 @@ const About = () => {
         title={heroTitle}
         subtitle={heroDescription}
         backgroundImage={heroBackground}
-        height="h-[70vh] min-h-[500px]"
+        height="h-[90vh] min-h-[500px]"
       />
 
       {/* Stats Section - Floating Cards */}
