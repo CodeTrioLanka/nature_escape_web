@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Check, X, MapPin, Calendar, Users, Clock, ChevronRight, ChevronLeft, Phone, Loader2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { fetchPackageBySlug, Package } from "@/api/packages.api";
 
 // Import images
@@ -601,37 +602,46 @@ const TourDetail = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
         </div>
+      </section>
 
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
-          <span className="inline-block bg-primary/90 text-primary-foreground px-4 py-1 rounded-full text-sm font-medium mb-4">
-            {tour.categoryLabel}
-          </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-2">{tour.title}</h1>
-          <div className="flex items-center gap-2 text-lg mb-4 opacity-80">
-            <span className="w-12 h-px bg-white/60"></span>
-            <span>{tour.subtitle}</span>
-            <span className="w-12 h-px bg-white/60"></span>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-6 mt-4 text-sm">
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              <span>{tour.duration}</span>
+      {/* Hero Content Section (Moved from Overlay) */}
+      <section className="pt-16 pb-8 bg-background">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="inline-block bg-primary/90 text-primary-foreground px-4 py-1 rounded-full text-sm font-medium mb-4">
+              {tour.categoryLabel}
+            </span>
+            <h1 className="section-title mb-2">{tour.title}</h1>
+            <div className="flex items-center justify-center gap-2 text-lg mb-4 text-muted-foreground">
+              <span className="w-12 h-px bg-border"></span>
+              <span>{tour.subtitle}</span>
+              <span className="w-12 h-px bg-border"></span>
             </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              <span>{tour.groupSize}</span>
+
+            <div className="flex flex-wrap justify-center gap-6 mt-4 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                <span>{tour.duration}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>{tour.groupSize}</span>
+              </div>
             </div>
-          </div>
 
-          <p className="max-w-3xl mt-6 text-white/90 leading-relaxed">
-            {tour.description}
-          </p>
+            <p className="max-w-3xl mx-auto mt-6 text-muted-foreground leading-relaxed">
+              {tour.description}
+            </p>
 
-          <Button size="lg" className="mt-8 bg-primary hover:bg-primary/90">
-            <Phone className="w-4 h-4 mr-2" />
-            Inquire Now
-          </Button>
+            <Button size="lg" className="mt-8 bg-primary hover:bg-primary/90">
+              <Phone className="w-4 h-4 mr-2" />
+              Inquire Now
+            </Button>
+          </motion.div>
         </div>
       </section>
 
