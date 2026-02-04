@@ -637,10 +637,12 @@ const TourDetail = () => {
               {tour.description}
             </p>
 
-            <Button size="lg" className="mt-8 bg-primary hover:bg-primary/90">
-              <Phone className="w-4 h-4 mr-2" />
-              Inquire Now
-            </Button>
+            <Link to="/contact">
+              <Button size="lg" className="mt-8 bg-primary hover:bg-primary/90">
+                <Phone className="w-4 h-4 mr-2" />
+                Inquire Now
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>
