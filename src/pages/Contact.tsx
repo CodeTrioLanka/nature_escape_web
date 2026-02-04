@@ -98,7 +98,7 @@ const Contact = () => {
     <Layout>
       {/* Hero Section */}
       <PageHero
-        backgroundImage="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"
+        backgroundImage="https://res.cloudinary.com/dicyqfwrf/video/upload/v1770219053/Whisk_etzyetmzqwz1qgmi1cmiddotewz5qtlzatz10sn_zjjrrk.mp4"
         height="h-[60vh] min-h-[300px]"
         showWave={false}
       />

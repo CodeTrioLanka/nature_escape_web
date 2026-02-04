@@ -29,20 +29,40 @@ const PageHero = ({
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+    const isVideo = backgroundImage.match(/\.(mp4|webm|ogg|mov)$|^https:\/\/res\.cloudinary\.com\/.*\/video\/upload\//i);
+
     return (
         <section
             ref={ref}
             className={`relative ${height} flex items-center justify-center overflow-hidden -mt-20`}
         >
-            {/* Background Image with Parallax Effect */}
+            {/* Background Image/Video with Parallax Effect */}
             <motion.div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                className="absolute inset-0 overflow-hidden"
                 style={{
-                    backgroundImage: `url(${backgroundImage})`,
                     y: backgroundY,
                     scale: backgroundScale,
                 }}
             >
+                {isVideo ? (
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                    >
+                        <source src={backgroundImage} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                ) : (
+                    <div
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                        style={{
+                            backgroundImage: `url(${backgroundImage})`,
+                        }}
+                    />
+                )}
                 <div className="absolute inset-0 bg-black/50" />
             </motion.div>
 
