@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
 import { fetchTourCategories, TourCategory } from "@/api/tours.api";
+import { optimizeImage } from "@/lib/utils";
 
 // Hero images
 import beachSurfImg from "@/assets/ballon.jpg";
@@ -48,36 +50,18 @@ const sampleTours = [
   },
 ];
 
-
-
 const SriLankaTours = () => {
-  const [tourCategories, setTourCategories] = useState<TourCategory[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
   const toursRef = useRef(null);
   const categoriesRef = useRef(null);
   const mapRef = useRef(null);
   const ctaRef = useRef(null);
 
-  // Fetch tour categories from backend
-  useEffect(() => {
-    const loadTourCategories = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchTourCategories();
-        setTourCategories(data);
-        setError(null);
-      } catch (err) {
-        console.error('Error loading tour categories:', err);
-        setError('Failed to load tour categories. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadTourCategories();
-  }, []);
+  // Fetch tour categories from backend with React Query
+  const { data: tourCategories = [], isLoading: loading, error } = useQuery({
+    queryKey: ['tourCategories'],
+    queryFn: fetchTourCategories,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
 
   const toursInView = useInView(toursRef, { once: true, margin: "-50px" });
   const categoriesInView = useInView(categoriesRef, { once: true, margin: "-50px" });
@@ -199,7 +183,7 @@ const SriLankaTours = () => {
             </div>
           ) : error ? (
             <div className="text-center py-12">
-              <p className="text-red-500 mb-4">{error}</p>
+              <p className="text-red-500 mb-4">{error instanceof Error ? error.message : "An error occurred"}</p>
               <button
                 onClick={() => window.location.reload()}
                 className="px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors"
@@ -224,9 +208,11 @@ const SriLankaTours = () => {
                 >
                   <Link to={`/sri-lanka-tours/${category.slug}`} className="block w-full h-full">
                     <img
-                      src={category.images && category.images.length > 0 ? category.images[0] : ""}
+                      src={optimizeImage(category.images?.[0] || "", 600)}
                       alt={category.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">

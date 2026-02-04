@@ -4,6 +4,7 @@ export interface TourCategory {
     images: string[];
     slug: string;
     description?: string;
+    scheduleImage?: string;
     isActive: boolean;
     displayOrder: number;
     createdAt?: string;
