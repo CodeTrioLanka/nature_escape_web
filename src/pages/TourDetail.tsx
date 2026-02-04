@@ -117,7 +117,7 @@ const toursData: Record<string, TourData> = {
     inclusions: [
       "Accommodation – Transportation in an air-conditioned vehicle with the services of a chauffeur guide -Entrance Tickets – Government Taxes",
     ],
-    
+
     exclusions: [
       "Alcoholic Beverages",
       "Extra meals/snacks and beverages ordered from the hotel or outside the hotel.",
@@ -594,7 +594,7 @@ const TourDetail = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px]">
+      <section className="relative h-[70vh] min-h-[500px] -mt-20">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${tour.heroImage})` }}

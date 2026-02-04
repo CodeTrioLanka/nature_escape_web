@@ -46,6 +46,7 @@ const Services = () => {
         subtitle={hero.description}
         backgroundImage={hero.heroImage}
         height="h-[90vh] min-h-[500px]"
+        showWave={false}
       />
 
       {/* Services Grid Section */}

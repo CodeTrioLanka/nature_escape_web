@@ -224,6 +224,7 @@ const Reviews = () => {
           subtitle="See what our travelers say about their experiences"
           backgroundImage="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1920&q=80"
           height="h-[40vh]"
+          showWave={false}
         />
 
         {/* Rating Summary */}
