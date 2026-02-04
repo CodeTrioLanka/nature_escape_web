@@ -978,32 +978,23 @@ const TourCategory = () => {
       </section>
 
       {/* Title Section */}
-      <section className="py-16 bg-background">
+      <section className="pt-16 pb-8 bg-background">
         <div className="container mx-auto px-4 text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-sm tracking-widest text-muted-foreground uppercase"
+            transition={{ duration: 0.6 }}
           >
-            Sri Lanka
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-display font-bold text-foreground mt-2 mb-6"
-          >
-            {data.title}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-muted-foreground max-w-4xl mx-auto leading-relaxed"
-          >
-            {data.description}
-          </motion.p>
+            <span className="text-sm tracking-widest text-muted-foreground uppercase">
+              Sri Lanka
+            </span>
+            <h1 className="section-title mt-2 mb-6">
+              {data.title}
+            </h1>
+            <p className="text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              {data.description}
+            </p>
+          </motion.div>
         </div>
       </section>
 

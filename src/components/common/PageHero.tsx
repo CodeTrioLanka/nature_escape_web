@@ -18,6 +18,7 @@ const PageHero = ({
     children,
     showWave = true
 }: PageHeroProps) => {
+    const isVideo = backgroundImage.match(/\.(mp4|webm|ogg|mov)$|^https?:\/\/.*video.*$/i);
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -47,12 +48,15 @@ const PageHero = ({
                 {isVideo ? (
                     <video
                         autoPlay
-                        loop
                         muted
+                        loop
                         playsInline
                         className="absolute inset-0 w-full h-full object-cover"
                     >
-                        <source src={backgroundImage} type="video/mp4" />
+                        <source
+                            src={backgroundImage}
+                            type={backgroundImage.toLowerCase().endsWith('.mov') ? 'video/quicktime' : `video/${backgroundImage.split('.').pop()}`}
+                        />
                         Your browser does not support the video tag.
                     </video>
                 ) : (
