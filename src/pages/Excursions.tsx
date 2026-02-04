@@ -53,7 +53,7 @@ const Excursions = () => {
     <Layout>
       {/* Hero Section */}
       <PageHero
-        backgroundImage={heroContent?.heroImage || wildlife}
+        backgroundImage={heroContent?.heroImage}
         height="h-[90vh] min-h-[500px]"
         showWave={false}
       />

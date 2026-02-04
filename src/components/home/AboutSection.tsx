@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -40,17 +40,6 @@ const AboutSection = () => {
 
   const displayImage = aboutUsData?.hero?.heroBackground || heroImage;
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const decorY = useTransform(scrollYProgress, [0, 1], [150, -150]);
-  const statsY = useTransform(scrollYProgress, [0, 1], [80, -40]);
-  const circleY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
-
   // Show loading state
   if (isLoading) {
     return (
@@ -77,7 +66,6 @@ const AboutSection = () => {
           {/* Image with Parallax */}
           <motion.div
             className="relative p-4 md:p-6"
-            style={{ y: imageY }}
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
@@ -105,7 +93,6 @@ const AboutSection = () => {
 
           {/* Content with Parallax */}
           <motion.div
-            style={{ y: contentY }}
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -176,7 +163,7 @@ const AboutSection = () => {
         </div>
 
         {/* Stats with Animated Counters */}
-        <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20" style={{ y: statsY }}>
+        <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
