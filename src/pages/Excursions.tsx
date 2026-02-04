@@ -89,13 +89,13 @@ const Excursions = () => {
             className="flex flex-wrap justify-center gap-0 mb-12"
           >
             <div className="bg-primary/90 text-primary-foreground px-4 py-3 min-w-[150px]">
-              <label className="block text-xs mb-1">Time</label>
+              <label className="block text-xs mb-1">Category</label>
               <select
-                value={timeFilter}
-                onChange={(e) => setTimeFilter(e.target.value)}
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
                 className="w-full bg-transparent border-none text-sm focus:outline-none cursor-pointer"
               >
-                {timeOptions.map((option) => (
+                {categoryOptions.map((option) => (
                   <option key={option} value={option} className="text-foreground bg-background">
                     {option}
                   </option>
@@ -117,13 +117,13 @@ const Excursions = () => {
               </select>
             </div>
             <div className="bg-primary/70 text-primary-foreground px-4 py-3 min-w-[150px]">
-              <label className="block text-xs mb-1">Category</label>
+              <label className="block text-xs mb-1">Time</label>
               <select
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
+                value={timeFilter}
+                onChange={(e) => setTimeFilter(e.target.value)}
                 className="w-full bg-transparent border-none text-sm focus:outline-none cursor-pointer"
               >
-                {categoryOptions.map((option) => (
+                {timeOptions.map((option) => (
                   <option key={option} value={option} className="text-foreground bg-background">
                     {option}
                   </option>
