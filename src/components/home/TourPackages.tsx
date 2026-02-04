@@ -181,13 +181,13 @@ const TourCard = ({ pkg, index }: { pkg: any, index: number }) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group relative aspect-[4/5] overflow-hidden rounded-[20px] cursor-pointer shadow-lg"
+      className="group relative aspect-[4/5] overflow-hidden rounded-[20px] cursor-pointer shadow-lg will-change-transform"
     >
       <Link to={pkg.href} className="block w-full h-full">
         {/* Background Image */}
-        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110 will-change-transform">
           <img
-            src={optimizeImage(pkg.image, 600)}
+            src={optimizeImage(pkg.image, 400)}
             alt={pkg.title}
             className="w-full h-full object-cover"
             loading="lazy"

@@ -6,6 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { fetchTourCategoryBySlug, TourCategory as ITourCategory } from "@/api/tours.api";
 import { fetchPackagesByCategoryId, Package } from "@/api/packages.api";
+import { optimizeImage } from "@/lib/utils";
 
 // Images
 import beachSurfImg from "@/assets/beach-surf.jpg";
@@ -969,7 +970,7 @@ const TourCategory = () => {
         <motion.div
           className="absolute inset-0 bg-cover bg-center scale-110"
           style={{
-            backgroundImage: `url(${data.heroImage})`,
+            backgroundImage: `url(${optimizeImage(data.heroImage, 1920)})`,
             y: heroY
           }}
         >
@@ -1023,9 +1024,11 @@ const TourCategory = () => {
                       {tour.image ? (
                         <>
                           <img
-                            src={tour.image}
+                            src={optimizeImage(tour.image, 600)}
                             alt={tour.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            loading="lazy"
+                            decoding="async"
                           />
                           {/* Gradient Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent" />

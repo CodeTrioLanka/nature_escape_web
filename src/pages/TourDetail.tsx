@@ -6,6 +6,7 @@ import { Check, X, MapPin, Calendar, Users, Clock, ChevronRight, ChevronLeft, Ph
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { fetchPackageBySlug, Package } from "@/api/packages.api";
+import { optimizeImage } from "@/lib/utils";
 
 // Import images
 import beachParadiseImg from "@/assets/beach-paradise.jpg";
@@ -599,7 +600,7 @@ const TourDetail = () => {
         {tour.heroImage ? (
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${tour.heroImage})` }}
+            style={{ backgroundImage: `url(${optimizeImage(tour.heroImage, 1920)})` }}
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
           </div>
@@ -689,9 +690,11 @@ const TourDetail = () => {
             {tour.gallery.map((image, index) => (
               <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg">
                 <img
-                  src={image}
+                  src={optimizeImage(image, 800)}
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             ))}
