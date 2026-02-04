@@ -106,71 +106,93 @@ const Testimonials = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-secondary font-medium tracking-wider uppercase text-sm">
+          <span
+            className="text-gold text-3xl md:text-4xl block mb-2"
+            style={{ fontFamily: "'Brush Script MT', cursive" }}
+          >
             Testimonials
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-primary-foreground mt-3 mb-4">
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-primary-foreground mb-6">
             Tour Experiences
           </h2>
-          <p className="text-primary-foreground/70 max-w-2xl mx-auto">
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-6" />
+          <p className="text-primary-foreground/70 max-w-2xl mx-auto text-lg leading-relaxed">
             Hear from travelers who've experienced the magic of Sri Lanka with us
           </p>
         </motion.div>
 
-        <motion.div className="grid md:grid-cols-3 gap-8" style={{ y: cardsY }}>
-          {reviews.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              className="bg-card/95 backdrop-blur-md p-8 rounded-3xl shadow-2xl flex flex-col h-full justify-between"
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: loading ? 0 : index * 0.2 }}
-              whileHover={{ y: -10 }}
-            >
-              <div>
-                <motion.div
-                  initial={{ rotate: 0 }}
-                  whileHover={{ rotate: 12, scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Quote className="w-12 h-12 text-secondary/30 mb-4" />
-                </motion.div>
+        {/* Auto-scrolling Marquee Container with Gradient Mask */}
+        <div
+          className="relative w-full overflow-hidden py-10"
+          style={{
+            y: cardsY,
+            maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
+          } as any}
+        >
+          <motion.div
+            className="flex gap-6 w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              ease: "linear",
+              duration: 40,
+              repeat: Infinity
+            }}
+          >
+            {[...reviews, ...reviews].map((testimonial, index) => (
+              <div
+                key={index}
+                className="w-[380px] md:w-[420px] shrink-0 bg-white p-8 rounded-[2rem] shadow-lg flex flex-col relative overflow-hidden group border border-white/50"
+              >
+                {/* Header: User Info & Rating */}
+                <div className="flex justify-between items-start mb-6">
+                  <div className="flex gap-4 items-center">
+                    <div className="w-14 h-14 rounded-full bg-ocean-dark text-white flex items-center justify-center font-display font-bold text-xl shrink-0 shadow-md">
+                      {testimonial.avatar}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <h4 className="font-bold text-foreground text-lg leading-tight">
+                          {testimonial.name}
+                        </h4>
+                        {/* Blue Verified Badge */}
+                        <div title="Verified Traveler">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-[#1D9BF0]">
+                            <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.02-2.147 3.6 0 1.457.748 2.795 1.84 3.668-.19.537-.305 1.114-.305 1.712 0 2.613 2.094 4.73 4.685 4.73.535 0 1.05-.084 1.532-.236C10.04 22.84 11.236 23.5 12.5 23.5c1.157 0 2.26-.547 2.977-1.4.526.177 1.09.28 1.674.28 2.59 0 4.685-2.117 4.685-4.73 0-.598-.115-1.175-.305-1.712 1.092-.873 1.84-2.21 1.84-3.668zM10.957 17.52l-3.32-3.13 1.487-1.573 1.74 1.64 4.542-4.8 1.573 1.488-5.93 6.265z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-400 font-medium mt-0.5">{testimonial.tour}</p>
+                    </div>
+                  </div>
 
-                <div className="flex gap-1 mb-4">
+                  {/* Quote Icon Top Right - Outlined Style */}
+                  <Quote className="w-10 h-10 text-gold/30 fill-transparent stroke-[1.5]" />
+                </div>
+
+                {/* Stars */}
+                <div className="flex gap-1 mb-6">
                   {[...Array(5)].map((_, i) => (
-                    <motion.div
+                    <Star
                       key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ duration: 0.3, delay: 0.5 + i * 0.1 }}
-                    >
-                      <Star
-                        className={`w-5 h-5 ${i < testimonial.rating ? "fill-secondary text-secondary" : "text-muted"}`}
-                      />
-                    </motion.div>
+                      className={`w-4 h-4 ${i < testimonial.rating ? "fill-[#F59E0B] text-[#F59E0B]" : "fill-gray-200 text-gray-200"}`}
+                    />
                   ))}
                 </div>
 
-                <p className="text-foreground mb-6 leading-relaxed italic line-clamp-4">
-                  "{testimonial.text}"
-                </p>
-              </div>
-
-              <div className="border-t border-border pt-4 flex items-center gap-4 mt-auto">
-                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold shrink-0">
-                  {testimonial.avatar}
-                </div>
-                <div>
-                  <p className="font-display font-semibold text-foreground">
-                    {testimonial.name}
+                {/* Review Text */}
+                <div className="relative z-10">
+                  <p className="text-gray-600 leading-relaxed text-[15px] font-serif tracking-wide italic">
+                    "{testimonial.text}"
                   </p>
-                  <p className="text-sm text-muted-foreground">{testimonial.location}</p>
-                  <p className="text-sm text-primary mt-0.5">{testimonial.tour}</p>
                 </div>
+
+                {/* Decorative Corner Glow */}
+                <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-br from-gold/10 to-primary/5 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
         <motion.div
           className="text-center mt-12"
@@ -178,14 +200,15 @@ const Testimonials = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.6 }}
         >
-          <Link to="/reviews">
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-primary-foreground border-primary-foreground/30 bg-primary-foreground/10 hover:bg-primary-foreground hover:text-primary backdrop-blur-sm gap-2"
-            >
-              Read All Reviews <ArrowRight className="w-4 h-4" />
-            </Button>
+          <Link
+            to="/reviews"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-full backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-105"
+          >
+            <span className="relative z-10 text-white font-medium tracking-wide">Read All Reviews</span>
+            <ArrowRight className="w-5 h-5 text-gold group-hover:translate-x-1 transition-transform" />
+
+            {/* Shimmer Effect */}
+            <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent z-0" />
           </Link>
         </motion.div>
       </div>

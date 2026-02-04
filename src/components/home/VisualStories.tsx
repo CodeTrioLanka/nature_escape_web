@@ -49,15 +49,24 @@ const VisualStories = () => {
 
       <div className="container mx-auto px-4 relative z-20 pointer-events-none pt-12">
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary font-medium tracking-wider uppercase text-sm">
+          <span
+            className="text-gold text-3xl md:text-4xl block mb-2"
+            style={{ fontFamily: "'Brush Script MT', cursive" }}
+          >
             Gallery
           </span>
-          <h2 className="section-title mt-3 mb-4">Captured Moments</h2>
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-foreground mb-6">
+            Captured Moments
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-6" />
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+            Glimpses of the unforgettable memories created with Nature Escape
+          </p>
         </motion.div>
       </div>
 
