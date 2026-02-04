@@ -76,36 +76,31 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Image with Parallax */}
           <motion.div
-            className="relative"
+            className="relative p-4 md:p-6"
             style={{ y: imageY }}
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-              <motion.img
-                src={displayImage}
-                alt={heroData.heroTitle || "Sri Lanka Destination"}
-                className="w-full h-[500px] object-cover"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.6 }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+            {/* Main Image Container */}
+            <div className="relative z-10 mx-auto max-w-md transform transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)] rounded-[2.5rem] bg-white p-2 shadow-2xl group">
+              <div className="relative overflow-hidden rounded-[2rem] h-[380px] md:h-[480px] w-full">
+                <motion.img
+                  src={displayImage}
+                  alt={heroData.heroTitle || "Sri Lanka Destination"}
+                  className="h-full w-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,0.8,0.25,1)] group-hover:scale-110"
+                />
+
+                {/* Gloss/Shine Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                {/* Vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60" />
+              </div>
+
+              {/* Elegant Border Line */}
+              <div className="absolute inset-3 rounded-[2.2rem] border border-gray-100 pointer-events-none" />
             </div>
-            {/* Decorative Elements with Parallax */}
-            <motion.div
-              className="absolute -bottom-6 -right-6 w-48 h-48 bg-gradient-to-br from-primary to-ocean-dark rounded-2xl hidden lg:block -z-10"
-              style={{ y: decorY }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            />
-            <motion.div
-              className="absolute -top-4 -left-4 w-24 h-24 bg-secondary/20 rounded-full blur-2xl hidden lg:block"
-              style={{ y: circleY }}
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
           </motion.div>
 
           {/* Content with Parallax */}
@@ -121,7 +116,7 @@ const AboutSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              {aboutUsData?.hero?.heroTitle ? "About Us" : "Sri Lanka's Leading"}
+              Sri Lanka’s Leading
             </motion.span>
             <motion.h2
               className="section-title mt-3 mb-6"
@@ -132,51 +127,22 @@ const AboutSection = () => {
               {heroData.heroTitle}
             </motion.h2>
             <motion.p
-              className="text-muted-foreground mb-6 leading-relaxed"
+              className="text-xl font-bold text-foreground mb-4 leading-relaxed text-justify"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              {heroData.heroDescription}
+              Experience the beauty of Sri Lanka with Nature Escape.
             </motion.p>
             <motion.p
-              className="text-muted-foreground mb-8 leading-relaxed"
+              className="text-muted-foreground mb-6 leading-relaxed text-justify"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              From ancient temples and pristine beaches to lush tea plantations and
-              exotic wildlife, we craft unforgettable experiences tailored to your dreams.
+              {heroData.heroDescription}
             </motion.p>
 
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              <h3 className="font-display font-semibold text-xl mb-4 text-foreground">
-                Why Book with Ceylon Tours?
-              </h3>
-              <ul className="space-y-3 text-muted-foreground">
-                {[
-                  "Award-winning service excellence",
-                  "Local expertise with global standards",
-                  "Sustainable and responsible tourism"
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-center gap-3"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
-                  >
-                    <span className="w-2 h-2 bg-secondary rounded-full" />
-                    {item}
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -184,16 +150,26 @@ const AboutSection = () => {
               transition={{ duration: 0.5, delay: 1 }}
             >
               <Link
-                to="/contact"
-                className="group inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-ocean-light hover:shadow-lg hover:shadow-primary/20 transition-all duration-300"
+                to="/about"
+                className="group relative inline-flex items-center gap-3 px-10 py-4 bg-primary text-primary-foreground font-bold rounded-full overflow-hidden transition-all duration-500 uppercase tracking-[0.2em] text-xs md:text-sm shadow-lg hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95"
               >
-                Learn More About Us
-                <motion.span
-                  className="inline-block"
-                  whileHover={{ x: 5 }}
-                >
-                  →
-                </motion.span>
+                {/* 1. Animated Background Fill */}
+                <div className="absolute inset-0 bg-gradient-to-r from-ocean-light via-ocean to-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+
+                {/* 2. Shimmer/Glint effect */}
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
+
+                <span className="relative z-10">About Us</span>
+
+                {/* 3. Highly dynamic arrow */}
+                <div className="relative z-10 flex items-center">
+                  <span className="inline-block text-xl transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:translate-x-8 group-hover:opacity-0">
+                    →
+                  </span>
+                  <span className="absolute left-0 inline-block text-xl -translate-x-8 opacity-0 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:translate-x-0 group-hover:opacity-100">
+                    →
+                  </span>
+                </div>
               </Link>
             </motion.div>
           </motion.div>
@@ -204,21 +180,27 @@ const AboutSection = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-8 bg-card rounded-2xl border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-500 group"
+              className="relative p-6 rounded-2xl bg-white shadow-xl shadow-black/5 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-gray-100 group overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              whileHover={{ y: -5, scale: 1.02 }}
             >
-              <div className="text-4xl md:text-5xl font-display font-bold text-primary mb-2">
-                <AnimatedCounter
-                  end={stat.value}
-                  suffix={stat.suffix}
-                  duration={2.5}
-                />
-              </div>
-              <div className="text-muted-foreground text-sm group-hover:text-primary transition-colors">
-                {stat.label}
+              {/* Decorative background gradient blob */}
+              <div className="absolute -top-10 -right-10 w-24 h-24 bg-ocean/5 rounded-full blur-2xl group-hover:bg-ocean/10 transition-colors duration-500" />
+
+              {/* Content */}
+              <div className="relative z-10 text-center">
+                <div className="text-4xl md:text-5xl font-display font-bold mb-3 bg-gradient-to-br from-primary via-ocean-dark to-ocean bg-clip-text text-transparent">
+                  <AnimatedCounter
+                    end={stat.value}
+                    suffix={stat.suffix}
+                    duration={2.5}
+                  />
+                </div>
+                <div className="h-1 w-12 mx-auto bg-gradient-to-r from-transparent via-gold to-transparent mb-3 opacity-50" />
+                <div className="text-muted-foreground font-medium text-xs uppercase tracking-widest group-hover:text-ocean-dark transition-colors duration-300">
+                  {stat.label}
+                </div>
               </div>
             </motion.div>
           ))}
