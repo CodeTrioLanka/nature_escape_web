@@ -648,11 +648,6 @@ const TourDetail = () => {
       {/* Itinerary Section */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-sm text-primary uppercase tracking-wider mb-2">Through the Hills</h2>
-            <h3 className="text-3xl md:text-4xl font-serif">to the Sea</h3>
-          </div>
-
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="w-full">
               {tour.itinerary.map((item, index) => (

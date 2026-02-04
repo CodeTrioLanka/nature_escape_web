@@ -29,33 +29,33 @@ const MICE = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <p className="text-sm text-muted-foreground mb-2">Walkers Tour Services</p>
+            <p className="text-sm text-muted-foreground mb-2">Nature Escape Services</p>
             <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-10">
               MICE
             </h1>
-            
+
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
-                At Nature Escape, we specialize in delivering world-class MICE (Meetings, Incentives, 
-                Conferences, and Exhibitions) services tailored to the unique needs of corporate clients. 
-                With decades of experience and a deep understanding of Sri Lanka's hospitality landscape, 
+                At Nature Escape, we specialize in delivering world-class MICE (Meetings, Incentives,
+                Conferences, and Exhibitions) services tailored to the unique needs of corporate clients.
+                With decades of experience and a deep understanding of Sri Lanka's hospitality landscape,
                 we create seamless, impactful events that leave lasting impressions.
               </p>
               <p>
-                From intimate board meetings to large-scale international conferences, our dedicated MICE 
-                team handles every detail with precision and creativity. We offer end-to-end solutions 
-                including venue selection, accommodation arrangements, transportation logistics, themed 
+                From intimate board meetings to large-scale international conferences, our dedicated MICE
+                team handles every detail with precision and creativity. We offer end-to-end solutions
+                including venue selection, accommodation arrangements, transportation logistics, themed
                 events, team-building activities, and post-event tours.
               </p>
               <p>
-                Our extensive network of premium hotels, unique venues, and trusted local partners ensures 
-                that every aspect of your corporate event is executed flawlessly. Whether you're looking 
-                to motivate your team with an incentive trip, host a product launch, or organize a 
+                Our extensive network of premium hotels, unique venues, and trusted local partners ensures
+                that every aspect of your corporate event is executed flawlessly. Whether you're looking
+                to motivate your team with an incentive trip, host a product launch, or organize a
                 multi-day conference, we bring your vision to life.
               </p>
               <p>
-                Sri Lanka's diverse landscapes — from pristine beaches to misty highlands, ancient ruins 
-                to modern cities — provide the perfect backdrop for unforgettable corporate experiences. 
+                Sri Lanka's diverse landscapes — from pristine beaches to misty highlands, ancient ruins
+                to modern cities — provide the perfect backdrop for unforgettable corporate experiences.
                 Let Nature Escape transform your next business event into an extraordinary journey.
               </p>
             </div>

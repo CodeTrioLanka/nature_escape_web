@@ -176,7 +176,7 @@ const ServiceDetail = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <p className="text-sm text-muted-foreground mb-2">Walkers Tour Services</p>
+            <p className="text-sm text-muted-foreground mb-2">Nature Escape Services</p>
             <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-10">
               {service.title}
             </h1>
