@@ -82,3 +82,28 @@ export const fetchPackageBySlug = async (slug: string): Promise<Package> => {
         throw error;
     }
 };
+
+export const fetchAllPackages = async (featuredOnly: boolean = false): Promise<Package[]> => {
+    try {
+        const baseUrl = import.meta.env.VITE_BASE_URI || 'http://localhost:5000';
+        const url = featuredOnly
+            ? `${baseUrl}/api/packages?featured=true`
+            : `${baseUrl}/api/packages`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new Error('Response is not JSON');
+        }
+
+        const data: PackagesResponse = await response.json();
+        return data.packages || [];
+    } catch (error) {
+        console.error('API Error fetching all packages:', error);
+        throw error;
+    }
+};

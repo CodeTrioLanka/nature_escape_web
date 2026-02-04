@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 import { Clock, ArrowRight, Plane } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { fetchAllPackages, Package } from "@/api/packages.api";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
 import templeImg from "@/assets/temple.jpg";
@@ -10,7 +13,7 @@ import wildlifeImg from "@/assets/wildlife.jpg";
 import beachImg from "@/assets/beach-unawatuna.jpg";
 import familyImg from "@/assets/family-beach.jpg";
 
-const packages = [
+const staticPackages = [
   {
     id: 1,
     title: "Cultural Triangle Explorer",
@@ -69,7 +72,10 @@ const packages = [
 
 const TourPackages = () => {
   const ref = useRef(null);
+  const bgTextRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [packages, setPackages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -78,17 +84,77 @@ const TourPackages = () => {
 
   const bgTextY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
+  // Fallback images
+  const fallbackImages: { [key: string]: string } = {
+    sigiriya: sigiriyaImg,
+    tea: teaImg,
+    temple: templeImg,
+    wildlife: wildlifeImg,
+    beach: beachImg,
+    family: familyImg,
+  };
+
+  // GSAP Parallax Effect for background text
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (bgTextRef.current) {
+      gsap.to(bgTextRef.current, {
+        yPercent: 50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
+  useEffect(() => {
+    const loadPackages = async () => {
+      try {
+        const data = await fetchAllPackages();
+        if (data && data.length > 0) {
+          const mappedPackages = data.map((pkg, index) => ({
+            id: pkg._id,
+            title: pkg.packageName,
+            duration: `${pkg.overview.duration.days} Days / ${pkg.overview.duration.nights} Nights`,
+            description: pkg.hero.description,
+            image: pkg.hero.backgroundImage || Object.values(fallbackImages)[index % 6],
+            href: `/tour/${pkg.slug}`,
+            price: "", // Add price if available in backend
+          }));
+          setPackages(mappedPackages);
+        } else {
+          setPackages(staticPackages);
+        }
+      } catch (error) {
+        console.error("Failed to fetch tour packages:", error);
+        setPackages(staticPackages);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadPackages();
+  }, []);
+
   return (
     <section className="py-24 bg-background relative overflow-hidden" ref={ref}>
       {/* Background Text */}
-      <motion.div
+      <div
+        ref={bgTextRef}
         className="absolute top-0 left-0 right-0 text-center pointer-events-none opacity-[0.03]"
-        style={{ y: bgTextY }}
       >
         <span className="text-[120px] md:text-[200px] font-display font-bold leading-none select-none">
           Journeys
         </span>
-      </motion.div>
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -134,7 +200,7 @@ const TourPackages = () => {
           </div>
 
           <div className="space-y-32">
-            {packages.map((pkg, index) => (
+            {packages.slice(0, 6).map((pkg, index) => (
               <TourCard key={pkg.id} pkg={pkg} index={index} />
             ))}
           </div>
