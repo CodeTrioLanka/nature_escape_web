@@ -941,7 +941,7 @@ const TourCategory = () => {
       slug: pkg.slug,
       title: pkg.packageName,
       duration: `${pkg.overview?.duration?.days || 0} Days / ${pkg.overview?.duration?.nights || 0} Nights`, // Adjust based on data availability
-      image: pkg.hero?.backgroundImage || staticData.tours[0]?.image || beachSurfImg,
+      image: pkg.hero?.backgroundImage || null,
       recommended: pkg.hero?.title ? [pkg.hero.title] : ["Adventure"] // Placeholder
     })),
     features: staticData.features, // Backend doesn't have features yet
@@ -1019,15 +1019,22 @@ const TourCategory = () => {
                     className="group block"
                   >
                     <div className="relative overflow-hidden aspect-[4/5] rounded-lg shadow-lg">
-                      {/* Background Image */}
-                      <img
-                        src={tour.image}
-                        alt={tour.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent" />
+                      {/* Background Image or Placeholder */}
+                      {tour.image ? (
+                        <>
+                          <img
+                            src={tour.image}
+                            alt={tour.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          />
+                          {/* Gradient Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent" />
+                        </>
+                      ) : (
+                        <div className="w-full h-full bg-muted flex items-center justify-center">
+                          <p className="text-muted-foreground text-center px-4">Image not uploaded</p>
+                        </div>
+                      )}
 
                       {/* Recommended Tag - Top */}
                       <div className="absolute top-4 left-4 right-4">
@@ -1065,100 +1072,35 @@ const TourCategory = () => {
         </div>
       </section>
 
-      {/* Comparison Table */}
-      {data.features && data.features.length > 0 && (
+
+      {/* Schedule Image Section */}
+      {tourCategory && (
         <section className="py-12 bg-sand">
           <div className="container mx-auto px-4">
-            <div className="overflow-x-auto">
-              <table className="w-full max-w-4xl mx-auto bg-card rounded-xl shadow-lg overflow-hidden">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left p-4 font-display font-semibold text-foreground">
-                      Inclusions
-                    </th>
-                    {/* Only show up to 3 tours in comparison to fit/avoid overflow if many packages */}
-                    {data.tours.slice(0, 3).map((tour) => (
-                      <th key={tour.id} className="p-4 text-center">
-                        <div className="font-display font-semibold text-foreground text-sm">
-                          {tour.title}
-                        </div>
-                        <div className="text-muted-foreground text-xs mt-1">
-                          {tour.duration}
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.features.map((group, groupIndex) => {
-                    // Handle grouped sections
-                    if ('section' in group) {
-                      return (
-                        <React.Fragment key={group.section}>
-                          {/* SECTION HEADER ROW */}
-                          <tr className="bg-muted/60">
-                            <td
-                              colSpan={Math.min(data.tours.length, 3) + 1}
-                              className="p-4 font-display font-semibold text-foreground uppercase tracking-wide"
-                            >
-                              {group.section}
-                            </td>
-                          </tr>
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-display font-bold">Tour Schedule</h2>
+              <p className="text-muted-foreground mt-2">Detailed itinerary overview</p>
+            </div>
 
-                          {/* FEATURE ROWS */}
-                          {group.items.map((item, idx) => (
-                            <tr
-                              key={item.name}
-                              className={idx % 2 === 0 ? "bg-card" : "bg-muted/30"}
-                            >
-                              <td className="p-4 text-sm text-foreground pl-8">
-                                {item.name}
-                              </td>
-
-                              {item.values.slice(0, Math.min(data.tours.length, 3)).map((value, i) => (
-                                <td key={i} className="p-4 text-center">
-                                  {value ? (
-                                    <Check className="w-5 h-5 text-forest mx-auto" />
-                                  ) : (
-                                    <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
-                                  )}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </React.Fragment>
-                      );
-                    }
-
-                    // Handle flat features
-                    return (
-                      <tr
-                        key={group.name}
-                        className={groupIndex % 2 === 0 ? "bg-card" : "bg-muted/30"}
-                      >
-                        <td className="p-4 text-sm text-foreground">
-                          {group.name}
-                        </td>
-
-                        {group.values.slice(0, Math.min(data.tours.length, 3)).map((value, i) => (
-                          <td key={i} className="p-4 text-center">
-                            {value ? (
-                              <Check className="w-5 h-5 text-forest mx-auto" />
-                            ) : (
-                              <X className="w-5 h-5 text-muted-foreground/40 mx-auto" />
-                            )}
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-
-              </table>
+            <div className="max-w-5xl mx-auto">
+              {tourCategory.scheduleImage ? (
+                <div className="bg-card rounded-xl shadow-lg overflow-hidden">
+                  <img
+                    src={tourCategory.scheduleImage}
+                    alt="Tour Schedule"
+                    className="w-full h-auto"
+                  />
+                </div>
+              ) : (
+                <div className="bg-muted rounded-xl shadow-lg p-12 flex items-center justify-center min-h-[400px]">
+                  <p className="text-muted-foreground text-xl">Image not uploaded</p>
+                </div>
+              )}
             </div>
           </div>
         </section>
       )}
+
 
       {/* Map Section */}
       {data.mapText && (

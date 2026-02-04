@@ -596,12 +596,18 @@ const TourDetail = () => {
     <Layout>
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px] -mt-20">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${tour.heroImage})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
-        </div>
+        {tour.heroImage ? (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${tour.heroImage})` }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
+          </div>
+        ) : (
+          <div className="absolute inset-0 bg-muted flex items-center justify-center">
+            <p className="text-muted-foreground text-xl">Image not uploaded</p>
+          </div>
+        )}
       </section>
 
       {/* Hero Content Section (Moved from Overlay) */}
