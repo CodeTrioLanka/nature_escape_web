@@ -31,9 +31,7 @@ const Index = () => {
       <GSAPParallaxContainer speed={0.9}>
         <Testimonials />
       </GSAPParallaxContainer>
-      <GSAPParallaxContainer speed={1.1}>
-        <Sustainability />
-      </GSAPParallaxContainer>
+
       <GSAPParallaxContainer speed={0.95}>
         <VisualStories />
       </GSAPParallaxContainer>

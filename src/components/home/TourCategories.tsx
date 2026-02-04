@@ -60,11 +60,17 @@ const TourCategories = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary font-medium tracking-wider uppercase text-sm">
+          <span
+            className="text-gold text-3xl md:text-4xl block mb-2"
+            style={{ fontFamily: "'Brush Script MT', cursive" }}
+          >
             Explore
           </span>
-          <h2 className="section-title mt-3 mb-4">Tour Categories</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-foreground mb-6">
+            Tour Categories
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-6" />
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
             Discover the diverse experiences Sri Lanka has to offer
           </p>
         </motion.div>
