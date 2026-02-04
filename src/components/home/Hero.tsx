@@ -37,7 +37,7 @@ const Hero = () => {
 
   // Prioritize homebgVideo field, then check if homebg is a video, otherwise use as image
   const backgroundVideo = homeData?.homebgVideo || (isHomebgVideo ? homeData?.homebg : null);
-  const backgroundImage = !isHomebgVideo ? (homeData?.homebg || heroImage) : heroImage;
+  const backgroundImage = !isHomebgVideo ? (homeData?.homebg) : homeData?.homebg;
   const isVideo = !!backgroundVideo;
 
   console.log('Background video URL:', backgroundVideo, 'Background image URL:', backgroundImage, 'Is Video:', isVideo);

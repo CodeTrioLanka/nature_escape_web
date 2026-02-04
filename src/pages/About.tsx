@@ -168,7 +168,7 @@ const About = () => {
     : fallbackMilestones;
 
   // Hero section data with fallbacks
-  const heroBackground = aboutData?.hero?.heroBackground || sigiriya;
+  const heroBackground = aboutData?.hero?.heroBackground;
   const heroTitle = aboutData?.hero?.heroTitle || "We Create Memories";
   const heroDescription = aboutData?.hero?.heroDescription || "Your trusted partner in discovering Sri Lanka's natural wonders since 2010";
 
