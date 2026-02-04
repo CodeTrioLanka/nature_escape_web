@@ -137,7 +137,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            {homeData?.subtitle || "Immerse yourself in Sri Lanka's pristine beaches, ancient rainforests, and breathtaking wildlife."}
+            {homeData?.subtitle}
           </motion.p>
 
           {/* CTA Button - Centered */}

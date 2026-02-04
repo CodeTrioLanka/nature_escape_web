@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { fetchThingsToDo, ThingsToDoItem, HeroItem } from "@/api/thingsToDo.api";
 import { Skeleton } from "@/components/ui/skeleton";
+import PageHero from "@/components/common/PageHero";
 
 const ThingsToDo = () => {
   const [activities, setActivities] = useState<ThingsToDoItem[]>([]);
@@ -43,14 +44,12 @@ const ThingsToDo = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] -mt-20">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroData?.heroImage || adventureImage})` }}
-        >
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
-      </section>
+      <PageHero
+        title={heroData?.title || "Crafted for Every Traveller"}
+        subtitle={heroData?.subtitle || "Unforgettable Sri Lankan Adventures"}
+        backgroundImage={heroData?.heroImage || adventureImage}
+        height="h-[65vh] min-h-[500px]"
+      />
 
       {/* Content Section */}
       <section className="py-16 md:py-24 bg-background">

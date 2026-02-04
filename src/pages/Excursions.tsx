@@ -1,9 +1,10 @@
 import Layout from "@/components/layout/Layout";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import wildlife from "@/assets/wildlife.jpg";
 import { fetchExcursionFilters, getAllExcursions, getExcursionHeroes, Excursion, ExcursionHero } from "@/api/excursion.api";
+import PageHero from "@/components/common/PageHero";
 
 const Excursions = () => {
   const [timeFilter, setTimeFilter] = useState("All");
@@ -15,14 +16,6 @@ const Excursions = () => {
   const [categoryOptions, setCategoryOptions] = useState(["All"]);
   const [excursions, setExcursions] = useState<Excursion[]>([]);
   const [heroContent, setHeroContent] = useState<ExcursionHero | null>(null);
-
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -59,26 +52,12 @@ const Excursions = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      {/* Hero Section */}
-      <section
-        ref={ref}
-        className="relative h-[50vh] min-h-[400px] -mt-20 overflow-hidden flex items-center justify-center"
-      >
-        <motion.div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            y: backgroundY,
-            scale: backgroundScale,
-          }}
-        >
-          <img
-            src={heroContent?.heroImage || wildlife}
-            alt={heroContent?.title || "Safari Excursion"}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/30" />
-        </motion.div>
-      </section>
+      <PageHero
+        title={heroContent?.title || "Nature Escape Excursions"}
+        subtitle={heroContent?.subtitle || "Explore Sri Lanka with our exclusive excursions"}
+        backgroundImage={heroContent?.heroImage || wildlife}
+        height="h-[65vh] min-h-[500px]"
+      />
 
       {/* Content Section */}
       <section className="py-16 bg-background">
