@@ -4,7 +4,7 @@ import { useRef, ReactNode } from "react";
 interface PageHeroProps {
     title?: string;
     subtitle?: string;
-    backgroundImage: string;
+    backgroundImage?: string;
     height?: string;
     children?: ReactNode;
     showWave?: boolean;
@@ -29,7 +29,7 @@ const PageHero = ({
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-    const isVideo = backgroundImage.match(/\.(mp4|webm|ogg|mov)$|^https:\/\/res\.cloudinary\.com\/.*\/video\/upload\//i);
+    const isVideo = backgroundImage ? backgroundImage.match(/\.(mp4|webm|ogg|mov)$|^https:\/\/res\.cloudinary\.com\/.*\/video\/upload\//i) : null;
 
     return (
         <section
@@ -59,11 +59,12 @@ const PageHero = ({
                     <div
                         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
                         style={{
-                            backgroundImage: `url(${backgroundImage})`,
+                            backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
+                            backgroundColor: !backgroundImage ? '#1a1a1a' : undefined // Fallback color
                         }}
                     />
                 )}
-                <div className="absolute inset-0 bg-black/50" />
+                <div className="absolute inset-0 bg-black/20" />
             </motion.div>
 
             {/* Content - Centered Layout */}

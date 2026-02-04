@@ -11,6 +11,8 @@ import { fetchTourCategories, TourCategory } from "@/api/tours.api";
 import beachSurfImg from "@/assets/ballon.jpg";
 import heroImage from "@/assets/hero-srilanka.jpg";
 
+import sigiriyaWebp from "@/assets/sigiriya.webp";
+
 // Category images
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
@@ -86,7 +88,7 @@ const SriLankaTours = () => {
     <Layout>
       {/* Hero Section with PageHero Component */}
       <PageHero
-        backgroundImage={beachSurfImg}
+        backgroundImage={sigiriyaWebp}
         height="h-[90vh] min-h-[500px]"
         showWave={false}
       />
