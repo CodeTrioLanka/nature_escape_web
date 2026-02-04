@@ -1,31 +1,43 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
-import sigiriyaImg from "@/assets/sigiriya.jpg";
-import teaImg from "@/assets/tea-plantations.jpg";
-import templeImg from "@/assets/temple.jpg";
-import beachImg from "@/assets/beach-paradise.jpg";
-import wildlifeImg from "@/assets/wildlife.jpg";
-import honeymoonImg from "@/assets/honeymoon.jpg";
-
-const images = [
-  { src: sigiriyaImg, alt: "Sigiriya Rock Fortress" },
-  { src: teaImg, alt: "Tea Plantations" },
-  { src: templeImg, alt: "Ancient Temple" },
-  { src: beachImg, alt: "Tropical Beach" },
-  { src: wildlifeImg, alt: "Wildlife Safari" },
-  { src: honeymoonImg, alt: "Romantic Getaway" },
-];
+import { useRef, useState, useEffect } from "react";
+import DomeGallery from "../ui/dome-gallery";
+import { fetchHomeData } from "@/api/home.api";
 
 const VisualStories = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [isMobile, setIsMobile] = useState(false);
+  const [images, setImages] = useState<any[]>([]);
+
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const data = await fetchHomeData();
+        if (data && data.gallery) {
+          const formattedImages = data.gallery.map((url: string) => ({
+            src: url,
+            alt: "Nature Escape Gallery"
+          }));
+          setImages(formattedImages);
+        }
+      } catch (error) {
+        console.error("Failed to load gallery images", error);
+      }
+    };
+    loadImages();
+
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
-    <section className="py-24 bg-sand relative overflow-hidden" ref={ref}>
+    <section className="py-24 bg-sand relative overflow-hidden min-h-screen" ref={ref}>
       {/* Background Text */}
-      <motion.div 
-        className="absolute top-0 left-0 right-0 text-center pointer-events-none"
+      <motion.div
+        className="absolute top-0 left-0 right-0 text-center pointer-events-none z-0"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1 }}
@@ -35,9 +47,9 @@ const VisualStories = () => {
         </span>
       </motion.div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
-          className="text-center mb-16 pt-16"
+      <div className="container mx-auto px-4 relative z-20 pointer-events-none pt-12">
+        <motion.div
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -46,58 +58,22 @@ const VisualStories = () => {
             Gallery
           </span>
           <h2 className="section-title mt-3 mb-4">Captured Moments</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Glimpses of unforgettable experiences from our travelers
-          </p>
         </motion.div>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {images.map((image, index) => (
-            <motion.div
-              key={index}
-              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${
-                index === 0 || index === 5 ? "md:row-span-2" : ""
-              }`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 0.98 }}
-            >
-              <motion.img
-                src={image.src}
-                alt={image.alt}
-                className={`w-full object-cover transition-all duration-700 ${
-                  index === 0 || index === 5 ? "h-[400px] md:h-full" : "h-[200px] md:h-[250px]"
-                }`}
-                whileHover={{ scale: 1.15 }}
-              />
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/0 to-foreground/0 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-              
-              {/* Content */}
-              <motion.div 
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileHover={{ opacity: 1, y: 0 }}
-              >
-                <div className="text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <span className="text-primary-foreground font-display font-semibold text-xl">
-                    {image.alt}
-                  </span>
-                  <motion.div 
-                    className="w-12 h-0.5 bg-secondary mx-auto mt-2"
-                    initial={{ width: 0 }}
-                    whileHover={{ width: 48 }}
-                  />
-                </div>
-              </motion.div>
-
-              {/* Border glow on hover */}
-              <div className="absolute inset-0 border-2 border-secondary/0 group-hover:border-secondary/50 rounded-2xl transition-all duration-300" />
-            </motion.div>
-          ))}
-        </div>
+      <div className="w-full relative z-10 h-[600px] md:h-[800px] mt-8">
+        <DomeGallery
+          images={images}
+          fit={0.7}
+          minRadius={isMobile ? 150 : 200}
+          maxVerticalRotationDeg={20}
+          segments={isMobile ? 24 : 34}
+          dragDampening={0.8}
+          grayscale={false}
+          openedImageWidth={isMobile ? "300px" : "600px"}
+          openedImageHeight={isMobile ? "400px" : "600px"}
+          overlayBlurColor="hsl(35, 30%, 95%)"
+        />
       </div>
     </section>
   );
