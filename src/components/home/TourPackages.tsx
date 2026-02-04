@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import { Clock, ArrowRight, Plane } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { fetchAllPackages, Package } from "@/api/packages.api";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { fetchAllPackages } from "@/api/packages.api";
 import sigiriyaImg from "@/assets/sigiriya.jpg";
 import teaImg from "@/assets/tea-plantations.jpg";
 import templeImg from "@/assets/temple.jpg";
@@ -72,17 +70,9 @@ const staticPackages = [
 
 const TourPackages = () => {
   const ref = useRef(null);
-  const bgTextRef = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [packages, setPackages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  const bgTextY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   // Fallback images
   const fallbackImages: { [key: string]: string } = {
@@ -94,28 +84,6 @@ const TourPackages = () => {
     family: familyImg,
   };
 
-  // GSAP Parallax Effect for background text
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (bgTextRef.current) {
-      gsap.to(bgTextRef.current, {
-        yPercent: 50,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ref.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
-
   useEffect(() => {
     const loadPackages = async () => {
       try {
@@ -126,17 +94,28 @@ const TourPackages = () => {
             title: pkg.packageName,
             duration: `${pkg.overview.duration.days} Days / ${pkg.overview.duration.nights} Nights`,
             description: pkg.hero.description,
+            category: pkg.category || "WILDLIFE & ADVENTURE TOURS",
+            recommendedFor: pkg.recommendedFor || (index % 2 === 0 ? "ADVENTURE" : "WILDLIFE"),
             image: pkg.hero.backgroundImage || Object.values(fallbackImages)[index % 6],
             href: `/tour/${pkg.slug}`,
-            price: "", // Add price if available in backend
           }));
           setPackages(mappedPackages);
         } else {
-          setPackages(staticPackages);
+          // Map static packages to include category and recommendedFor for demo
+          const mappedStatic = staticPackages.map((pkg, index) => ({
+            ...pkg,
+            category: "WILDLIFE & ADVENTURE TOURS",
+            recommendedFor: index % 2 === 0 ? "ADVENTURE" : "WILDLIFE",
+          }));
+          setPackages(mappedStatic);
         }
       } catch (error) {
         console.error("Failed to fetch tour packages:", error);
-        setPackages(staticPackages);
+        setPackages(staticPackages.map((pkg, index) => ({
+          ...pkg,
+          category: "WILDLIFE & ADVENTURE TOURS",
+          recommendedFor: index % 2 === 0 ? "ADVENTURE" : "WILDLIFE",
+        })));
       } finally {
         setLoading(false);
       }
@@ -146,19 +125,9 @@ const TourPackages = () => {
 
   return (
     <section className="py-24 bg-background relative overflow-hidden" ref={ref}>
-      {/* Background Text */}
-      <div
-        ref={bgTextRef}
-        className="absolute top-0 left-0 right-0 text-center pointer-events-none opacity-[0.03]"
-      >
-        <span className="text-[120px] md:text-[200px] font-display font-bold leading-none select-none">
-          Journeys
-        </span>
-      </div>
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          className="text-center mb-24 max-w-3xl mx-auto"
+          className="text-center mb-16 max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -178,36 +147,14 @@ const TourPackages = () => {
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Dashed Path Connection (Desktop Only) */}
-          <div className="absolute top-20 bottom-20 left-[50%] -translate-x-1/2 w-full max-w-[800px] hidden md:block -z-10 pointer-events-none">
-            <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 600">
-              {/* 
-                  Approximation of a zigzag path for 6 items.
-                  Starts near y=50 (1st item), weaves L/R.
-                */}
-              <path
-                d="M 50,50 C 90,50 90,150 50,150 C 10,150 10,250 50,250 C 90,250 90,350 50,350 C 10,350 10,450 50,450 C 90,450 90,550 50,550"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="0.5"
-                strokeDasharray="4 4"
-                className="text-foreground"
-                vectorEffect="non-scaling-stroke"
-              />
-              {/* Decorative dots or crosses could be added here if needed */}
-            </svg>
-          </div>
-
-          <div className="space-y-32">
-            {packages.slice(0, 6).map((pkg, index) => (
-              <TourCard key={pkg.id} pkg={pkg} index={index} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {packages.slice(0, 6).map((pkg, index) => (
+            <TourCard key={pkg.id} pkg={pkg} index={index} />
+          ))}
         </div>
 
         <motion.div
-          className="text-center mt-24"
+          className="text-center mt-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -227,86 +174,56 @@ const TourPackages = () => {
 };
 
 const TourCard = ({ pkg, index }: { pkg: any, index: number }) => {
-  const isEven = index % 2 === 0;
-
-  // Custom clip paths to simulate slightly different rough edges
-  const clipPaths = [
-    "polygon(2% 0%, 98% 1%, 100% 98%, 1% 99%)",
-    "polygon(0% 2%, 99% 0%, 98% 99%, 2% 100%)",
-    "polygon(1% 1%, 97% 2%, 99% 97%, 3% 98%)",
-  ];
-  const clipPath = clipPaths[index % 3];
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.1 }}
-      viewport={{ once: true, margin: "-100px" }}
-      className={`flex flex-col md:flex-row items-center gap-8 md:gap-0 ${isEven ? "" : "md:flex-row-reverse"}`}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="group relative aspect-[4/5] overflow-hidden rounded-[20px] cursor-pointer shadow-lg"
     >
-      {/* Image Side */}
-      <div className={`w-full md:w-1/2 flex relative ${isEven ? "justify-end md:pr-12" : "justify-start md:pl-12"}`}>
-        <div className="relative w-full max-w-[500px] aspect-[4/3] group">
-          {/* Decorative Backdrops */}
-          <div
-            className={`absolute inset-0 bg-secondary/80 -rotate-2 scale-105 transition-transform duration-500 group-hover:rotate-0 rounded-sm`}
+      <Link to={pkg.href} className="block w-full h-full">
+        {/* Background Image */}
+        <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+          <img
+            src={pkg.image}
+            alt={pkg.title}
+            className="w-full h-full object-cover"
           />
+          {/* Overlays */}
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+        </div>
 
-          <motion.div
-            className="relative w-full h-full overflow-hidden shadow-xl bg-white p-1"
-            style={{ clipPath }}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.4 }}
-          >
-            <img
-              src={pkg.image}
-              alt={pkg.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60" />
+        {/* Top Badge */}
+        <div className="absolute top-6 left-6">
+          <div className="bg-white/95 px-4 py-2 rounded-[2px] shadow-sm">
+            <span className="text-[10px] font-black uppercase tracking-wider text-black whitespace-nowrap">
+              RECOMMENDED FOR {pkg.recommendedFor}
+            </span>
+          </div>
+        </div>
 
-            {/* Plane Icon Decoration */}
-            <div className="absolute top-4 right-4 text-white opacity-80">
-              <Plane className="w-6 h-6 rotate-45" />
+        {/* Content Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500 group-hover:translate-y-[-8px]">
+          <div className="flex flex-col">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-white/80 text-[11px] font-bold uppercase tracking-[0.2em]">
+                {pkg.category}
+              </span>
+              <div className="h-[1px] w-8 bg-white/40" />
             </div>
-          </motion.div>
-        </div>
-      </div>
 
-      {/* Content Side */}
-      <div className={`w-full md:w-1/2 flex ${isEven ? "justify-start md:-ml-16" : "justify-end md:-mr-16"} relative z-10`}>
-        <div
-          className="bg-card p-8 md:p-10 shadow-xl max-w-md relative hover:-translate-y-1 transition-transform duration-300"
-        >
-          {/* Tape Effect top/bottom */}
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-yellow-100/50 rotate-[-2deg] opacity-60 backdrop-blur-sm shadow-sm" />
+            <h3 className="text-white text-3xl lg:text-4xl font-black uppercase leading-[1] mb-3 tracking-tighter drop-shadow-md">
+              {pkg.title}
+            </h3>
 
-          <div className="flex items-center gap-2 text-primary font-medium text-xs tracking-wider mb-4 uppercase">
-            <Clock className="w-3.5 h-3.5" />
-            {pkg.duration}
-          </div>
-
-          <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4 leading-tight">
-            {pkg.title}
-          </h3>
-
-          <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-            {pkg.description}
-          </p>
-
-          <div className="flex items-center justify-between mt-auto pt-6 border-t border-dashed border-border/60">
-            <Link
-              to={pkg.href}
-              className="bg-gold hover:bg-gold-light text-white font-medium px-6 py-2.5 rounded-sm shadow-md hover:shadow-lg transition-all text-sm flex items-center gap-2 group-hover:gap-3"
-            >
-              Details
-              <ArrowRight className="w-3 h-3" />
-            </Link>
+            <div className="text-white/80 text-sm font-medium tracking-wide">
+              {pkg.duration}
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 };
