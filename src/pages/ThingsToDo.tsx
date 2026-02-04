@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import adventureImage from "@/assets/adventure.jpg";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+
 import { fetchThingsToDo, ThingsToDoItem, HeroItem } from "@/api/thingsToDo.api";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const ThingsToDo = () => {
+  const navigate = useNavigate();
   const [activities, setActivities] = useState<ThingsToDoItem[]>([]);
   const [heroData, setHeroData] = useState<HeroItem | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedActivity, setSelectedActivity] = useState<ThingsToDoItem | null>(null);
+
 
   useEffect(() => {
     const loadActivities = async () => {
@@ -104,7 +100,7 @@ const ThingsToDo = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
-                  onClick={() => setSelectedActivity(activity)}
+                  onClick={() => navigate(`/things-to-do/${activity._id}`)}
                   className="cursor-pointer group block relative aspect-[4/3] overflow-hidden rounded-lg"
                 >
                   <img
@@ -126,30 +122,7 @@ const ThingsToDo = () => {
       </section>
 
       {/* Detail Dialog */}
-      <Dialog open={!!selectedActivity} onOpenChange={(open) => !open && setSelectedActivity(null)}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-2xl md:text-3xl font-bold mb-4">
-              {selectedActivity?.title}
-            </DialogTitle>
-          </DialogHeader>
 
-          {selectedActivity && (
-            <div className="space-y-6">
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-                <img
-                  src={selectedActivity.image}
-                  alt={selectedActivity.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <DialogDescription className="text-base leading-relaxed whitespace-pre-wrap">
-                {selectedActivity.description}
-              </DialogDescription>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </Layout>
   );
 };

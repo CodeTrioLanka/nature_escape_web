@@ -14,6 +14,7 @@ import DestinationDetail from "./pages/DestinationDetail";
 import Excursions from "./pages/Excursions";
 import ExcursionDetail from "./pages/ExcursionDetail";
 import ThingsToDo from "./pages/ThingsToDo";
+import ThingsToDoDetail from "./pages/ThingsToDoDetail";
 import Reviews from "./pages/Reviews";
 import Sustainability from "./pages/Sustainability";
 import Services from "./pages/Services";
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/excursions" element={<Excursions />} />
           <Route path="/excursion/:excursionSlug" element={<ExcursionDetail />} />
           <Route path="/things-to-do" element={<ThingsToDo />} />
+          <Route path="/things-to-do/:id" element={<ThingsToDoDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/sustainability" element={<Sustainability />} />
           <Route path="/services" element={<Services />} />
