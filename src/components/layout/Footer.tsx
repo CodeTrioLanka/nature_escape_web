@@ -98,7 +98,16 @@ const Footer = () => {
       <div className="relative z-10 border-t border-ocean-light/20">
         <div className="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-primary-foreground/70 text-sm">
-            © 2026 Nature Escape. All rights reserved.
+            © 2026{" "}
+            <a
+              href="https://www.codetriolanka.lk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-secondary/80 transition-colors font-semibold"
+            >
+              CodeTrio Lanka Solutions
+            </a>
+            . All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link to="#" className="text-primary-foreground/60 hover:text-primary-foreground text-sm">
