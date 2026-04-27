@@ -32,7 +32,7 @@ export interface SubmitReviewData {
     reviewText: string;
 }
 
-const getBaseUrl = () => import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const getBaseUrl = () => import.meta.env.VITE_API_URL;
 
 // Get public approved reviews
 export const fetchPublicReviews = async (): Promise<Review[]> => {

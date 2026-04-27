@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { sendMessage, fetchContactDetails, ContactDetails } from "@/api/contact.api";
 import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
+import SEO from "@/components/common/SEO";
 
 const Contact = () => {
   const [subject, setSubject] = useState("General Inquiry");
@@ -96,6 +97,10 @@ const Contact = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Contact Us"
+        description="Get in touch with Nature Escape. We are here to help you plan your perfect nature-filled adventure in Sri Lanka and the Maldives."
+      />
       {/* Hero Section */}
       <PageHero
         backgroundImage="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80"

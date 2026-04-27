@@ -3,25 +3,25 @@ import Hero from "@/components/home/Hero";
 import AboutSection from "@/components/home/AboutSection";
 import TourCategories from "@/components/home/TourCategories";
 import TourPackages from "@/components/home/TourPackages";
-// import BespokeTours from "@/components/home/BespokeTours";
 import ExclusiveExperiences from "@/components/home/ExclusiveExperiences";
 import Testimonials from "@/components/home/Testimonials";
-// import Sustainability from "@/components/home/Sustainability";
 import VisualStories from "@/components/home/VisualStories";
-// import Journey from "@/components/home/Journey";
+import SEO from "@/components/common/SEO";
 
 const Index = () => {
   return (
     <Layout>
+      <SEO 
+        title="Best Sri Lanka & Maldives Nature Tours"
+        description="Experience the ultimate nature escape in Sri Lanka and the Maldives. Book tailor-made wildlife tours, beach holidays, and cultural experiences."
+      />
       <Hero />
       <AboutSection />
       <TourCategories />
       <TourPackages />
-      {/* <BespokeTours /> */}
       <ExclusiveExperiences />
       <Testimonials />
       <VisualStories />
-      {/* <Journey /> */}
     </Layout>
   );
 };

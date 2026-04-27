@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import SEO from "@/components/common/SEO";
 import { Star, Quote, Send, MapPin, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -217,6 +218,10 @@ const Reviews = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Traveler Reviews & Testimonials"
+        description="Read what our travelers have to say about their Nature Escape adventures. Authentic reviews and testimonials from our happy customers."
+      />
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
         {/* Hero Section */}

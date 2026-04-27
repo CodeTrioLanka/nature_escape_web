@@ -8,6 +8,7 @@ import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
 import { fetchTourCategories, TourCategory } from "@/api/tours.api";
 import { optimizeImage } from "@/lib/utils";
+import SEO from "@/components/common/SEO";
 
 // Hero images
 import beachSurfImg from "@/assets/ballon.jpg";
@@ -70,6 +71,10 @@ const SriLankaTours = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Sri Lanka Tour Packages"
+        description="Explore the pearl of the Indian Ocean with our curated Sri Lanka tour packages. From ancient ruins to tropical beaches and wildlife safaris."
+      />
       {/* Hero Section with PageHero Component */}
       <PageHero
         backgroundImage={sigiriyaWebp}
