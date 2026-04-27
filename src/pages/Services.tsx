@@ -4,6 +4,7 @@ import PageHero from "@/components/common/PageHero";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { fetchServicePageData, Service, ServiceHero } from "@/api/services.api";
+import SEO from "@/components/common/SEO";
 
 const Services = () => {
   const [services, setServices] = useState<Service[]>([]);
@@ -39,6 +40,10 @@ const Services = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Our Services"
+        description="From visa assistance to expert tour guides and luxury transportation, Nature Escape provides comprehensive travel services for your Sri Lanka trip."
+      />
       {/* Hero Section with PageHero Component */}
       {/* Hero Section with PageHero Component */}
       <PageHero

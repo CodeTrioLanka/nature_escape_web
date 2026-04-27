@@ -12,8 +12,9 @@ import sigiriya from "@/assets/sigiriya.jpg";
 import temple from "@/assets/temple.jpg";
 import beachParadise from "@/assets/beach-paradise.jpg";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import SEO from "@/components/common/SEO";
 
-const stats = [
+const FALLBACK_STATS = [
   { number: 15, suffix: "+", label: "Years Experience", icon: Clock },
   { number: 10000, suffix: "+", label: "Happy Travelers", icon: Users },
   { number: 500, suffix: "+", label: "Tours Completed", icon: MapPin },
@@ -21,7 +22,7 @@ const stats = [
 ];
 
 // Icon mapping for dynamic values
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ElementType> = {
   Heart,
   Leaf,
   Users,
@@ -142,12 +143,7 @@ const About = () => {
     { number: aboutData.stats.happyTravelers || 10000, suffix: "+", label: "Happy Travelers", icon: Users },
     { number: aboutData.stats.toursCompleted || 500, suffix: "+", label: "Tours Completed", icon: MapPin },
     { number: aboutData.stats.destination || 50, suffix: "+", label: "Destinations", icon: Globe },
-  ] : [
-    { number: 15, suffix: "+", label: "Years Experience", icon: Clock },
-    { number: 10000, suffix: "+", label: "Happy Travelers", icon: Users },
-    { number: 500, suffix: "+", label: "Tours Completed", icon: MapPin },
-    { number: 50, suffix: "+", label: "Destinations", icon: Globe },
-  ];
+  ] : FALLBACK_STATS;
 
   const values = (aboutData?.values && aboutData.values.length > 0)
     ? aboutData.values.map(value => ({
@@ -191,6 +187,10 @@ const About = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Our Story & Vision"
+        description="Learn about Nature Escape, our mission to promote sustainable tourism in Sri Lanka, and the passionate team behind your unforgettable journeys."
+      />
       {/* Hero Section - Using PageHero Component */}
       <PageHero
         backgroundImage={heroBackground}

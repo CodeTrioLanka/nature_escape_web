@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getServiceById, Service } from "@/api/services.api";
+import SEO from "@/components/common/SEO";
 import sigiriya from "@/assets/sigiriya.jpg";
 import wildlife from "@/assets/wildlife.jpg";
 import beachMirissa from "@/assets/beach-mirissa.jpg";
@@ -103,9 +104,9 @@ const ServiceDetail = () => {
             paragraphs: backendService.description
               ? backendService.description.split('\n\n').filter(p => p.trim())
               : staticServicesData[serviceSlug]?.paragraphs || [],
-            ctaType: (backendService as any).ctaType || staticServicesData[serviceSlug]?.ctaType || "inquire",
-            ctaLink: (backendService as any).ctaLink || staticServicesData[serviceSlug]?.ctaLink,
-            ctaText: (backendService as any).ctaText || staticServicesData[serviceSlug]?.ctaText
+            ctaType: backendService.ctaType || staticServicesData[serviceSlug]?.ctaType || "inquire",
+            ctaLink: backendService.ctaLink || staticServicesData[serviceSlug]?.ctaLink,
+            ctaText: backendService.ctaText || staticServicesData[serviceSlug]?.ctaText
           };
           setService(serviceData);
         } else {
@@ -155,6 +156,14 @@ const ServiceDetail = () => {
 
   return (
     <Layout>
+      {service && (
+        <SEO 
+          title={service.title}
+          description={service.paragraphs[0]?.substring(0, 160)}
+          ogType="article"
+          ogImage={service.heroImage}
+        />
+      )}
       {/* Hero Section */}
       <section className="relative h-[45vh] min-h-[350px] -mt-20">
         <div className="absolute inset-0">

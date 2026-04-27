@@ -27,7 +27,7 @@ export interface ExcursionHero {
 
 export const getExcursionHeroes = async (): Promise<ExcursionHero[]> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/excursion/`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -44,7 +44,7 @@ export const getExcursionHeroes = async (): Promise<ExcursionHero[]> => {
 
 export const getAllExcursions = async (): Promise<Excursion[]> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/excursion/`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -69,7 +69,7 @@ export const getAllExcursions = async (): Promise<Excursion[]> => {
 
 export const fetchExcursionFilters = async (): Promise<ExcursionFilters> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/excursion/filters`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -88,7 +88,7 @@ export const fetchExcursionFilters = async (): Promise<ExcursionFilters> => {
 
 export const getExcursionBySlug = async (slug: string): Promise<Excursion> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/excursion/slug/${slug}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

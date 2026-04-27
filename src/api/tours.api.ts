@@ -17,7 +17,7 @@ interface ApiResponse {
 
 export const fetchTourCategories = async (): Promise<TourCategory[]> => {
     try {
-        const baseUrl = import.meta.env.VITE_BASE_URI || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/tours`);
 
         if (!response.ok) {
