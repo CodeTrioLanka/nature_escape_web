@@ -10,7 +10,7 @@ import SEO from "@/components/common/SEO";
 
 import { fetchTourCategories, TourCategory } from "@/api/tours.api";
 import { optimizeImage } from "@/lib/utils";
-import SEO from "@/components/common/SEO";
+
 
 // Hero images
 import beachSurfImg from "@/assets/ballon.jpg";
