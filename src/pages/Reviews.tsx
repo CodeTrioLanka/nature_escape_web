@@ -8,6 +8,8 @@ import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/layout/Layout";
 import { fetchPublicReviews, fetchReviewStats, submitReview as submitReviewAPI, Review, ReviewStats } from "@/api/reviews.api";
 import PageHero from "@/components/common/PageHero";
+import SEO from "@/components/common/SEO";
+
 
 // Fallback static reviews data
 const staticReviews = [
@@ -215,10 +217,26 @@ const Reviews = () => {
     );
   };
 
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "SL Nature Escape Tours",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": averageRating.toFixed(1),
+      "reviewCount": stats?.totalReviews || reviews.length
+    }
+  };
+
   return (
     <Layout>
+      <SEO
+        title="Traveler Reviews & Testimonials"
+        description="Read reviews and testimonials from travelers who experienced Sri Lanka with SL Nature Escape. Highly-rated custom tours, safaris, and guides."
+        keywords="sri lanka travel reviews, client testimonials, nature escape reviews, travel agency feedback"
+        schema={reviewSchema}
+      />
       <div className="min-h-screen bg-background">
-        {/* Hero Section */}
         {/* Hero Section */}
         <PageHero
           backgroundImage="https://res.cloudinary.com/dicyqfwrf/video/upload/v1770225883/q_cmkpgg.mp4"

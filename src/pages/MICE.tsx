@@ -1,13 +1,20 @@
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/common/SEO";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import temple from "@/assets/temple.jpg";
 
 const MICE = () => {
   return (
     <Layout>
+      <SEO
+        title="MICE Corporate Events & Conferences Sri Lanka"
+        description="Plan seamless corporate meetings, incentives, conferences, and exhibitions in Sri Lanka with SL Nature Escape. Custom venues, logistics, and tours."
+        keywords="mice travel sri lanka, corporate events sri lanka, meetings and incentives, business travel ceylon, corporate retreat"
+      />
       {/* Hero Section */}
       <section className="relative h-[45vh] min-h-[350px]">
         <div className="absolute inset-0">

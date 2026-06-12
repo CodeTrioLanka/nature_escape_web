@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/common/SEO";
 import { motion } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
+
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getServiceById, Service } from "@/api/services.api";
@@ -153,8 +155,27 @@ const ServiceDetail = () => {
     );
   }
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
+    "description": service.paragraphs[0] || "",
+    "provider": {
+      "@type": "TravelAgency",
+      "name": "SL Nature Escape",
+      "url": "https://www.slnatureescape.com"
+    }
+  };
+
   return (
     <Layout>
+      <SEO
+        title={`${service.title} | Travel Services`}
+        description={service.paragraphs[0] ? service.paragraphs[0].substring(0, 155) + "..." : ""}
+        keywords={`${service.title}, travel services, sri lanka travel helper, sl nature escape`}
+        ogImage={service.heroImage}
+        schema={serviceSchema}
+      />
       {/* Hero Section */}
       <section className="relative h-[45vh] min-h-[350px] -mt-20">
         <div className="absolute inset-0">

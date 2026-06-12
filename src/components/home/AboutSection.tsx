@@ -19,17 +19,17 @@ const AboutSection = () => {
   });
 
   // Prepare stats from API data or use defaults
-  const stats = aboutUsData?.stats ? [
-    { value: aboutUsData.stats.yearExperience || 56, suffix: "+", label: "Years of Experience" },
-    { value: aboutUsData.stats.happyTravelers || 175, suffix: "+", label: "Expert Team Members" },
-    { value: aboutUsData.stats.toursCompleted || 300, suffix: "+", label: "Total Tours" },
-    { value: aboutUsData.stats.destination || 600, suffix: "+", label: "Happy Travelers" },
-  ] : [
-    { value: 56, suffix: "+", label: "Years of Experience" },
-    { value: 175, suffix: "+", label: "Expert Team Members" },
-    { value: 300, suffix: "+", label: "Total Tours" },
-    { value: 600, suffix: "+", label: "Happy Travelers" },
-  ];
+  // const stats = aboutUsData?.stats ? [
+  //   { value: aboutUsData.stats.yearExperience || 56, suffix: "+", label: "Years of Experience" },
+  //   { value: aboutUsData.stats.happyTravelers || 175, suffix: "+", label: "Expert Team Members" },
+  //   { value: aboutUsData.stats.toursCompleted || 300, suffix: "+", label: "Total Tours" },
+  //   { value: aboutUsData.stats.destination || 600, suffix: "+", label: "Happy Travelers" },
+  // ] : [
+  //   { value: 56, suffix: "+", label: "Years of Experience" },
+  //   { value: 175, suffix: "+", label: "Expert Team Members" },
+  //   { value: 300, suffix: "+", label: "Total Tours" },
+  //   { value: 600, suffix: "+", label: "Happy Travelers" },
+  // ];
 
   // Get hero data from API or use defaults
   const heroData = aboutUsData?.hero || {
@@ -163,7 +163,7 @@ const AboutSection = () => {
         </div>
 
         {/* Stats with Animated Counters */}
-        <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
+        {/* <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -172,10 +172,7 @@ const AboutSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             >
-              {/* Decorative background gradient blob */}
               <div className="absolute -top-10 -right-10 w-24 h-24 bg-ocean/5 rounded-full blur-2xl group-hover:bg-ocean/10 transition-colors duration-500" />
-
-              {/* Content */}
               <div className="relative z-10 text-center">
                 <div className="text-4xl md:text-5xl font-display font-bold mb-3 bg-gradient-to-br from-primary via-ocean-dark to-ocean bg-clip-text text-transparent">
                   <AnimatedCounter
@@ -191,7 +188,7 @@ const AboutSection = () => {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

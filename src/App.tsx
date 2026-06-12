@@ -20,6 +20,7 @@ import Sustainability from "./pages/Sustainability";
 import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 import Contact from "./pages/Contact";
+import Gallery from "./pages/Gallery";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -55,6 +56,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/service/:serviceSlug" element={<ServiceDetail />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/gallery" element={<Gallery />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

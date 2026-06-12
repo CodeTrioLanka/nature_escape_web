@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ArrowRight, Check, X, Loader2 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/common/SEO";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { fetchTourCategoryBySlug, TourCategory as ITourCategory } from "@/api/tours.api";
 import { fetchPackagesByCategoryId, Package } from "@/api/packages.api";
@@ -963,8 +964,27 @@ const TourCategory = () => {
     );
   }
 
+  const categorySchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": data.title,
+    "description": data.description,
+    "itemListElement": (data.tours || []).map((tour, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": `https://www.slnatureescape.com/tour/${tour.slug}`
+    }))
+  };
+
   return (
     <Layout>
+      <SEO
+        title={`${data.title} | Holiday Packages`}
+        description={data.description ? data.description.substring(0, 155) + "..." : ""}
+        keywords={`${data.title}, holiday packages, custom tours, vacation packages, sl nature escape`}
+        ogImage={data.heroImage}
+        schema={categorySchema}
+      />
       {/* Hero Section with Parallax */}
       <section className="relative h-[90vh] min-h-[350px] overflow-hidden -mt-20">
         <motion.div

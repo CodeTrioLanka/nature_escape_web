@@ -4,7 +4,8 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
-// 
+import SEO from "@/components/common/SEO";
+
 import { fetchAboutUsData, AboutUsData } from "@/api/aboutUs.api";
 import teaPlantations from "@/assets/tea-plantations.jpg";
 import wildlife from "@/assets/wildlife.jpg";
@@ -13,12 +14,12 @@ import temple from "@/assets/temple.jpg";
 import beachParadise from "@/assets/beach-paradise.jpg";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
-const stats = [
-  { number: 15, suffix: "+", label: "Years Experience", icon: Clock },
-  { number: 10000, suffix: "+", label: "Happy Travelers", icon: Users },
-  { number: 500, suffix: "+", label: "Tours Completed", icon: MapPin },
-  { number: 50, suffix: "+", label: "Destinations", icon: Globe },
-];
+// const stats = [
+//   { number: 15, suffix: "+", label: "Years Experience", icon: Clock },
+//   { number: 10000, suffix: "+", label: "Happy Travelers", icon: Users },
+//   { number: 500, suffix: "+", label: "Tours Completed", icon: MapPin },
+//   { number: 50, suffix: "+", label: "Destinations", icon: Globe },
+// ];
 
 // Icon mapping for dynamic values
 const iconMap: Record<string, any> = {
@@ -137,17 +138,17 @@ const About = () => {
   }, []);
 
   // Prepare data with fallbacks
-  const stats = aboutData?.stats ? [
-    { number: aboutData.stats.yearExperience || 15, suffix: "+", label: "Years Experience", icon: Clock },
-    { number: aboutData.stats.happyTravelers || 10000, suffix: "+", label: "Happy Travelers", icon: Users },
-    { number: aboutData.stats.toursCompleted || 500, suffix: "+", label: "Tours Completed", icon: MapPin },
-    { number: aboutData.stats.destination || 50, suffix: "+", label: "Destinations", icon: Globe },
-  ] : [
-    { number: 15, suffix: "+", label: "Years Experience", icon: Clock },
-    { number: 10000, suffix: "+", label: "Happy Travelers", icon: Users },
-    { number: 500, suffix: "+", label: "Tours Completed", icon: MapPin },
-    { number: 50, suffix: "+", label: "Destinations", icon: Globe },
-  ];
+  // const stats = aboutData?.stats ? [
+  //   { number: aboutData.stats.yearExperience || 15, suffix: "+", label: "Years Experience", icon: Clock },
+  //   { number: aboutData.stats.happyTravelers || 10000, suffix: "+", label: "Happy Travelers", icon: Users },
+  //   { number: aboutData.stats.toursCompleted || 500, suffix: "+", label: "Tours Completed", icon: MapPin },
+  //   { number: aboutData.stats.destination || 50, suffix: "+", label: "Destinations", icon: Globe },
+  // ] : [
+  //   { number: 15, suffix: "+", label: "Years Experience", icon: Clock },
+  //   { number: 10000, suffix: "+", label: "Happy Travelers", icon: Users },
+  //   { number: 500, suffix: "+", label: "Tours Completed", icon: MapPin },
+  //   { number: 50, suffix: "+", label: "Destinations", icon: Globe },
+  // ];
 
   const values = (aboutData?.values && aboutData.values.length > 0)
     ? aboutData.values.map(value => ({
@@ -191,6 +192,11 @@ const About = () => {
 
   return (
     <Layout>
+      <SEO
+        title="About Us | Sustainable Travel Specialists"
+        description="Learn more about SL Nature Escape, our team of local travel experts, and our mission to provide sustainable, authentic, and unforgettable journeys across Sri Lanka."
+        keywords="about sl nature escape, sri lanka travel agency, sustainable tourism sri lanka, local travel guides ceylon"
+      />
       {/* Hero Section - Using PageHero Component */}
       <PageHero
         backgroundImage={heroBackground}
@@ -215,7 +221,7 @@ const About = () => {
       </section>
 
       {/* Stats Section - Floating Cards */}
-      <section className="py-8 relative z-20">
+      {/* <section className="py-8 relative z-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {stats.map((stat, index) => (
@@ -243,7 +249,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Our Story - Cinematic Split */}
       <section className="py-24 bg-background overflow-hidden">
@@ -391,8 +397,7 @@ const About = () => {
       </section>
 
       {/* Timeline Section */}
-      <section ref={timelineRef} className="py-24 bg-sand relative overflow-hidden">
-        {/* Background Text */}
+      {/* <section ref={timelineRef} className="py-24 bg-sand relative overflow-hidden">
         <motion.div
           className="absolute top-10 left-0 right-0 text-center pointer-events-none"
           initial={{ opacity: 0 }}
@@ -419,9 +424,7 @@ const About = () => {
             </h2>
           </motion.div>
 
-          {/* Timeline */}
           <div className="relative max-w-4xl mx-auto">
-            {/* Animated Line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-border -translate-x-1/2 hidden md:block">
               <motion.div
                 className="w-full bg-gradient-to-b from-forest to-gold"
@@ -438,7 +441,6 @@ const About = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
               >
-                {/* Content */}
                 <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
                   <motion.div
                     className="bg-card p-6 rounded-2xl shadow-lg border border-border/50"
@@ -451,7 +453,6 @@ const About = () => {
                   </motion.div>
                 </div>
 
-                {/* Dot */}
                 <motion.div
                   className="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-forest rounded-full border-4 border-background shadow-lg hidden md:block"
                   initial={{ scale: 0 }}
@@ -464,7 +465,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Values Section - Modern Cards */}
       <section className="py-24 bg-background relative overflow-hidden">

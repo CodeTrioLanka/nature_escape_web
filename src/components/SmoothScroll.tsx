@@ -56,10 +56,22 @@ const SmoothScroll = () => {
 
     // 4. Handle Scroll Reset on Navigation
     useEffect(() => {
+        // Force native scroll reset first
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+
+        // Then also reset Lenis with a small delay to ensure it takes effect
         if (window.lenis) {
             window.lenis.scrollTo(0, { immediate: true });
-        } else {
-            window.scrollTo(0, 0);
+            // Additional delayed reset for mobile reliability
+            const timeout = setTimeout(() => {
+                window.scrollTo(0, 0);
+                if (window.lenis) {
+                    window.lenis.scrollTo(0, { immediate: true });
+                }
+            }, 50);
+            return () => clearTimeout(timeout);
         }
     }, [pathname]);
 

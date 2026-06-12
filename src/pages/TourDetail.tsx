@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
+import SEO from "@/components/common/SEO";
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Check, X, MapPin, Calendar, Users, Clock, ChevronRight, ChevronLeft, Phone, Loader2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
@@ -593,8 +595,33 @@ const TourDetail = () => {
     );
   }
 
+  const tourSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": tour.title,
+    "description": tour.description,
+    "image": tour.heroImage,
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "lowPrice": "Contact for details",
+      "seller": {
+        "@type": "TravelAgency",
+        "name": "SL Nature Escape",
+        "url": "https://www.slnatureescape.com"
+      }
+    }
+  };
+
   return (
     <Layout>
+      <SEO
+        title={`${tour.title} | Sri Lanka Tour`}
+        description={tour.description ? tour.description.substring(0, 155) + "..." : ""}
+        keywords={`${tour.title}, sri lanka tours, ${tour.categoryLabel}, nature escape`}
+        ogImage={tour.heroImage}
+        schema={tourSchema}
+      />
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px] -mt-20">
         {tour.heroImage ? (
@@ -884,10 +911,12 @@ const TourDetail = () => {
                 Contact Us
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              <Phone className="w-4 h-4 mr-2" />
-              +94 11 234 5678
-            </Button>
+            <a href="tel:+94112770294">
+              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                <Phone className="w-4 h-4 mr-2" />
+                +94 11 277 0294
+              </Button>
+            </a>
           </div>
         </div>
       </section>

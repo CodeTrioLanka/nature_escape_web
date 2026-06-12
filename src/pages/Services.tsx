@@ -3,6 +3,8 @@ import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import SEO from "@/components/common/SEO";
+
 import { fetchServicePageData, Service, ServiceHero } from "@/api/services.api";
 
 const Services = () => {
@@ -39,7 +41,11 @@ const Services = () => {
 
   return (
     <Layout>
-      {/* Hero Section with PageHero Component */}
+      <SEO
+        title="Our Services | Custom Tours & Travel Logistics"
+        description="Explore the range of travel services offered by SL Nature Escape: custom tour planning, airport transfers, hotel bookings, local tour guides, and MICE travel."
+        keywords="travel services sri lanka, tour packages, custom travel plans, airport transfer sri lanka, hotel booking, corporate travel ceylon"
+      />
       {/* Hero Section with PageHero Component */}
       <PageHero
         backgroundImage={hero.heroImage}

@@ -6,6 +6,8 @@ import { fetchThingsToDo, ThingsToDoItem } from "@/api/thingsToDo.api";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import SEO from "@/components/common/SEO";
+
 
 const ThingsToDoDetail = () => {
     const { id } = useParams<{ id: string }>();
@@ -70,8 +72,23 @@ const ThingsToDoDetail = () => {
         );
     }
 
+    const activitySchema = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": activity.title,
+        "description": activity.description,
+        "image": activity.image
+    };
+
     return (
         <Layout>
+            <SEO
+                title={`${activity.title} | Experiences in Sri Lanka`}
+                description={activity.description ? activity.description.substring(0, 155) + "..." : ""}
+                keywords={`${activity.title}, Sri Lanka experiences, activities, things to do`}
+                ogImage={activity.image}
+                schema={activitySchema}
+            />
             <div className="container mx-auto px-4 py-24">
                 <Button
                     variant="ghost"
