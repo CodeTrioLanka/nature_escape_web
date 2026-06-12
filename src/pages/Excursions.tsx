@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import wildlife from "@/assets/wildlife.jpg";
 import { fetchExcursionFilters, getAllExcursions, getExcursionHeroes, Excursion, ExcursionHero } from "@/api/excursion.api";
 import PageHero from "@/components/common/PageHero";
+import SEO from "@/components/common/SEO";
+
 
 const Excursions = () => {
   const [timeFilter, setTimeFilter] = useState("All");
@@ -51,6 +53,11 @@ const Excursions = () => {
 
   return (
     <Layout>
+      <SEO
+        title="Excursions & Day Trips | Sri Lanka Travel"
+        description="Enhance your Sri Lanka tour with short excursions and exciting day trips: Yala safaris, balloon rides, Galle fort walks, Sigiriya climbs, and more."
+        keywords="sri lanka excursions, day trips sri lanka, yala safari, hot air balloon sri lanka, day tours ceylon"
+      />
       {/* Hero Section */}
       <PageHero
         backgroundImage={heroContent?.heroImage}

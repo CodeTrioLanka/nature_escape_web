@@ -3,8 +3,9 @@ import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { fetchServicePageData, Service, ServiceHero } from "@/api/services.api";
 import SEO from "@/components/common/SEO";
+
+import { fetchServicePageData, Service, ServiceHero } from "@/api/services.api";
 
 const Services = () => {
   const [services, setServices] = useState<Service[]>([]);
@@ -40,11 +41,11 @@ const Services = () => {
 
   return (
     <Layout>
-      <SEO 
-        title="Our Services"
-        description="From visa assistance to expert tour guides and luxury transportation, Nature Escape provides comprehensive travel services for your Sri Lanka trip."
+      <SEO
+        title="Our Services | Custom Tours & Travel Logistics"
+        description="Explore the range of travel services offered by SL Nature Escape: custom tour planning, airport transfers, hotel bookings, local tour guides, and MICE travel."
+        keywords="travel services sri lanka, tour packages, custom travel plans, airport transfer sri lanka, hotel booking, corporate travel ceylon"
       />
-      {/* Hero Section with PageHero Component */}
       {/* Hero Section with PageHero Component */}
       <PageHero
         backgroundImage={hero.heroImage}

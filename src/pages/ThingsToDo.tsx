@@ -7,6 +7,8 @@ import adventureImage from "@/assets/adventure.jpg";
 import { fetchThingsToDo, ThingsToDoItem, HeroItem } from "@/api/thingsToDo.api";
 import { Skeleton } from "@/components/ui/skeleton";
 import PageHero from "@/components/common/PageHero";
+import SEO from "@/components/common/SEO";
+
 
 const ThingsToDo = () => {
   const navigate = useNavigate();
@@ -39,6 +41,11 @@ const ThingsToDo = () => {
 
   return (
     <Layout>
+      <SEO
+        title="Things to Do in Sri Lanka | Tour Activities & Experiences"
+        description="Discover the best things to do and activities in Sri Lanka: whale watching, balloon safaris, hiking Ella rock, train rides, surfing, and cultural tours."
+        keywords="things to do sri lanka, activities sri lanka, whale watching mirissa, hiking ella, hot air balloon ceylon"
+      />
       {/* Hero Section */}
       <PageHero
         backgroundImage={heroData?.heroImage || adventureImage}

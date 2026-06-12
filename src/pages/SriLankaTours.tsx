@@ -6,9 +6,11 @@ import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
+import SEO from "@/components/common/SEO";
+
 import { fetchTourCategories, TourCategory } from "@/api/tours.api";
 import { optimizeImage } from "@/lib/utils";
-import SEO from "@/components/common/SEO";
+
 
 // Hero images
 import beachSurfImg from "@/assets/ballon.jpg";
@@ -71,9 +73,10 @@ const SriLankaTours = () => {
 
   return (
     <Layout>
-      <SEO 
-        title="Sri Lanka Tour Packages"
-        description="Explore the pearl of the Indian Ocean with our curated Sri Lanka tour packages. From ancient ruins to tropical beaches and wildlife safaris."
+      <SEO
+        title="Sri Lanka Tour Packages | Travel & Holiday Packages"
+        description="Discover custom Sri Lanka tour packages with SL Nature Escape. Tailored itineraries covering beautiful beaches, ancient temples, tea country hikes, and wild safari camps."
+        keywords="sri lanka tours, sri lanka holiday packages, travel agency sri lanka, beach tours, cultural triangle, tea plantation tour"
       />
       {/* Hero Section with PageHero Component */}
       <PageHero
@@ -234,11 +237,10 @@ const SriLankaTours = () => {
         </div>
       </section>
 
-      {/* Coastline Section with Map */}
+      {/* Coastline Section with Map
       <section className="py-20 bg-accent" ref={mapRef}>
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Map Image */}
             <motion.div
               className="relative"
               initial={{ opacity: 0, x: -50 }}
@@ -254,7 +256,6 @@ const SriLankaTours = () => {
               />
             </motion.div>
 
-            {/* Content */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={mapInView ? { opacity: 1, x: 0 } : {}}
@@ -304,6 +305,7 @@ const SriLankaTours = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* CTA Section */}
       <section
@@ -343,12 +345,12 @@ const SriLankaTours = () => {
               Get a Free Quote
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link
-              to="tel:+94112345678"
+            <a
+              href="tel:+94112770294"
               className="inline-flex items-center gap-2 px-8 py-4 bg-primary-foreground/10 text-primary-foreground font-semibold rounded-full backdrop-blur-md border border-primary-foreground/30 hover:bg-primary-foreground/20 transition-all duration-300"
             >
               Call Us Now
-            </Link>
+            </a>
           </motion.div>
         </div>
       </section>

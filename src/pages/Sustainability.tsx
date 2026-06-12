@@ -1,6 +1,6 @@
 import Layout from "@/components/layout/Layout";
-import { motion } from "framer-motion";
 import SEO from "@/components/common/SEO";
+import { motion } from "framer-motion";
 import { Leaf, Globe, Heart, Users, TreePine, Recycle, HandHeart, Award } from "lucide-react";
 import teaPlantations from "@/assets/tea-plantations.jpg";
 import wildlife from "@/assets/wildlife.jpg";
@@ -50,9 +50,10 @@ const impacts = [
 const Sustainability = () => {
   return (
     <Layout>
-      <SEO 
-        title="Sustainability & Responsible Travel"
-        description="Learn about Nature Escape's commitment to sustainable tourism in Sri Lanka. From carbon offset programs to community support and plastic-free tours."
+      <SEO
+        title="Sustainable Tourism & Eco Friendly Travel"
+        description="Learn how SL Nature Escape practices responsible tourism. From supporting local communities to plastic-free tours, we protect Sri Lanka's environments."
+        keywords="sustainable tourism sri lanka, responsible travel, eco friendly tours, carbon offset travel, wildlife conservation ceylon"
       />
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[400px] -mt-20">

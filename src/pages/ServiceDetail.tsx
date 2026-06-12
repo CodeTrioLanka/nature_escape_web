@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/common/SEO";
 import { motion } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
+
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getServiceById, Service } from "@/api/services.api";
-import SEO from "@/components/common/SEO";
 import sigiriya from "@/assets/sigiriya.jpg";
 import wildlife from "@/assets/wildlife.jpg";
 import beachMirissa from "@/assets/beach-mirissa.jpg";
@@ -154,16 +155,27 @@ const ServiceDetail = () => {
     );
   }
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
+    "description": service.paragraphs[0] || "",
+    "provider": {
+      "@type": "TravelAgency",
+      "name": "SL Nature Escape",
+      "url": "https://www.slnatureescape.com"
+    }
+  };
+
   return (
     <Layout>
-      {service && (
-        <SEO 
-          title={service.title}
-          description={service.paragraphs[0]?.substring(0, 160)}
-          ogType="article"
-          ogImage={service.heroImage}
-        />
-      )}
+      <SEO
+        title={`${service.title} | Travel Services`}
+        description={service.paragraphs[0] ? service.paragraphs[0].substring(0, 155) + "..." : ""}
+        keywords={`${service.title}, travel services, sri lanka travel helper, sl nature escape`}
+        ogImage={service.heroImage}
+        schema={serviceSchema}
+      />
       {/* Hero Section */}
       <section className="relative h-[45vh] min-h-[350px] -mt-20">
         <div className="absolute inset-0">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X, ChevronRight } from "lucide-react";
-import logo from "@/assets/nature-escape-logo.png";
+const logo = "/logov2.jpeg";
 import { fetchTourCategories } from "@/api/tours.api";
 import { motion, AnimatePresence } from "framer-motion";
 import TypingText from "../ui/TypingText";
@@ -84,10 +84,10 @@ const Header = () => {
           : "bg-transparent"
           }`}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 relative z-50">
+            <Link to="/" className="flex items-center gap-6 relative z-50">
               <img
                 src={logo}
                 alt="Nature Escape"
@@ -95,7 +95,7 @@ const Header = () => {
               />
               <TypingText
                 text="Nature Escape"
-                className="text-3xl font-signature text-white hidden sm:block drop-shadow-lg"
+                className="text-2xl font-signature text-white hidden sm:block drop-shadow-lg"
                 typingSpeed={100}
                 cursorClassName="bg-gold h-8"
               />

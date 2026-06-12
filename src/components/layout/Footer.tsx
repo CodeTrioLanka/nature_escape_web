@@ -1,9 +1,44 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchContactDetails } from "@/api/contact.api";
+import { fetchTourCategories } from "@/api/tours.api";
 import srilanka_beach from "@/assets/srilanka_beach.webp";
-import logo from "@/assets/nature-escape-logo.png";
+const logo = "/logov2.jpeg";
 
 const Footer = () => {
+  // Fetch contact details (shared cache with Contact page)
+  const { data: contactDetails } = useQuery({
+    queryKey: ["contactDetails"],
+    queryFn: fetchContactDetails,
+    staleTime: 1000 * 60 * 10, // 10 minutes
+  });
+
+  // Fetch tour categories (shared cache with Sri Lanka Tours page)
+  const { data: tourCategories } = useQuery({
+    queryKey: ["tourCategories"],
+    queryFn: fetchTourCategories,
+    staleTime: 1000 * 60 * 10,
+  });
+
+  // Dynamic values with fallbacks
+  const address =
+    contactDetails?.address && contactDetails.address.length > 0
+      ? contactDetails.address.join(", ")
+      : "130 Galle Road, Colombo 03, Sri Lanka";
+
+  const phones =
+    contactDetails?.phone && contactDetails.phone.length > 0
+      ? contactDetails.phone
+      : ["+94 11 277 0294", "+94 76 311 9077"];
+
+  const emailAddress =
+    contactDetails?.email && contactDetails.email.length > 0
+      ? contactDetails.email[0]
+      : "slnatureescape@gmail.com";
+
+  const socials = contactDetails?.socials;
+
   return (
     <footer className="relative text-primary-foreground">
       {/* Background Image */}
@@ -24,17 +59,16 @@ const Footer = () => {
               />
             </Link>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
-              Your gateway to unforgettable nature experiences in Sri Lanka.
-              Discover pristine beaches, lush forests, and exotic wildlife.
+              Creating unforgettable travel experiences that connect you with nature, culture, and adventure.
             </p>
             <div className="flex justify-center md:justify-start space-x-4 mt-6">
-              <a href="#" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
+              <a href={socials?.facebook || "#"} target={socials?.facebook ? "_blank" : undefined} rel="noopener noreferrer" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
+              <a href={socials?.instagram || "#"} target={socials?.instagram ? "_blank" : undefined} rel="noopener noreferrer" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
+              <a href={socials?.twitter || "#"} target={socials?.twitter ? "_blank" : undefined} rel="noopener noreferrer" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
               <a href="#" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
@@ -61,13 +95,22 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">Tour Categories</h4>
             <ul className="space-y-2">
-              {["Cultural Tours", "Wildlife Safari", "Beach Holidays", "Adventure Tours", "Honeymoon Packages", "MICE"].map((item) => (
-                <li key={item}>
-                  <Link to="#" className="text-primary-foreground/70 hover:text-secondary transition-colors text-sm">
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              {tourCategories && tourCategories.length > 0
+                ? tourCategories.map((cat) => (
+                    <li key={cat._id}>
+                      <Link to={`/sri-lanka-tours/${cat.slug}`} className="text-primary-foreground/70 hover:text-secondary transition-colors text-sm">
+                        {cat.title}
+                      </Link>
+                    </li>
+                  ))
+                : ["Cultural Tours", "Wildlife Safari", "Beach Holidays", "Adventure Tours", "Honeymoon Packages", "MICE"].map((item) => (
+                    <li key={item}>
+                      <Link to="/sri-lanka-tours" className="text-primary-foreground/70 hover:text-secondary transition-colors text-sm">
+                        {item}
+                      </Link>
+                    </li>
+                  ))
+              }
             </ul>
           </div>
 
@@ -78,16 +121,22 @@ const Footer = () => {
               <li className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-3">
                 <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/70 text-sm">
-                  130 Galle Road, Colombo 03, Sri Lanka
+                  {address}
                 </span>
               </li>
-              <li className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3">
-                <Phone className="w-5 h-5 text-secondary shrink-0" />
-                <span className="text-primary-foreground/70 text-sm">+94 11 234 5678</span>
-              </li>
+              {phones.map((p, idx) => (
+                <li key={idx} className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3">
+                  <Phone className="w-5 h-5 text-secondary shrink-0" />
+                  <a href={`tel:${p.replace(/\s/g, "")}`} className="text-primary-foreground/70 text-sm hover:text-secondary transition-colors">
+                    {p}
+                  </a>
+                </li>
+              ))}
               <li className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3">
                 <Mail className="w-5 h-5 text-gold shrink-0" />
-                <span className="text-primary-foreground/80 text-sm">info@natureescape.com</span>
+                <a href={`mailto:${emailAddress}`} className="text-primary-foreground/80 text-sm hover:text-gold transition-colors">
+                  {emailAddress}
+                </a>
               </li>
             </ul>
           </div>
@@ -110,12 +159,9 @@ const Footer = () => {
             . All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link to="#" className="text-primary-foreground/60 hover:text-primary-foreground text-sm">
-              Privacy Policy
-            </Link>
-            <Link to="#" className="text-primary-foreground/60 hover:text-primary-foreground text-sm">
-              Terms of Service
-            </Link>
+            <a href="https://www.codetriolanka.lk/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground text-sm transition-colors">
+              Website design and develop by CodeTrioLanka
+            </a>
           </div>
         </div>
       </div>
@@ -124,3 +170,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/common/SEO";
 import { MapPin, Calendar, Bus, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -375,8 +376,24 @@ const DestinationDetail = () => {
     );
   };
 
+  const destinationSchema = {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    "name": destination.name,
+    "description": destination.description,
+    "image": destination.heroImage,
+    "touristType": "Adventure, Culture, Nature"
+  };
+
   return (
     <Layout>
+      <SEO
+        title={`Explore ${destination.name} | Sri Lanka Travel Guide`}
+        description={destination.description ? destination.description.substring(0, 155) + "..." : ""}
+        keywords={`${destination.name}, Sri Lanka destination, travel guide, best time to visit ${destination.name}, ${destination.subtitle}`}
+        ogImage={destination.heroImage}
+        schema={destinationSchema}
+      />
       {/* Hero Section */}
       <section ref={heroRef} className="relative h-[60vh] md:h-[70vh] overflow-hidden -mt-20">
         <motion.div

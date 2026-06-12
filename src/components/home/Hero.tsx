@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import logo from "@/assets/nature-escape-logo.png";
+const logo = "/logov2.jpeg";
 import { fetchHomeData, HomeData } from "@/api/home.api";
 import { optimizeImage } from "@/lib/utils";
 
@@ -108,11 +108,11 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-8"
           >
-            <img
+            {/* <img
               src={logo}
               alt="Nature Escape"
               className="h-24 md:h-32 w-auto drop-shadow-2xl"
-            />
+            /> */}
           </motion.div>
 
           {/* "Discover the" - Script Style */}
@@ -131,8 +131,11 @@ const Hero = () => {
 
           {/* Main Title */}
           <motion.h1
-            className="text-5xl md:text-6xl lg:text-8xl font-display font-bold text-primary-foreground leading-tight mb-6"
-            style={{ textShadow: "0 4px 20px rgba(0,0,0,0.7)" }}
+            className="text-5xl md:text-6xl lg:text-8xl font-display  text-primary-foreground leading-tight mb-6"
+            style={{
+              fontFamily: "'Brush Script MT', cursive",
+              textShadow: "0 2px 10px rgba(0,0,0,0.5)"
+            }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}

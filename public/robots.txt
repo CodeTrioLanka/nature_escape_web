@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://natureescape.lk/sitemap.xml
+Sitemap: https://www.slnatureescape.com/sitemap.xml

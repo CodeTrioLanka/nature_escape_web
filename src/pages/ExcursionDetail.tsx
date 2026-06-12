@@ -1,6 +1,8 @@
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/common/SEO";
 import { motion } from "framer-motion";
 import { useParams, Link } from "react-router-dom";
+
 import { Clock, MapPin, ArrowRight, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
@@ -65,8 +67,33 @@ const ExcursionDetail = () => {
     );
   }
 
+  const excursionSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": excursion.title,
+    "description": excursion.description,
+    "image": excursion.image,
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "price": "Contact for pricing",
+      "seller": {
+        "@type": "TravelAgency",
+        "name": "SL Nature Escape",
+        "url": "https://www.slnatureescape.com"
+      }
+    }
+  };
+
   return (
     <Layout>
+      <SEO
+        title={`${excursion.title} | Sri Lanka Excursion`}
+        description={excursion.description ? excursion.description.substring(0, 155) + "..." : ""}
+        keywords={`${excursion.title}, sri lanka excursion, day trip ${excursion.destination}, things to do ${excursion.destination}`}
+        ogImage={excursion.image}
+        schema={excursionSchema}
+      />
       {/* Hero Section */}
       <section className="relative h-[45vh] min-h-[350px] -mt-20">
         <div className="absolute inset-0">

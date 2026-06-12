@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
 import { sendMessage, fetchContactDetails, ContactDetails } from "@/api/contact.api";
 import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
@@ -15,21 +16,13 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [customSubject, setCustomSubject] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [contactDetails, setContactDetails] = useState<ContactDetails | null>(null);
 
-  useEffect(() => {
-    const loadContactDetails = async () => {
-      try {
-        const data = await fetchContactDetails();
-        if (data) {
-          setContactDetails(data);
-        }
-      } catch (error) {
-        console.error("Failed to load contact details", error);
-      }
-    };
-    loadContactDetails();
-  }, []);
+  // Shared cache with Footer
+  const { data: contactDetails } = useQuery({
+    queryKey: ["contactDetails"],
+    queryFn: fetchContactDetails,
+    staleTime: 1000 * 60 * 10,
+  });
 
   const displayContactInfo = [
     {
@@ -38,20 +31,21 @@ const Contact = () => {
       lines: Array.isArray(contactDetails?.address) && contactDetails.address.length > 0
         ? contactDetails.address
         : ["130 Galle Road, Colombo 03", "Sri Lanka"],
+      link: "https://maps.app.goo.gl/pX84aXniDLGt7HxC8",
     },
     {
       icon: Phone,
       title: "Phone",
       lines: Array.isArray(contactDetails?.phone) && contactDetails.phone.length > 0
         ? contactDetails.phone
-        : ["+94 11 234 5678", "+94 77 123 4567"],
+        : ["+94 11 277 0294", "+94 76 311 9077"],
     },
     {
       icon: Mail,
       title: "Email",
       lines: Array.isArray(contactDetails?.email) && contactDetails.email.length > 0
         ? contactDetails.email
-        : ["info@ceylontours.com", "bookings@ceylontours.com"],
+        : ["slnatureescape@gmail.com"],
     },
     {
       icon: Clock,
@@ -97,9 +91,17 @@ const Contact = () => {
 
   return (
     <Layout>
-      <SEO 
-        title="Contact Us"
-        description="Get in touch with Nature Escape. We are here to help you plan your perfect nature-filled adventure in Sri Lanka and the Maldives."
+      <SEO
+        title="Contact Us | Plan Your Custom Trip"
+        description="Get in touch with SL Nature Escape. Contact our destination experts to plan, customize, or book your dream holiday to Sri Lanka & the Maldives."
+        keywords="contact sl nature escape, tour inquiries sri lanka, travel agency contact, book trip sri lanka"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact SL Nature Escape",
+          "description": "Get in touch with our team to start planning your perfect nature tour in Sri Lanka.",
+          "url": "https://www.slnatureescape.com/contact"
+        }}
       />
       {/* Hero Section */}
       <PageHero
@@ -159,33 +161,65 @@ const Contact = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {displayContactInfo.map((info, index) => (
-                <motion.div
-                  key={index}
-                  className="flex gap-5 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 group"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ x: 5 }}
-                >
-                  <motion.div
-                    className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300"
-                    whileHover={{ rotate: 10 }}
+              {displayContactInfo.map((info, index) => {
+                const cardContent = (
+                  <>
+                    <motion.div
+                      className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors duration-300"
+                      whileHover={{ rotate: 10 }}
+                    >
+                      <info.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                    </motion.div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
+                        {info.title}
+                      </h3>
+                      {info.lines.map((line, i) => (
+                        <p key={i} className="text-muted-foreground">
+                          {info.title === "Phone" ? (
+                            <a href={`tel:${line.replace(/\s/g, "")}`} className="hover:text-primary transition-colors hover:underline">
+                              {line}
+                            </a>
+                          ) : info.title === "Email" ? (
+                            <a href={`mailto:${line}`} className="hover:text-primary transition-colors hover:underline">
+                              {line}
+                            </a>
+                          ) : (
+                            line
+                          )}
+                        </p>
+                      ))}
+                    </div>
+                  </>
+                );
+
+                return info.link ? (
+                  <motion.a
+                    key={index}
+                    href={info.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex gap-5 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 group cursor-pointer"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                    whileHover={{ x: 5 }}
                   >
-                    <info.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                    {cardContent}
+                  </motion.a>
+                ) : (
+                  <motion.div
+                    key={index}
+                    className="flex gap-5 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 group"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                    whileHover={{ x: 5 }}
+                  >
+                    {cardContent}
                   </motion.div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
-                      {info.title}
-                    </h3>
-                    {info.lines.map((line, i) => (
-                      <p key={i} className="text-muted-foreground">
-                        {line}
-                      </p>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+                );
+              })}
             </motion.div>
 
             {/* Contact Form */}
