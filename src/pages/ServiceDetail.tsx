@@ -105,9 +105,9 @@ const ServiceDetail = () => {
             paragraphs: backendService.description
               ? backendService.description.split('\n\n').filter(p => p.trim())
               : staticServicesData[serviceSlug]?.paragraphs || [],
-            ctaType: (backendService as any).ctaType || staticServicesData[serviceSlug]?.ctaType || "inquire",
-            ctaLink: (backendService as any).ctaLink || staticServicesData[serviceSlug]?.ctaLink,
-            ctaText: (backendService as any).ctaText || staticServicesData[serviceSlug]?.ctaText
+            ctaType: backendService.ctaType || staticServicesData[serviceSlug]?.ctaType || "inquire",
+            ctaLink: backendService.ctaLink || staticServicesData[serviceSlug]?.ctaLink,
+            ctaText: backendService.ctaText || staticServicesData[serviceSlug]?.ctaText
           };
           setService(serviceData);
         } else {

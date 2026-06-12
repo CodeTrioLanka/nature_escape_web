@@ -3,6 +3,9 @@ export interface Service {
     title: string;
     description: string;
     image: string;
+    ctaType?: "inquire" | "link";
+    ctaLink?: string;
+    ctaText?: string;
     createdAt: string;
     updatedAt: string;
 }
@@ -27,7 +30,7 @@ export interface ServiceHeroResponse {
 
 export const fetchServiceHero = async (): Promise<ServiceHero | null> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/service-page/hero`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -46,7 +49,7 @@ export const fetchServiceHero = async (): Promise<ServiceHero | null> => {
 
 export const fetchServices = async (): Promise<Service[]> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/service-page/services`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -65,7 +68,7 @@ export const fetchServices = async (): Promise<Service[]> => {
 
 export const getServiceById = async (id: string): Promise<Service> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/service-page/services/${id}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -90,7 +93,7 @@ export interface ServicePageData {
 // Fetch complete service page data (hero + services) in one request
 export const fetchServicePageData = async (): Promise<ServicePageData> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/service-page`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

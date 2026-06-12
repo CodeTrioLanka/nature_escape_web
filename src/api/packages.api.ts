@@ -42,7 +42,7 @@ interface PackagesResponse {
 
 export const fetchPackagesByCategoryId = async (categoryId: string): Promise<Package[]> => {
     try {
-        const baseUrl = import.meta.env.VITE_BASE_URI || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/packages/category/${categoryId}`);
 
         if (!response.ok) {
@@ -68,7 +68,7 @@ interface SinglePackageResponse {
 
 export const fetchPackageBySlug = async (slug: string): Promise<Package> => {
     try {
-        const baseUrl = import.meta.env.VITE_BASE_URI || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/packages/slug/${slug}`);
 
         if (!response.ok) {
@@ -85,7 +85,7 @@ export const fetchPackageBySlug = async (slug: string): Promise<Package> => {
 
 export const fetchAllPackages = async (featuredOnly: boolean = false): Promise<Package[]> => {
     try {
-        const baseUrl = import.meta.env.VITE_BASE_URI || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const url = featuredOnly
             ? `${baseUrl}/api/packages?featured=true`
             : `${baseUrl}/api/packages`;

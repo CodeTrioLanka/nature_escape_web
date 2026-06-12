@@ -21,7 +21,7 @@ export interface ContactDetails {
 
 export const sendMessage = async (messageData: ContactMessage): Promise<void> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/message`, {
             method: 'POST',
             headers: {
@@ -46,7 +46,7 @@ export const sendMessage = async (messageData: ContactMessage): Promise<void> =>
 
 export const fetchContactDetails = async (): Promise<ContactDetails | null> => {
     try {
-        const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const baseUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${baseUrl}/api/contactus`);
 
         if (!response.ok) {

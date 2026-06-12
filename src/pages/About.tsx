@@ -13,7 +13,6 @@ import sigiriya from "@/assets/sigiriya.jpg";
 import temple from "@/assets/temple.jpg";
 import beachParadise from "@/assets/beach-paradise.jpg";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
-
 // const stats = [
 //   { number: 15, suffix: "+", label: "Years Experience", icon: Clock },
 //   { number: 10000, suffix: "+", label: "Happy Travelers", icon: Users },
@@ -22,7 +21,7 @@ import AnimatedCounter from "@/components/ui/AnimatedCounter";
 // ];
 
 // Icon mapping for dynamic values
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ElementType> = {
   Heart,
   Leaf,
   Users,

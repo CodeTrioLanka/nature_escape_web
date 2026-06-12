@@ -8,7 +8,6 @@ import Layout from "@/components/layout/Layout";
 import PageHero from "@/components/common/PageHero";
 import SEO from "@/components/common/SEO";
 
-
 const Contact = () => {
   const [subject, setSubject] = useState("General Inquiry");
   const [firstName, setFirstName] = useState("");

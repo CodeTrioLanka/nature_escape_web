@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import SEO from "@/components/common/SEO";
 import { Star, Quote, Send, MapPin, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,7 +9,6 @@ import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/layout/Layout";
 import { fetchPublicReviews, fetchReviewStats, submitReview as submitReviewAPI, Review, ReviewStats } from "@/api/reviews.api";
 import PageHero from "@/components/common/PageHero";
-import SEO from "@/components/common/SEO";
 
 
 // Fallback static reviews data
