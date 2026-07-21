@@ -49,7 +49,7 @@ const Services = () => {
       {/* Hero Section with PageHero Component */}
       <PageHero
         backgroundImage={hero.heroImage}
-        height="h-[90vh] min-h-[500px]"
+        height="h-[60vh] min-h-[300px]"
         showWave={false}
       />
 

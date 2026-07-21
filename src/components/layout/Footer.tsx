@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Youtube } from "luci
 import { useQuery } from "@tanstack/react-query";
 import { fetchContactDetails } from "@/api/contact.api";
 import { fetchTourCategories } from "@/api/tours.api";
-import srilanka_beach from "@/assets/srilanka_beach.webp";
+
 const logo = "/logov2.jpeg";
 
 const Footer = () => {
@@ -40,14 +40,8 @@ const Footer = () => {
   const socials = contactDetails?.socials;
 
   return (
-    <footer className="relative text-primary-foreground">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${srilanka_beach})` }}
-      />
-      <div className="absolute inset-0 bg-black/40" />
-      <div className="relative z-10 container mx-auto px-4 py-16">
+    <footer className="relative text-primary-foreground bg-gradient-to-b from-gray-950 to-gray-900 mt-20">
+      <div className="relative z-10 container mx-auto px-4 pt-20 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center md:text-left">
           {/* Brand */}
           <div>
@@ -62,18 +56,37 @@ const Footer = () => {
               Creating unforgettable travel experiences that connect you with nature, culture, and adventure.
             </p>
             <div className="flex justify-center md:justify-start space-x-4 mt-6">
-              <a href={socials?.facebook || "#"} target={socials?.facebook ? "_blank" : undefined} rel="noopener noreferrer" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href={socials?.instagram || "#"} target={socials?.instagram ? "_blank" : undefined} rel="noopener noreferrer" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href={socials?.twitter || "#"} target={socials?.twitter ? "_blank" : undefined} rel="noopener noreferrer" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
-                <Youtube className="w-5 h-5" />
-              </a>
+              {(() => {
+                const getValidLink = (url?: string) => (!url || url.includes("ceylontours") || url === "#" ? "/coming-soon" : url);
+                const fb = getValidLink(socials?.facebook);
+                const insta = getValidLink(socials?.instagram);
+                const tw = getValidLink(socials?.twitter);
+                const yt = getValidLink(socials?.youtube);
+
+                const renderSocial = (url: string, Icon: any) => {
+                  if (url.startsWith("/")) {
+                    return (
+                      <Link to={url} className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
+                        <Icon className="w-5 h-5" />
+                      </Link>
+                    );
+                  }
+                  return (
+                    <a href={url} target="_blank" rel="noopener noreferrer" className="p-2 bg-ocean-light/20 rounded-full hover:bg-secondary hover:text-secondary-foreground transition-colors">
+                      <Icon className="w-5 h-5" />
+                    </a>
+                  );
+                };
+
+                return (
+                  <>
+                    {renderSocial(fb, Facebook)}
+                    {renderSocial(insta, Instagram)}
+                    {renderSocial(tw, Twitter)}
+                    {renderSocial(yt, Youtube)}
+                  </>
+                );
+              })()}
             </div>
           </div>
 
@@ -147,16 +160,7 @@ const Footer = () => {
       <div className="relative z-10 border-t border-ocean-light/20">
         <div className="container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-primary-foreground/70 text-sm">
-            © 2026{" "}
-            <a
-              href="https://www.codetriolanka.lk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary hover:text-secondary/80 transition-colors font-semibold"
-            >
-              CodeTrio Lanka Solutions
-            </a>
-            . All rights reserved.
+            © 2026 SL Nature Escape. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="https://www.codetriolanka.lk/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 hover:text-primary-foreground text-sm transition-colors">

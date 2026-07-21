@@ -19,37 +19,31 @@ const staticCategories = [
     title: "Cultural Tours",
     image: sigiriyaImg,
     href: "/sri-lanka-tours/cultural",
-    rotate: "-3deg",
   },
   {
     title: "Hill Country",
     image: teaImg,
     href: "/sri-lanka-tours/hill-country",
-    rotate: "2deg",
   },
   {
     title: "Wildlife Safari",
     image: wildlifeImg,
     href: "/sri-lanka-tours/wildlife",
-    rotate: "-2deg",
   },
   {
     title: "Beach Escapes",
     image: beachImg,
     href: "/sri-lanka-tours/beach",
-    rotate: "4deg",
   },
   {
     title: "Adventure Tours",
     image: adventureImg,
     href: "/sri-lanka-tours/adventure",
-    rotate: "-4deg",
   },
   {
     title: "Honeymoon",
     image: honeymoonImg,
     href: "/sri-lanka-tours/honeymoon",
-    rotate: "3deg",
   },
 ];
 
@@ -70,8 +64,7 @@ const TourCategories = () => {
     honeymoon: honeymoonImg,
   };
 
-  // Rotation values for visual effect
-  const rotations = ["-3deg", "2deg", "-2deg", "4deg", "-4deg", "3deg"];
+
 
   // GSAP Parallax Effect
   useEffect(() => {
@@ -110,7 +103,6 @@ const TourCategories = () => {
         title: cat.title,
         image: cat.images && cat.images.length > 0 ? cat.images[0] : fallbackImages[cat.slug] || sigiriyaImg,
         href: `/sri-lanka-tours/${cat.slug}`,
-        rotate: rotations[index % rotations.length],
       }));
       setCategories(mappedCategories);
     }
@@ -157,23 +149,20 @@ const TourCategories = () => {
           {categories.slice(0, 6).map((category, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
-              animate={isInView ? { opacity: 1, scale: 1, rotate: category.rotate } : {}}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1, type: "spring", stiffness: 100 }}
               className="relative group"
-              style={{ zIndex: 1 }}
               whileHover={{
-                scale: 1.1,
-                rotate: 0,
-                zIndex: 10,
+                scale: 1.05,
                 transition: { duration: 0.3 }
               }}
             >
               <Link
                 to={category.href}
-                className="block p-3 bg-white rounded-[2rem] shadow-xl hover:shadow-2xl transition-all duration-300 transform"
+                className="block p-3 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
               >
-                <div className="relative w-64 h-64 md:w-72 md:h-72 overflow-hidden rounded-[1.5rem]">
+                <div className="relative w-64 h-64 md:w-72 md:h-72 overflow-hidden rounded-xl">
                   <img
                     src={optimizeImage(category.image, 600)}
                     alt={category.title}
@@ -182,8 +171,8 @@ const TourCategories = () => {
                     decoding="async"
                   />
 
-                  {/* Overlay Gradient */}
-                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                  {/* Overlay Gradient for text readability */}
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
                   <div className="absolute bottom-6 left-0 right-0 text-center px-4">
                     <h3 className="font-display font-bold text-white text-xl md:text-2xl tracking-wide drop-shadow-md">

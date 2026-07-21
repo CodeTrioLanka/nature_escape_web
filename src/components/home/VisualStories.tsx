@@ -65,7 +65,7 @@ const VisualStories = () => {
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1 }}
       >
-        <span className="text-[80px] md:text-[140px] font-display italic font-bold text-muted-foreground/10 leading-none select-none">
+        <span className="text-[80px] md:text-[140px] font-display italic font-bold text-muted-foreground/[0.04] leading-none select-none">
           Visual Stories
         </span>
       </motion.div>
@@ -94,7 +94,7 @@ const VisualStories = () => {
 
         {/* Bento Grid Gallery */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 h-auto lg:h-[600px]"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -123,8 +123,8 @@ const VisualStories = () => {
               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
             </motion.div>
 
-            {/* Explore Button */}
-            <motion.div variants={itemVariants}>
+            {/* Explore Button - Desktop only */}
+            <motion.div variants={itemVariants} className="hidden lg:block">
               <Link
                 to="/gallery"
                 className="w-full bg-black text-white rounded-full py-4 px-6 flex items-center justify-between group hover:bg-gold transition-colors duration-300"
@@ -158,6 +158,24 @@ const VisualStories = () => {
             </motion.div>
           </div>
 
+        </motion.div>
+
+        {/* Explore Button - Mobile only (after all images) */}
+        <motion.div
+          className="lg:hidden mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <Link
+            to="/gallery"
+            className="w-full bg-black text-white rounded-full py-4 px-6 flex items-center justify-between group hover:bg-gold transition-colors duration-300"
+          >
+            <span className="font-medium">Explore Gallery</span>
+            <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
+              <ArrowUpRight className="w-4 h-4" />
+            </span>
+          </Link>
         </motion.div>
       </div>
     </section>
