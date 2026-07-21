@@ -61,7 +61,7 @@ const Excursions = () => {
       {/* Hero Section */}
       <PageHero
         backgroundImage={heroContent?.heroImage}
-        height="h-[90vh] min-h-[500px]"
+        height="h-[60vh] min-h-[300px]"
         showWave={false}
       />
 
@@ -89,14 +89,14 @@ const Excursions = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-0 mb-12"
+            className="flex flex-wrap justify-center gap-4 mb-12"
           >
-            <div className="bg-primary/90 text-primary-foreground px-4 py-3 min-w-[150px]">
-              <label className="block text-xs mb-1">Category</label>
+            <div className="bg-white border border-gray-100 shadow-sm rounded-xl px-5 py-3 min-w-[180px] hover:shadow-md transition-shadow">
+              <label className="block text-xs font-semibold text-muted-foreground mb-1 uppercase tracking-wider">Category</label>
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="w-full bg-transparent border-none text-sm focus:outline-none cursor-pointer"
+                className="w-full bg-transparent border-none text-sm text-foreground font-medium focus:outline-none cursor-pointer"
               >
                 {categoryOptions.map((option) => (
                   <option key={option} value={option} className="text-foreground bg-background">
@@ -105,12 +105,13 @@ const Excursions = () => {
                 ))}
               </select>
             </div>
-            <div className="bg-primary/80 text-primary-foreground px-4 py-3 min-w-[150px]">
-              <label className="block text-xs mb-1">Destination</label>
+            
+            <div className="bg-white border border-gray-100 shadow-sm rounded-xl px-5 py-3 min-w-[180px] hover:shadow-md transition-shadow">
+              <label className="block text-xs font-semibold text-muted-foreground mb-1 uppercase tracking-wider">Destination</label>
               <select
                 value={destinationFilter}
                 onChange={(e) => setDestinationFilter(e.target.value)}
-                className="w-full bg-transparent border-none text-sm focus:outline-none cursor-pointer"
+                className="w-full bg-transparent border-none text-sm text-foreground font-medium focus:outline-none cursor-pointer"
               >
                 {destinationOptions.map((option) => (
                   <option key={option} value={option} className="text-foreground bg-background">
@@ -119,12 +120,13 @@ const Excursions = () => {
                 ))}
               </select>
             </div>
-            <div className="bg-primary/70 text-primary-foreground px-4 py-3 min-w-[150px]">
-              <label className="block text-xs mb-1">Time</label>
+            
+            <div className="bg-white border border-gray-100 shadow-sm rounded-xl px-5 py-3 min-w-[180px] hover:shadow-md transition-shadow">
+              <label className="block text-xs font-semibold text-muted-foreground mb-1 uppercase tracking-wider">Time</label>
               <select
                 value={timeFilter}
                 onChange={(e) => setTimeFilter(e.target.value)}
-                className="w-full bg-transparent border-none text-sm focus:outline-none cursor-pointer"
+                className="w-full bg-transparent border-none text-sm text-foreground font-medium focus:outline-none cursor-pointer"
               >
                 {timeOptions.map((option) => (
                   <option key={option} value={option} className="text-foreground bg-background">
@@ -151,7 +153,7 @@ const Excursions = () => {
                     alt={excursion.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="text-white font-semibold text-lg uppercase tracking-wide">
                       {excursion.title}

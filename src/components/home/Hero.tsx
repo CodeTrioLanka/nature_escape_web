@@ -67,7 +67,9 @@ const Hero = () => {
             src={backgroundVideo}
             onError={(e) => console.error('Video failed to load:', e)}
           />
-          <div className="absolute inset-0 bg-black/40" />
+          {/* Dark gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-black/30" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.45)_0%,rgba(0,0,0,0.15)_70%,transparent_100%)]" />
         </motion.div>
       ) : (
         <motion.div
@@ -91,7 +93,9 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
             onLoad={() => setImgLoaded(true)}
           />
-          <div className="absolute inset-0 bg-black/40" />
+          {/* Dark gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-black/30" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.45)_0%,rgba(0,0,0,0.15)_70%,transparent_100%)]" />
         </motion.div>
       )}
 
@@ -167,7 +171,7 @@ const Hero = () => {
             >
               <Link
                 to="/sri-lanka-tours"
-                className="inline-flex items-center gap-2 px-10 py-4 bg-primary-foreground text-forest font-bold text-lg rounded-lg hover:bg-primary-foreground/90 shadow-2xl hover:shadow-primary-foreground/30 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-10 py-4 bg-emerald-500 text-white font-bold text-lg rounded-lg hover:bg-emerald-400 shadow-2xl hover:shadow-emerald-500/40 transition-all duration-300"
               >
                 View Adventure
               </Link>

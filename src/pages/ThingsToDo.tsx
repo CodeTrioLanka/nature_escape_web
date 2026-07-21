@@ -49,7 +49,7 @@ const ThingsToDo = () => {
       {/* Hero Section */}
       <PageHero
         backgroundImage={heroData?.heroImage || adventureImage}
-        height="h-[90vh] min-h-[500px]"
+        height="h-[60vh] min-h-[300px]"
         showWave={false}
       />
 
@@ -73,7 +73,7 @@ const ThingsToDo = () => {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6"
             >
-              {heroData?.title || "Crafted for Every Traveller"}
+              {heroData?.title ? heroData.title.replace("Experiencess", "Experiences") : "Crafted for Every Traveller"}
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -113,7 +113,7 @@ const ThingsToDo = () => {
                     alt={activity.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="text-white font-semibold text-lg uppercase tracking-wide">
                       {activity.title}

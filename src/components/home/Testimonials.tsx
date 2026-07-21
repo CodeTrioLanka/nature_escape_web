@@ -95,7 +95,7 @@ const Testimonials = () => {
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1 }}
       >
-        <span className="text-[80px] md:text-[140px] font-display italic font-bold text-gray-800/10 leading-none select-none">
+        <span className="text-[80px] md:text-[140px] font-display italic font-bold text-gray-800/[0.04] leading-none select-none">
           Real Stories
         </span>
       </motion.div>

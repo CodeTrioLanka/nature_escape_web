@@ -199,7 +199,7 @@ const About = () => {
       {/* Hero Section - Using PageHero Component */}
       <PageHero
         backgroundImage={heroBackground}
-        height="h-[90vh] min-h-[500px]"
+        height="h-[60vh] min-h-[300px]"
         showWave={false}
       />
 
@@ -483,7 +483,7 @@ const About = () => {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
@@ -652,7 +652,7 @@ const About = () => {
               <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   to="/sri-lanka-tours"
-                  className="inline-flex items-center gap-2 px-10 py-5 bg-primary-foreground/10 text-primary-foreground font-bold rounded-xl backdrop-blur-md border-2 border-primary-foreground/30 hover:bg-primary-foreground/20 transition-all"
+                  className="inline-flex items-center gap-2 px-10 py-5 bg-transparent text-white font-bold rounded-xl backdrop-blur-md border-2 border-white hover:bg-white/15 transition-all"
                 >
                   Explore Tours
                 </Link>

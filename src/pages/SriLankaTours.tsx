@@ -81,7 +81,7 @@ const SriLankaTours = () => {
       {/* Hero Section with PageHero Component */}
       <PageHero
         backgroundImage={sigiriyaWebp}
-        height="h-[90vh] min-h-[500px]"
+        height="h-[60vh] min-h-[300px]"
         showWave={false}
       />
 
@@ -222,7 +222,7 @@ const SriLankaTours = () => {
                       loading="lazy"
                       decoding="async"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6">
                       <h3 className="text-white font-semibold text-lg uppercase tracking-wide">
                         {category.title}
