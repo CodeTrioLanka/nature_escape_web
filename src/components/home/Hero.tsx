@@ -121,9 +121,9 @@ const Hero = () => {
 
           {/* "Discover the" - Script Style */}
           <motion.p
-            className="text-2xl md:text-3xl text-primary-foreground/90 mb-4 font-light italic"
+            className="text-4xl md:text-5xl text-primary-foreground/90 mb-4 tracking-wide"
             style={{
-              fontFamily: "'Brush Script MT', cursive",
+              fontFamily: "'Sacramento', cursive",
               textShadow: "0 2px 10px rgba(0,0,0,0.5)"
             }}
             initial={{ opacity: 0, y: 20 }}
@@ -135,16 +135,22 @@ const Hero = () => {
 
           {/* Main Title */}
           <motion.h1
-            className="text-5xl md:text-6xl lg:text-8xl font-display  text-primary-foreground leading-tight mb-6"
+            className="text-5xl md:text-6xl lg:text-8xl font-bold italic text-primary-foreground leading-tight mb-6"
             style={{
-              fontFamily: "'Brush Script MT', cursive",
+              fontFamily: "'Playfair Display', serif",
               textShadow: "0 2px 10px rgba(0,0,0,0.5)"
             }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            {homeData?.title || "Adventure Travel"}
+            {(homeData?.title ? homeData.title.replace('Nature Escape', 'SL Nature Escape') : "SL Nature Escape")
+              .split(' ')
+              .map((word, index, array) => (
+                <span key={index} className="block md:inline">
+                  {word}{index < array.length - 1 ? ' ' : ''}
+                </span>
+              ))}
           </motion.h1>
 
           {/* Subtitle */}
