@@ -32,6 +32,7 @@ jobs:
           username: ${{ secrets.NAMESCHEAP_USERNAME }}
           key: ${{ secrets.NAMESCHEAP_SSH_KEY }}
           port: ${{ secrets.NAMESCHEAP_PORT }}
+          passphrase: ${{ secrets.NAMESCHEAP_SSH_PASSPHRASE }}
           script: |
             set -e
             cd /home/${{ secrets.NAMESCHEAP_USERNAME }}/public_html
@@ -50,19 +51,21 @@ jobs:
           username: ${{ secrets.NAMESCHEAP_USERNAME }}
           key: ${{ secrets.NAMESCHEAP_SSH_KEY }}
           port: ${{ secrets.NAMESCHEAP_PORT }}
+          passphrase: ${{ secrets.NAMESCHEAP_SSH_PASSPHRASE }}
           source: "dist/*"
           target: "/home/${{ secrets.NAMESCHEAP_USERNAME }}/public_html"
-          # strip_components: 1
+          strip_components: 1
 
-      # - name: Verify deployment
-      #   uses: appleboy/ssh-action@v1.2.0
-      #   with:
-      #     host: ${{ secrets.NAMESCHEAP_HOST }}
-      #     username: ${{ secrets.NAMESCHEAP_USERNAME }}
-      #     key: ${{ secrets.NAMESCHEAP_SSH_KEY }}
-      #     port: ${{ secrets.NAMESCHEAP_PORT }}
-      #     script: |
-      #       cd /home/${{ secrets.NAMESCHEAP_USERNAME }}/public_html
+      - name: Verify deployment
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.NAMESCHEAP_HOST }}
+          username: ${{ secrets.NAMESCHEAP_USERNAME }}
+          key: ${{ secrets.NAMESCHEAP_SSH_KEY }}
+          port: ${{ secrets.NAMESCHEAP_PORT }}
+          passphrase: ${{ secrets.NAMESCHEAP_SSH_PASSPHRASE }}
+          script: |
+            cd /home/${{ secrets.NAMESCHEAP_USERNAME }}/public_html
 
-      #       echo "Deployment completed."
-      #       ls -la
+            echo "Deployment completed."
+            ls -la
